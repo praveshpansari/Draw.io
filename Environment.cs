@@ -10,11 +10,22 @@ using System.Windows.Forms;
 
 namespace PLEnvironment
 {
-    public partial class Form1 : Form
+    public partial class Environment : Form
     {
-        public Form1()
+
+        String command;
+
+        public Environment()
         {
             InitializeComponent();
+        }
+
+        private void commandLine_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                //TODO: execute command function
+            }
         }
     }
 }
