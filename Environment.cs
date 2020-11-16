@@ -13,7 +13,7 @@ namespace PLEnvironment
     public partial class Environment : Form
     {
 
-        String command;
+        CommandLineCommand command;
 
         public Environment()
         {
@@ -24,7 +24,7 @@ namespace PLEnvironment
         {
             if (e.KeyCode == Keys.Enter)
             {
-                //TODO: execute command function
+               // TODO: A function that takes a command string and perform checks 
             }
         }
     }
