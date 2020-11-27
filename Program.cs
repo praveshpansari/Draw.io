@@ -14,9 +14,11 @@ namespace PLEnvironment
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Environment());
+            Lexer lexer = new Lexer("if 100 100");
+            lexer.Advance();
+            /* Application.EnableVisualStyles();
+             Application.SetCompatibleTextRenderingDefault(false);
+             Application.Run(new Environment());*/
         }
     }
 }

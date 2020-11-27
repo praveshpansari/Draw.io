@@ -6,10 +6,21 @@ using System.Threading.Tasks;
 
 namespace PLEnvironment
 {
-    interface Command
+    abstract class Command
     {
-        void setCommand(String command);
-        string getCommand();
-        void functionality();
+
+        protected String command;
+        public void setCommand(String command)
+        {
+            this.command = command;
+        }
+        public string getCommand()
+        {
+            return this.command;
+        }
+        public abstract void functionality();
+
+
+
     }
 }
