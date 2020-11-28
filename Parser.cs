@@ -8,8 +8,6 @@ namespace PLEnvironment
 {
     class Parser
     {
-
-
         void Execute()
         {
 
