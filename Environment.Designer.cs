@@ -31,6 +31,8 @@
             this.commandLine = new System.Windows.Forms.TextBox();
             this.outputWindow = new System.Windows.Forms.PictureBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.runButton = new System.Windows.Forms.Button();
+            this.syntaxButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.outputWindow)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,6 +52,7 @@
             this.outputWindow.Size = new System.Drawing.Size(360, 400);
             this.outputWindow.TabIndex = 2;
             this.outputWindow.TabStop = false;
+            this.outputWindow.Paint += new System.Windows.Forms.PaintEventHandler(this.outputWindow_Paint);
             // 
             // richTextBox1
             // 
@@ -59,11 +62,32 @@
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
             // 
+            // runButton
+            // 
+            this.runButton.Location = new System.Drawing.Point(25, 442);
+            this.runButton.Name = "runButton";
+            this.runButton.Size = new System.Drawing.Size(75, 23);
+            this.runButton.TabIndex = 4;
+            this.runButton.Text = "Run";
+            this.runButton.UseVisualStyleBackColor = true;
+            this.runButton.Click += new System.EventHandler(this.runButton_Click);
+            // 
+            // syntaxButton
+            // 
+            this.syntaxButton.Location = new System.Drawing.Point(106, 442);
+            this.syntaxButton.Name = "syntaxButton";
+            this.syntaxButton.Size = new System.Drawing.Size(75, 23);
+            this.syntaxButton.TabIndex = 5;
+            this.syntaxButton.Text = "Syntax";
+            this.syntaxButton.UseVisualStyleBackColor = true;
+            // 
             // Environment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 497);
+            this.Controls.Add(this.syntaxButton);
+            this.Controls.Add(this.runButton);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.outputWindow);
             this.Controls.Add(this.commandLine);
@@ -80,6 +104,8 @@
         private System.Windows.Forms.TextBox commandLine;
         private System.Windows.Forms.PictureBox outputWindow;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button runButton;
+        private System.Windows.Forms.Button syntaxButton;
     }
 }
 

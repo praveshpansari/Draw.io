@@ -8,10 +8,9 @@ namespace PLEnvironment
 {
     class Parser
     {
-        Command command;
-        string[] parameters;
 
-        void Execute(Command command, String[] parameters)
+
+        void Execute()
         {
 
         }
