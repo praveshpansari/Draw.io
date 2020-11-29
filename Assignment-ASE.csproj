@@ -46,19 +46,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command.cs" />
-    <Compile Include="CommandCollection.cs" />
+    <Compile Include="Circle.cs" />
     <Compile Include="Environment.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Environment.Designer.cs">
       <DependentUpon>Environment.cs</DependentUpon>
     </Compile>
-    <Compile Include="Lexer.cs" />
+    <Compile Include="Painter.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CommandLineCommand.cs" />
+    <Compile Include="Rectangle.cs" />
+    <Compile Include="Shape.cs" />
+    <Compile Include="ShapeFactory.cs" />
+    <Compile Include="ShapesInterface.cs" />
+    <Compile Include="Square.cs" />
     <EmbeddedResource Include="Environment.resx">
       <DependentUpon>Environment.cs</DependentUpon>
     </EmbeddedResource>

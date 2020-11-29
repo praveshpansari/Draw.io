@@ -13,16 +13,17 @@ namespace PLEnvironment
     public partial class Environment : Form
     {
 
-        Lexer lexer;
-        Parser parser;
-        Bitmap myBitmap = new Bitmap(640, 480);
+        Bitmap myBitmap;
         Graphics g;
-
+        Parser parser;
+        Painter painter;
         public Environment()
         {
             InitializeComponent();
-            lexer = new Lexer();
+            myBitmap = new Bitmap(outputWindow.Width, outputWindow.Height);
             parser = new Parser();
+            g = outputWindow.CreateGraphics();
+            painter = new Painter(g);
         }
 
         private void commandLine_KeyDown(object sender, KeyEventArgs e)
@@ -41,14 +42,10 @@ namespace PLEnvironment
 
         private void runButton_Click(object sender, EventArgs e)
         {
-            g = Graphics.FromImage(myBitmap);
-            Pen p = new Pen(Color.Black, 2);
-            foreach (Token t in (lexer.Advance(commandLine.Text)))
-            {
-                Console.WriteLine(t.toString());
-            }
-            Console.WriteLine(parser.parseProgram(lexer.Advance(commandLine.Text)).toString());
-
+            
+            g.DrawLine(new Pen(Color.Black), new Point(25, 20), new Point(50, 70));
+            string input = commandLine.Text;
+            parser.parse(input, painter);
         }
     }
 }
