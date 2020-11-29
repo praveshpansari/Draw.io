@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{FA29FAB2-59ED-42B4-B95D-67A9958FFD3B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>PLEnvironment</RootNamespace>
-    <AssemblyName>PLEnvironment</AssemblyName>
+    <RootNamespace>AssignmentASE</RootNamespace>
+    <AssemblyName>AssignmentASE</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -62,6 +62,7 @@
     <Compile Include="ShapeFactory.cs" />
     <Compile Include="ShapesInterface.cs" />
     <Compile Include="Square.cs" />
+    <Compile Include="Triangle.cs" />
     <EmbeddedResource Include="Environment.resx">
       <DependentUpon>Environment.cs</DependentUpon>
     </EmbeddedResource>
@@ -73,6 +74,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

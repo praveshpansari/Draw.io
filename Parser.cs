@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PLEnvironment
+namespace AssignmentASE
 {
     public class Parser
     {
@@ -30,6 +30,8 @@ namespace PLEnvironment
                         Console.WriteLine("Please enter a valid parameter");
                     }
 
+                if (command.Equals("clear")) p.clear();
+
                 if (command.Equals("drawto"))
                 {
                     if (parameters.Length == 2)
@@ -41,6 +43,11 @@ namespace PLEnvironment
                         throw new Exception("Command not found");
                     }
                 }
+                if (command.Equals("circle") || command.Equals("square") || command.Equals("rect") || command.Equals("triangle"))
+                {
+                    p.DrawShape(command, parameters);
+                }
+
             }
 
 

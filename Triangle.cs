@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace AssignmentASE
 {
-    class Rectangle : Shape
+    class Triangle : Shape
     {
         int width, height;
-        public Rectangle() : base()
+        public Triangle() : base()
         {
             width = 100;
             height = 100;
         }
-        public Rectangle(Color colour, int x, int y, int width, int height) : base(colour, x, y)
+        public Triangle(Color colour, int x, int y, int width, int height) : base(colour, x, y)
         {
 
             this.width = width; //the only thingthat is different from shape
@@ -34,14 +34,22 @@ namespace AssignmentASE
         public override void draw(Graphics g, bool fill, Pen p, Brush b)
         {
             if (fill)
-                g.FillRectangle(b, x, y, width, height);
+                g.FillPolygon(b, new Point[] {
+                new Point(x, y),
+                new Point(x + width, y),
+                new Point(new Random().Next(x, x + width), y + height)
+                });
             else
-                g.DrawRectangle(p, x, y, width, height);
+                g.DrawPolygon(p, new Point[] {
+                new Point(x, y),
+                new Point(x + width, y),
+                new Point(new Random().Next(x, x + width), y + height)
+                });
         }
 
         public override double calcArea()
         {
-            return width * height;
+            return width * height / 2;
         }
 
         public override double calcPerimeter()

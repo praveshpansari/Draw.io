@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace ShapesInheritanceExample
+namespace AssignmentASE
 {
     abstract class Shape : Shapes
     {
@@ -14,7 +14,7 @@ namespace ShapesInheritanceExample
         protected int x, y; //not I could use c# properties for this
         public Shape()
         {
-            colour = Color.Red;
+            colour = Color.Black;
             x = y = 100;
         }
 
@@ -30,7 +30,7 @@ namespace ShapesInheritanceExample
 
         //the three methods below are from the Shapes interface
         //here we are passing on the obligation to implement them to the derived classes by declaring them as abstract
-        public abstract void draw(Graphics g); //any derrived class must implement this method
+        public abstract void draw(Graphics g, bool fill, Pen p, Brush b); //any derrived class must implement this method
         public abstract double calcArea();
         public abstract double calcPerimeter();
 

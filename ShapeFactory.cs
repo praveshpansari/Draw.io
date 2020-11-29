@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShapesInheritanceExample
+namespace AssignmentASE
 {
     class ShapeFactory
     {
@@ -18,7 +18,7 @@ namespace ShapesInheritanceExample
                 return new Circle();
 
             }
-            else if (shapeType.Equals("RECTANGLE"))
+            else if (shapeType.Equals("RECT"))
             {
                 return new Rectangle();
 
@@ -26,6 +26,10 @@ namespace ShapesInheritanceExample
             else if (shapeType.Equals("SQUARE"))
             {
                 return new Square();
+            }
+            else if (shapeType.Equals("TRIANGLE"))
+            {
+                return new Triangle();
             }
             else
             {

@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShapesInheritanceExample
+namespace AssignmentASE
 {
     interface Shapes
     {
         void set(Color c, params int[] list);
-        void draw(Graphics g);
+        void draw(Graphics g, bool fill, Pen p, Brush b);
         double calcArea();
         double calcPerimeter();
 

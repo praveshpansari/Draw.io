@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShapesInheritanceExample
+namespace AssignmentASE
 {
     class Square : Rectangle
     {
@@ -21,9 +21,9 @@ namespace ShapesInheritanceExample
         }
 
         //no draw method here because it is provided by the parent class Rectangle
-        public override void draw(Graphics g)
+        public override void draw(Graphics g, bool fill, Pen p, Brush b)
         {
-            base.draw(g);
+            base.draw(g, fill, p, b);
         }
 
     }

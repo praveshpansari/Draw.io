@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace ShapesInheritanceExample
+namespace AssignmentASE
 {
     class Circle : Shape
     {
@@ -34,14 +34,13 @@ namespace ShapesInheritanceExample
 
 
 
-        public override void draw(Graphics g)
+        public override void draw(Graphics g, bool fill, Pen p, Brush b)
         {
-
-            Pen p = new Pen(Color.Black, 2);
-            SolidBrush b = new SolidBrush(colour);
-            g.FillEllipse(b, x, y, radius * 2, radius * 2);
-            g.DrawEllipse(p, x, y, radius * 2, radius * 2);
-
+            if (fill)
+                g.FillEllipse(b, x - radius, y - radius, radius * 2, radius * 2);
+            else
+                g.DrawEllipse(p, x - radius, y - radius, radius * 2, radius * 2);
+            Console.WriteLine(radius);
         }
 
         public override double calcArea()
