@@ -14,6 +14,7 @@ namespace PLEnvironment
     {
 
         Lexer lexer;
+        Parser parser;
         Bitmap myBitmap = new Bitmap(640, 480);
         Graphics g;
 
@@ -21,6 +22,7 @@ namespace PLEnvironment
         {
             InitializeComponent();
             lexer = new Lexer();
+            parser = new Parser();
         }
 
         private void commandLine_KeyDown(object sender, KeyEventArgs e)
@@ -41,11 +43,12 @@ namespace PLEnvironment
         {
             g = Graphics.FromImage(myBitmap);
             Pen p = new Pen(Color.Black, 2);
-            for (int i = 0; i < lexer.Advance(commandLine.Text).Count(); i++)
+            foreach (Token t in (lexer.Advance(commandLine.Text)))
             {
-                Console.WriteLine(lexer.Advance(commandLine.Text)[i].toString());
-                outputWindow.Image = myBitmap;
+                Console.WriteLine(t.toString());
             }
+            Console.WriteLine(parser.parseProgram(lexer.Advance(commandLine.Text)).toString());
+
         }
     }
 }
