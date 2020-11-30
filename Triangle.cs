@@ -28,23 +28,25 @@ namespace AssignmentASE
             base.set(colour, list[0], list[1]);
             this.width = list[2];
             this.height = list[3];
-
         }
 
         public override void draw(Graphics g, bool fill, Pen p, Brush b)
         {
+            Console.WriteLine(width + " " + height);
+            Point[] coords = new Point[3];
+            height = height / 2;
+            width = width / 2;
+            coords[0].X = (x - width);
+            coords[0].Y = (y + height);
+            coords[1].X = (x + width);
+            coords[1].Y = (y + height);
+            coords[2].X = new Random().Next(x - width, x + width);
+            coords[2].Y = (y - height);
+
             if (fill)
-                g.FillPolygon(b, new Point[] {
-                new Point(x, y),
-                new Point(x + width, y),
-                new Point(new Random().Next(x, x + width), y + height)
-                });
+                g.FillPolygon(b, coords);
             else
-                g.DrawPolygon(p, new Point[] {
-                new Point(x, y),
-                new Point(x + width, y),
-                new Point(new Random().Next(x, x + width), y + height)
-                });
+                g.DrawPolygon(p, coords);
         }
 
         public override double calcArea()

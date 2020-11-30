@@ -28,15 +28,14 @@ namespace AssignmentASE
             base.set(colour, list[0], list[1]);
             this.width = list[2];
             this.height = list[3];
-
         }
 
         public override void draw(Graphics g, bool fill, Pen p, Brush b)
         {
             if (fill)
-                g.FillRectangle(b, x, y, width, height);
+                g.FillRectangle(b, x - (width / 2), y - (height / 2), width, height);
             else
-                g.DrawRectangle(p, x, y, width, height);
+                g.DrawRectangle(p, x - (width / 2), y - (height / 2), width, height);
         }
 
         public override double calcArea()

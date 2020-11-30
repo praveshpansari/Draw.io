@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Circle.cs" />
+    <Compile Include="Command.cs" />
     <Compile Include="Environment.cs">
       <SubType>Form</SubType>
     </Compile>

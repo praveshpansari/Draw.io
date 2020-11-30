@@ -20,6 +20,12 @@ namespace AssignmentASE
             this.size = size;
         }
 
+        public override void set(Color colour, params int[] list)
+        {
+            //list[0] is x, list[1] is y, list[2] is size
+            base.set(colour, list[0], list[1], list[2], list[2]);
+        }
+
         //no draw method here because it is provided by the parent class Rectangle
         public override void draw(Graphics g, bool fill, Pen p, Brush b)
         {

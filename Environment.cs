@@ -12,18 +12,17 @@ namespace AssignmentASE
 {
     public partial class Environment : Form
     {
-
-        Bitmap myBitmap;
-        Graphics g;
         Parser parser;
         Painter painter;
+        Bitmap outputImage;
+
         public Environment()
         {
             InitializeComponent();
-            myBitmap = new Bitmap(outputWindow.Width, outputWindow.Height);
-            parser = new Parser();
-            g = outputWindow.CreateGraphics();
-            painter = new Painter(g);
+
+            outputImage = new Bitmap(outputWindow.Width, outputWindow.Height);
+            painter = new Painter(outputWindow, logBox);
+            parser = new Parser(painter);
         }
 
         private void commandLine_KeyDown(object sender, KeyEventArgs e)
@@ -36,16 +35,21 @@ namespace AssignmentASE
 
         private void outputWindow_Paint(object sender, PaintEventArgs e)
         {
-            Graphics windowG = e.Graphics;
-            windowG.DrawImageUnscaled(myBitmap, 0, 0);
+            Graphics g = e.Graphics;
+            g.DrawImageUnscaled(outputImage, 0, 0);
         }
 
         private void runButton_Click(object sender, EventArgs e)
         {
-            
-            g.DrawLine(new Pen(Color.Black), new Point(25, 20), new Point(50, 70));
             string input = commandLine.Text;
-            parser.parse(input, painter);
+
+            if (!input.ToLower().Trim().Equals("run"))
+                parser.parseCommand(input, 0);
+            else parser.parseEditor(codeEditor.Text);
+
+            outputWindow.Refresh();
+
+            parser.displayError();
         }
     }
 }

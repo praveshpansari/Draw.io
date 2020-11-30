@@ -18,7 +18,6 @@ namespace AssignmentASE
         }
         public Circle(Color colour, int x, int y, int radius) : base(colour, x, y)
         {
-
             this.radius = radius; //the only thingthat is different from shape
         }
 
@@ -28,11 +27,7 @@ namespace AssignmentASE
             //list[0] is x, list[1] is y, list[2] is radius
             base.set(colour, list[0], list[1]);
             this.radius = list[2];
-
-
         }
-
-
 
         public override void draw(Graphics g, bool fill, Pen p, Brush b)
         {
@@ -40,7 +35,6 @@ namespace AssignmentASE
                 g.FillEllipse(b, x - radius, y - radius, radius * 2, radius * 2);
             else
                 g.DrawEllipse(p, x - radius, y - radius, radius * 2, radius * 2);
-            Console.WriteLine(radius);
         }
 
         public override double calcArea()
