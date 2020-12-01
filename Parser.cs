@@ -33,6 +33,7 @@ namespace AssignmentASE
                     error += "[" + DateTime.Now.ToString("T") + "] " + "Command not recognized";
                     error += (lineNum != 0) ? " at line " + lineNum : "";
                     error += ".\r\n";
+                    return;
                 }
             }
             else if (token.Length > 1)
@@ -94,7 +95,7 @@ namespace AssignmentASE
                         error += ".\r\n";
                     }
                 }
-                
+
                 else if (command.Equals("drawto"))
                 {
                     if (parameters.Length == 2)

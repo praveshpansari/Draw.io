@@ -14,14 +14,14 @@ namespace AssignmentASE
         Bitmap tempBit;
         Pen pen;
         Pen cursorPen = new Pen(Color.Red);
-        System.Windows.Forms.TextBox logBox;
+        System.Windows.Forms.RichTextBox logBox;
         bool fill;
         ShapeFactory shapes;
         int xPos, yPos;
         System.Drawing.SolidBrush brush;
         System.Windows.Forms.PictureBox outputWindow;
 
-        public Painter(System.Windows.Forms.PictureBox outputWindow, System.Windows.Forms.TextBox logBox)
+        public Painter(System.Windows.Forms.PictureBox outputWindow, System.Windows.Forms.RichTextBox logBox)
         {
             this.logBox = logBox;
             this.outputWindow = outputWindow;
@@ -140,12 +140,15 @@ namespace AssignmentASE
             tempBit = new Bitmap(bitmap);
         }
 
+
         public void WriteError(String error)
         {
             outputWindow.Image = bitmap;
             g = Graphics.FromImage(outputWindow.Image);
+            logBox.SelectionColor = Color.Red;
             logBox.AppendText(error);
             logBox.Refresh();
+            logBox.SelectionColor = Color.Black;
             tempBit = new Bitmap(bitmap);
         }
     }
