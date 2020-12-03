@@ -16,11 +16,14 @@ namespace AssignmentASE
     /// </summary>
     public partial class Environment : Form
     {
- 
+
         Parser parser;
         Painter painter;
         Bitmap outputImage;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Environment()
         {
             InitializeComponent();
@@ -34,7 +37,7 @@ namespace AssignmentASE
         {
             if (e.KeyCode == Keys.Enter)
             {
-
+                runButton.PerformClick();
             }
         }
 
@@ -56,7 +59,6 @@ namespace AssignmentASE
                 {
                     parser.parseEditor(codeEditor.Text);
                 }
-
             }
             else
             {
@@ -77,9 +79,11 @@ namespace AssignmentASE
         {
             // Displays a SaveFileDialog so the user can save the Image
             // assigned to save button
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Rich Text File | *.rtf";
-            saveFileDialog.Title = "Save a Code Text File";
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Rich Text File | *.rtf",
+                Title = "Save a Code Text File"
+            };
             saveFileDialog.ShowDialog();
 
             // If the file name is not an empty string open it for saving.
@@ -101,9 +105,11 @@ namespace AssignmentASE
                 if (result == DialogResult.Yes)
                     this.saveToolStripMenuItem.PerformClick();
 
-                OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "Rich Text File | *.rtf";
-                openFileDialog.Title = "Open a Code Text File";
+                OpenFileDialog openFileDialog = new OpenFileDialog
+                {
+                    Filter = "Rich Text File | *.rtf",
+                    Title = "Open a Code Text File"
+                };
                 openFileDialog.ShowDialog();
 
                 if (openFileDialog.FileName != "")
@@ -171,7 +177,6 @@ namespace AssignmentASE
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             MessageBox.Show("Simple Programming Environment 2020\nVersion 1.0.0\n\u00a9 2020 Pravesh Pansari.\nAll rights reserved.", "Simple Programming Environment", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }

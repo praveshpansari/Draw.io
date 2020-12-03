@@ -16,34 +16,17 @@ namespace AssignmentASE
         String log;
         Pen cursorPen = new Pen(Color.Red);
         System.Windows.Forms.RichTextBox logBox;
-        bool fill;
+        public bool fill { get; }
         ShapeFactory shapes;
         CommandFactory commands;
-        int xPos;
-        int yPos;
+        public int xPos { get; }
+        public int yPos { get; }
         System.Drawing.SolidBrush brush;
         System.Windows.Forms.PictureBox outputWindow;
-
-        public int XPos
-        {
-            get { return xPos; }
-            set { xPos = value; }
-        }
-
-        public int YPos
-        {
-            get { return yPos; }
-            set { yPos = value; }
-        }
 
         public String Pen
         {
             get { return pen.Color.Name; }
-        }
-
-        public bool Fill
-        {
-            get { return fill; }
         }
 
         public Painter()
