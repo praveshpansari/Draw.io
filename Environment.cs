@@ -11,8 +11,12 @@ using System.Windows.Forms;
 
 namespace AssignmentASE
 {
+    /// <summary>
+    /// The main window with a command line, code editor, output window and a log.
+    /// </summary>
     public partial class Environment : Form
     {
+ 
         Parser parser;
         Painter painter;
         Bitmap outputImage;
@@ -44,6 +48,8 @@ namespace AssignmentASE
         {
             string input = commandLine.Text;
 
+            painter.updateImage();
+
             if (input == String.Empty)
             {
                 if (codeEditor.Text != String.Empty)
@@ -58,6 +64,10 @@ namespace AssignmentASE
                     parser.parseCommand(input, 0);
                 else parser.parseEditor(codeEditor.Text);
             }
+
+            painter.WriteLog();
+            painter.storeTempImage();
+            painter.DrawCursor();
             outputWindow.Refresh();
 
             parser.displayError();
@@ -83,16 +93,26 @@ namespace AssignmentASE
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Rich Text File | *.rtf";
-            openFileDialog.Title = "Open a Code Text File";
-            openFileDialog.ShowDialog();
+            DialogResult result;
+            result = MessageBox.Show("Do you want to save your code before closing it?", "Open File", MessageBoxButtons.YesNoCancel);
 
-            if (openFileDialog.FileName != "")
+            if (result != DialogResult.Cancel)
             {
-                this.codeEditor.LoadFile(openFileDialog.FileName);
+                if (result == DialogResult.Yes)
+                    this.saveToolStripMenuItem.PerformClick();
+
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Rich Text File | *.rtf";
+                openFileDialog.Title = "Open a Code Text File";
+                openFileDialog.ShowDialog();
+
+                if (openFileDialog.FileName != "")
+                {
+                    this.codeEditor.LoadFile(openFileDialog.FileName);
+                }
             }
         }
+
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -147,6 +167,12 @@ namespace AssignmentASE
                 // Console app
                 System.Environment.Exit(1);
             }
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            MessageBox.Show("Simple Programming Environment 2020\nVersion 1.0.0\n\u00a9 2020 Pravesh Pansari.\nAll rights reserved.", "Simple Programming Environment", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

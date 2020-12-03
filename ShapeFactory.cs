@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AssignmentASE
 {
-    class ShapeFactory
+    public class ShapeFactory
     {
         public Shape getShape(String shapeType)
         {
@@ -16,12 +16,10 @@ namespace AssignmentASE
             if (shapeType.Equals("CIRCLE"))
             {
                 return new Circle();
-
             }
             else if (shapeType.Equals("RECT"))
             {
                 return new Rectangle();
-
             }
             else if (shapeType.Equals("SQUARE"))
             {

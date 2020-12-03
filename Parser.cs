@@ -18,118 +18,73 @@ namespace AssignmentASE
             error = "";
         }
 
+
         public void parseCommand(string input, int lineNum)
         {
             input = input.ToLower().Trim();
             string[] token = input.Split(' ');
+            string command = token[0];
+            string[] parameters = new string[0];
+            if (token.Length > 1) { parameters = token[1].Split(','); }
 
-            if (token.Length == 1)
+
+
+            if (token[0].Equals("tocenter"))
             {
-                if (token[0].Equals("reset")) { p.Reset(); }
-                else if (token[0].Equals("clear")) p.Clear();
-                else if (token[0].Equals("tocenter")) { p.Center(); }
+                p.Center();
+            }
+
+            else if (command.Equals("fill"))
+            {
+                if (parameters.Length == 1)
+                {
+                    try { p.SetFill(parameters[0]); }
+                    catch (Exception c)
+                    {
+                        error += "[" + DateTime.Now.ToString("T") + "] " + c.Message;
+                        error += (lineNum != 0) ? " at line " + lineNum : "";
+                        error += ".\r\n";
+                    }
+                }
                 else
                 {
-                    error += "[" + DateTime.Now.ToString("T") + "] " + "Command not recognized";
+                    error += "[" + DateTime.Now.ToString("T") + "] " + "Incorrect number of parameters for this command";
                     error += (lineNum != 0) ? " at line " + lineNum : "";
                     error += ".\r\n";
-                    return;
                 }
             }
-            else if (token.Length > 1)
+
+            else if (command.Equals("pen"))
             {
-                string command = token[0];
-                string[] parameters = token[1].Split(',');
-
-                if (command.Equals("fill"))
+                if (parameters.Length == 1)
                 {
-                    if (parameters.Length == 1)
+                    try { p.SetColor(parameters[0]); }
+                    catch (Exception c)
                     {
-                        p.SetFill(parameters[0]);
-                    }
-                    else
-                    {
-                        error += "[" + DateTime.Now.ToString("T") + "] " + "Incorrect number of parameters for this command";
+                        error += "[" + DateTime.Now.ToString("T") + "] " + c.Message;
                         error += (lineNum != 0) ? " at line " + lineNum : "";
                         error += ".\r\n";
                     }
                 }
-
-                else if (command.Equals("color"))
+                else
                 {
-                    if (parameters.Length == 1)
-                    {
-                        p.SetColor(parameters[0]);
-                    }
-                    else
-                    {
-                        error += "[" + DateTime.Now.ToString("T") + "] " + "Incorrect number of parameters for this command";
-                        error += (lineNum != 0) ? " at line " + lineNum : "";
-                        error += ".\r\n";
-                    }
+                    error += "[" + DateTime.Now.ToString("T") + "] " + "Incorrect number of parameters for this command";
+                    error += (lineNum != 0) ? " at line " + lineNum : "";
+                    error += ".\r\n";
                 }
+            }
 
-                else if (command.Equals("moveto"))
+            else if (command.Equals("drawto") || command.Equals("moveto") || command.Equals("clear") || command.Equals("reset"))
+            {
+                int[] parametersInt = new int[0];
+                if (parameters.Length > 0)
                 {
-                    if (parameters.Length == 2)
-                    {
-                        int[] parametersInt = new int[parameters.Length];
-
-                        try
-                        {
-                            for (int i = 0; i < parameters.Length; ++i)
-                                parametersInt[i] = Int32.Parse(parameters[i]);
-                            p.MoveTo(parametersInt[0], parametersInt[1]);
-                        }
-                        catch (FormatException)
-                        {
-                            error += "[" + DateTime.Now.ToString("T") + "] " + "Parameters not valid for this command";
-                            error += (lineNum != 0) ? " at line " + lineNum : "";
-                            error += ".\r\n";
-                        }
-                    }
-                    else
-                    {
-                        error += "[" + DateTime.Now.ToString("T") + "] " + "Incorrect number of parameters for this command";
-                        error += (lineNum != 0) ? " at line " + lineNum : "";
-                        error += ".\r\n";
-                    }
-                }
-
-                else if (command.Equals("drawto"))
-                {
-                    if (parameters.Length == 2)
-                    {
-                        int[] parametersInt = new int[parameters.Length];
-
-                        try
-                        {
-                            for (int i = 0; i < parameters.Length; ++i)
-                                parametersInt[i] = Int32.Parse(parameters[i]);
-                            p.DrawTo(parametersInt[0], parametersInt[1]);
-                        }
-                        catch (FormatException)
-                        {
-                            error += "[" + DateTime.Now.ToString("T") + "] " + "Parameters not valid for this command";
-                            error += (lineNum != 0) ? " at line " + lineNum : "";
-                            error += ".\r\n";
-                        }
-                    }
-                    else
-                    {
-                        error += "[" + DateTime.Now.ToString("T") + "] " + "Incorrect number of parameters for this command";
-                        error += (lineNum != 0) ? " at line " + lineNum : "";
-                        error += ".\r\n";
-                    }
-                }
-                else if (command.Equals("circle") || command.Equals("square") || command.Equals("rect") || command.Equals("triangle"))
-                {
-                    int[] parametersInt = new int[parameters.Length];
+                    parametersInt = new int[parameters.Length];
                     try
                     {
                         for (int i = 0; i < parameters.Length; ++i)
                             parametersInt[i] = Int32.Parse(parameters[i]);
-                        p.DrawShape(command, parametersInt);
+
                     }
                     catch (FormatException)
                     {
@@ -137,26 +92,54 @@ namespace AssignmentASE
                         error += (lineNum != 0) ? " at line " + lineNum : "";
                         error += ".\r\n";
                     }
+
                 }
-                else
+                try
                 {
-                    error += "[" + DateTime.Now.ToString("T") + "] " + "Command not recognized";
+                    p.ExecuteCommand(command, parametersInt);
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    error += "[" + DateTime.Now.ToString("T") + "] " + "Incorrect number of parameters for this command.";
+                    error += (lineNum != 0) ? " at line " + lineNum : "";
+                    error += ".\r\n";
+                }
+            }
+
+            else if (command.Equals("circle") || command.Equals("square") || command.Equals("rect") || command.Equals("triangle"))
+            {
+                int[] parametersInt = new int[parameters.Length];
+                try
+                {
+                    for (int i = 0; i < parameters.Length; ++i)
+                        parametersInt[i] = Int32.Parse(parameters[i]);
+                    p.DrawShape(command, parametersInt);
+                }
+                catch (FormatException)
+                {
+                    error += "[" + DateTime.Now.ToString("T") + "] " + "Parameters not valid for this command";
+                    error += (lineNum != 0) ? " at line " + lineNum : "";
+                    error += ".\r\n";
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    error += "[" + DateTime.Now.ToString("T") + "] " + "Incorrect number of parameters for this command.";
                     error += (lineNum != 0) ? " at line " + lineNum : "";
                     error += ".\r\n";
                 }
             }
             else
             {
-                error += "[" + DateTime.Now.ToString("T") + "] " + "Invalid command and parameters format";
+                error += "[" + DateTime.Now.ToString("T") + "] " + "Command not recognized";
                 error += (lineNum != 0) ? " at line " + lineNum : "";
                 error += ".\r\n";
             }
-            p.DrawCursor();
+
+
         }
 
         public void parseEditor(string input)
         {
-            p.Clear();
             string[] lines = input.Split('\n');
             for (int lineNum = 0; lineNum < lines.Length; lineNum++)
             {

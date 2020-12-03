@@ -8,20 +8,18 @@ using System.Threading.Tasks;
 
 namespace AssignmentASE
 {
-    abstract class Shape : Shapes
+    public abstract class Shape : Shapes
     {
         protected Color colour; //shape's colour
-        protected int x, y; //not I could use c# properties for this
+        protected int x, y; //note I could use c# properties for this
         public Shape()
         {
             colour = Color.Black;
             x = y = 100;
         }
 
-
         public Shape(Color colour, int x, int y)
         {
-
             this.colour = colour; //shape's colour
             this.x = x; //its x pos
             this.y = y; //its y pos
@@ -43,7 +41,6 @@ namespace AssignmentASE
             this.x = list[0];
             this.y = list[1];
         }
-
 
         public override string ToString()
         {

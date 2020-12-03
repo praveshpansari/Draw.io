@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignment-ASE", "Assignment-ASE.csproj", "{FA29FAB2-59ED-42B4-B95D-67A9958FFD3B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPL-Testing", "..\SPL-TEsting\SPL-Testing.csproj", "{36B7D500-F3B7-4599-91FB-1EDD719F6BB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{FA29FAB2-59ED-42B4-B95D-67A9958FFD3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA29FAB2-59ED-42B4-B95D-67A9958FFD3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA29FAB2-59ED-42B4-B95D-67A9958FFD3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36B7D500-F3B7-4599-91FB-1EDD719F6BB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36B7D500-F3B7-4599-91FB-1EDD719F6BB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36B7D500-F3B7-4599-91FB-1EDD719F6BB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36B7D500-F3B7-4599-91FB-1EDD719F6BB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
