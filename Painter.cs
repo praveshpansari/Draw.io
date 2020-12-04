@@ -173,7 +173,7 @@ namespace AssignmentASE
             Shape shape = shapes.getShape(shapeType);
             try
             {
-                shape.set(Color.Black, list);
+                shape.set(list);
             }
             catch (IndexOutOfRangeException)
             {

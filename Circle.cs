@@ -8,48 +8,31 @@ using System.Threading.Tasks;
 
 namespace AssignmentASE
 {
+    /// <summary>
+    /// Circle Shape class inherited from <see cref="Shape"/>
+    /// </summary>
+    /// <remarks>
+    /// This class allows to set and draw a circle of specified radius
+    /// </remarks>
     class Circle : Shape
     {
+        // The radius of the circle
         int radius;
 
-        public Circle() : base()
-        {
-
-        }
-        public Circle(Color colour, int x, int y, int radius) : base(colour, x, y)
-        {
-            this.radius = radius; //the only thingthat is different from shape
-        }
-
-
-        public override void set(Color colour, params int[] list)
+        public override void set(params int[] list)
         {
             //list[0] is x, list[1] is y, list[2] is radius
-            base.set(colour, list[0], list[1]);
+            base.set(list[0], list[1]);
             this.radius = list[2];
         }
 
         public override void draw(Graphics g, bool fill, Pen p, Brush b)
         {
+            // iF fill is on draw filled else draw outlined
             if (fill)
                 g.FillEllipse(b, x - radius, y - radius, radius * 2, radius * 2);
             else
                 g.DrawEllipse(p, x - radius, y - radius, radius * 2, radius * 2);
-        }
-
-        public override double calcArea()
-        {
-            return Math.PI * (radius ^ 2);
-        }
-
-        public override double calcPerimeter()
-        {
-            return 2 * Math.PI * radius;
-        }
-
-        public override string ToString() //all classes inherit from object and ToString() is abstract in object
-        {
-            return base.ToString() + "  " + this.radius;
         }
     }
 }

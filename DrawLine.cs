@@ -7,6 +7,13 @@ using System.Threading.Tasks;
 
 namespace AssignmentASE
 {
+    /// <summary>
+    /// Draw Line Command class inherited from <see cref="Command"/>
+    /// </summary>
+    /// <remarks>
+    /// Allows to Execute the drawto command and draw a line from
+    /// current position to a given position
+    /// </remarks>
     class DrawLine : Command
     {
         int toX, toY;

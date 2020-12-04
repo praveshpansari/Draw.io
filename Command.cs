@@ -7,15 +7,20 @@ using System.Threading.Tasks;
 
 namespace AssignmentASE
 {
+    /// <summary>
+    /// Abstract class command implementing the <see cref="CommandInterface"/> interface
+    /// </summary>
+    /// <remarks>
+    /// Implements the execute, set and log method
+    /// </remarks>
     abstract class Command : CommandInterface
     {
+        // The current x and y coordinate in the graphics object
         protected int x, y;
+        // The graphics object where the command is executed
         protected Graphics g;
+        // The pen to be used when the command is executed
         protected Pen p;
-        public Command()
-        {
-
-        }
 
         public int X
         {
@@ -25,12 +30,6 @@ namespace AssignmentASE
         public int Y
         {
             get { return y; }
-        }
-
-        public Command(int x, int y)
-        {
-            this.x = x; //its x pos
-            this.y = y; //its y pos
         }
 
         public virtual void set(Graphics g, Pen p, params int[] list)

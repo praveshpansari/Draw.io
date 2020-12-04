@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace AssignmentASE
 {
+    /// <summary>
+    /// Reset Command class inherited from <see cref="Command"/>
+    /// </summary>
+    /// <remarks>
+    /// Allows to Execute the reset command and place the cursor to top left
+    /// </remarks>
     class Reset : Command
     {
         public override void execute()

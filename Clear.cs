@@ -7,6 +7,12 @@ using System.Threading.Tasks;
 
 namespace AssignmentASE
 {
+    /// <summary>
+    /// Clear Command class inherited from <see cref="Command"/>
+    /// </summary>
+    /// <remarks>
+    /// Allows to Execute the clear command and clear the output window
+    /// </remarks>
     class Clear : Command
     {
         public override void execute()

@@ -7,19 +7,21 @@ using System.Threading.Tasks;
 
 namespace AssignmentASE
 {
+    /// <summary>
+    /// MoveTo Command class inherited from <see cref="Command"/>
+    /// </summary>
+    /// <remarks>
+    /// Allows to Execute the moveto command and move the cursor to given position
+    /// </remarks>
     class MoveTo : Command
     {
         int toX, toY;
-        public MoveTo() : base()
-        { }
-
 
         public override void execute()
         {
             x = toX;
             y = toY;
         }
-
 
         public override void set(Graphics g, Pen p, params int[] list)
         {
