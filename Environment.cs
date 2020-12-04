@@ -30,22 +30,6 @@ namespace AssignmentASE
         }
 
         /// <summary>
-        /// When enter key is pressed by the user after entering a command
-        /// in the command line perform a run button click
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void commandLine_KeyDown(object sender, KeyEventArgs e)
-        {
-            // If the key pressed is 'enter'
-            if (e.KeyCode == Keys.Enter)
-            {
-                // Perform a click on the run button
-                runButton.PerformClick();
-            }
-        }
-
-        /// <summary>
         /// Paint method for the output window. Draws the ouputImage on it;
         /// </summary>
         /// <param name="sender"></param>
@@ -101,6 +85,23 @@ namespace AssignmentASE
             outputWindow.Refresh();
             // Display any errors if encountered in the log
             parser.displayError();
+        }
+
+
+        /// <summary>
+        /// When enter key is pressed by the user after entering a command
+        /// in the command line perform a run button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void commandLine_KeyDown(object sender, KeyEventArgs e)
+        {
+            // If the key pressed is 'enter'
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Perform a click on the run button
+                runButton.PerformClick();
+            }
         }
 
         /// <summary>
@@ -218,21 +219,15 @@ namespace AssignmentASE
         }
 
         /// <summary>
-        /// Allows the window form app to be dragged by the mouse
+        /// Event handler for the about button click
+        /// Shows the information about the program
         /// </summary>
-        /// <param name="m"></param>
-        protected override void WndProc(ref Message m)
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            switch (m.Msg)
-            {
-                case 0x84:
-                    base.WndProc(ref m);
-                    if ((int)m.Result == 0x1)
-                        m.Result = (IntPtr)0x2;
-                    return;
-            }
-
-            base.WndProc(ref m);
+            // Show the about message box
+            MessageBox.Show("Simple Programming Environment 2020 is a program environement which contains simple commands for drawing in different shapes and colors.\n\nVersion 1.0.0\n\u00a9 2020 Pravesh Pansari.\nAll rights reserved.", "Simple Programming Environment", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /// <summary>
@@ -251,16 +246,25 @@ namespace AssignmentASE
                 System.Environment.Exit(1);
         }
 
+
         /// <summary>
-        /// Event handler for the about button click
-        /// Shows the information about the program
+        /// Allows the window form app to be dragged by the mouse
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        /// <param name="m"></param>
+        protected override void WndProc(ref Message m)
         {
-            // Show the about message box
-            MessageBox.Show("Simple Programming Environment 2020 is a program environement which contains simple commands for drawing in different shapes and colors.\n\nVersion 1.0.0\n\u00a9 2020 Pravesh Pansari.\nAll rights reserved.", "Simple Programming Environment", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            switch (m.Msg)
+            {
+                case 0x84:
+                    base.WndProc(ref m);
+                    if ((int)m.Result == 0x1)
+                        m.Result = (IntPtr)0x2;
+                    return;
+            }
+
+            base.WndProc(ref m);
         }
+
+
     }
 }

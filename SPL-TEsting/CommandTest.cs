@@ -8,7 +8,7 @@ namespace SPL_Testing
     /// Tests for the parser class and command factory 
     /// </summary>
     [TestClass]
-    public class CommandFactoryTest
+    public class CommandTest
     {
         Painter p;
 
@@ -119,6 +119,7 @@ namespace SPL_Testing
             p = new Painter();
             Parser parser = new Parser(p);
             parser.parseCommand("var x = 5", 0);
+            Assert.IsTrue(5 == parser.Variables["x"]);
         }
 
         /// <summary>
@@ -133,6 +134,7 @@ namespace SPL_Testing
             p = new Painter();
             Parser parser = new Parser(p);
             parser.parseCommand("while x < 20", 0);
+            Assert.IsTrue(20 > parser.Variables["x"]);
         }
     }
 }

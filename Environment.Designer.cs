@@ -46,8 +46,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.closeButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.closeButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.outputWindow)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -107,6 +107,7 @@
             // syntaxButton
             // 
             this.syntaxButton.BackColor = System.Drawing.Color.White;
+            this.syntaxButton.Enabled = false;
             this.syntaxButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.syntaxButton.FlatAppearance.BorderSize = 0;
             this.syntaxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -262,6 +263,18 @@
             this.panel2.Size = new System.Drawing.Size(345, 91);
             this.panel2.TabIndex = 11;
             // 
+            // label3
+            // 
+            this.label3.BackColor = System.Drawing.Color.Gainsboro;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(0, 1);
+            this.label3.Margin = new System.Windows.Forms.Padding(0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(23, 20);
+            this.label3.TabIndex = 6;
+            this.label3.Text = ">";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // closeButton
             // 
             this.closeButton.BackColor = System.Drawing.SystemColors.ButtonFace;
@@ -277,18 +290,6 @@
             this.closeButton.Text = "✖";
             this.closeButton.UseVisualStyleBackColor = false;
             this.closeButton.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.Color.Gainsboro;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(0, 1);
-            this.label3.Margin = new System.Windows.Forms.Padding(0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(23, 20);
-            this.label3.TabIndex = 6;
-            this.label3.Text = ">";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Environment
             // 
