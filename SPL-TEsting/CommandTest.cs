@@ -133,6 +133,7 @@ namespace SPL_Testing
         {
             p = new Painter();
             Parser parser = new Parser(p);
+            parser.parseCommand("var x = 5", 0);    
             parser.parseCommand("while x < 20", 0);
             Assert.IsTrue(20 > parser.Variables["x"]);
         }

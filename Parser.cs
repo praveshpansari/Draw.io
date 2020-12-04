@@ -188,6 +188,9 @@ namespace AssignmentASE
             // Split the input on new line into lines
             string[] lines = input.Split('\n');
 
+            // Clear the board if editor is being used
+            parseCommand("clear", 0);
+
             // For each line
             for (int lineNum = 0; lineNum < lines.Length; lineNum++)
             {
