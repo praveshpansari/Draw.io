@@ -116,16 +116,20 @@ namespace AssignmentASE
                 // If a letter is encountered
                 if (Char.IsLetter(LastChar))
                 {
-                    while (Char.IsLetter(LastChar) && num < line.Length-1)
+                    do
                     {
                         // Add that letter to the identifier variable
                         curText += LastChar;
-                        // Increment index
-                        num++;
-                        // Set last char as the char at num index in word
-                        LastChar = line[num];
+                        if (num < line.Length - 1)
+                        {
+                            // Increment index
+                            num++;
+                            // Set last char as the char at num index in word
+                            LastChar = line[num];
+                        }
+                        else break;
+                    } while (Char.IsLetter(LastChar) && num < line.Length);
 
-                    }
 
                     // Switch the current identifier
                     switch (curText)
