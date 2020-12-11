@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using AssignmentASE;
+using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace SPL_Testing
 {
@@ -133,9 +135,29 @@ namespace SPL_Testing
         {
             p = new Painter();
             Parser parser = new Parser(p);
-            parser.parseCommand("var x = 5", 0);    
+            parser.parseCommand("var x = 5", 0);
             parser.parseCommand("while x < 20", 0);
             Assert.IsTrue(20 > parser.Variables["x"]);
+        }
+
+        [TestMethod]
+        public void TestLexerVariable()
+        {
+            //var splitOnAssignment = new Regex(@"[\s=]", RegexOptions.Compiled);
+            //var splitOnOperators = new Regex(@"[-+\\\*]", RegexOptions.Compiled);
+
+            //var expression = "num = 1 + 2";
+
+            //var output = splitOnAssignment.Split(expression).Where(token => token != String.Empty).ToArray<string>();
+
+            //var variable = new Variable();
+
+            //Console.WriteLine(output[0]);
+            //foreach(string x in splitOnOperators.Split(output[1]).Where(token => token != String.Empty).ToArray<string>())
+            //    Console.WriteLine(x);
+
+            
+
         }
     }
 }

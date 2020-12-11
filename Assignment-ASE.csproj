@@ -58,6 +58,7 @@
     <Compile Include="Environment.Designer.cs">
       <DependentUpon>Environment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Lexer.cs" />
     <Compile Include="MoveTo.cs" />
     <Compile Include="Painter.cs" />
     <Compile Include="Parser.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="ShapesInterface.cs" />
     <Compile Include="Square.cs" />
     <Compile Include="Triangle.cs" />
+    <Compile Include="Variable.cs" />
     <EmbeddedResource Include="Environment.resx">
       <DependentUpon>Environment.cs</DependentUpon>
     </EmbeddedResource>
@@ -83,6 +85,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="UMLClassDiagram.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
