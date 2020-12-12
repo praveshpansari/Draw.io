@@ -341,7 +341,23 @@ namespace AssignmentASE
 
                     if (lines[lineNum].Contains("=") || lines[lineNum].Contains("if") || lines[lineNum].Contains("endif") || lines[lineNum].Contains("while"))
                     {
-                         if (lines[lineNum].Contains("endif"))
+                        if (lines[lineNum].Contains("while") && !lines[lineNum].Contains("endwhile"))
+                        {
+                            int whileNum = lineNum;
+                            whileNum++;
+                            while (parseUsingIf(lines[lineNum]))
+                            {
+                                if (lines[whileNum].Contains("endwhile"))
+                                {
+                                    whileNum = lineNum;
+                                }
+                                else { parseEditor(lines[whileNum]); }
+                                whileNum++;
+                            }
+                            lineNum = whileNum;
+                        }
+
+                        else if (lines[lineNum].Contains("endif"))
                         {
                             continue;
                         }
