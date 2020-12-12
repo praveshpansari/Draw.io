@@ -236,7 +236,7 @@ namespace AssignmentASE
                 }
 
                 // If a punctuation is encountered
-                if (Char.IsPunctuation(LastChar))
+                if (new Regex(@"[()]", RegexOptions.Compiled).IsMatch(LastChar.ToString()))
                 {
                     // Add a BRACKET type token to the list
                     tokens.Add(new Token(Type.BRACKET, LastChar.ToString()));

@@ -318,6 +318,7 @@ namespace AssignmentASE
             return result;
         }
 
+
         /// <summary>
         /// Parses the text form the code editor
         /// </summary>
@@ -325,12 +326,11 @@ namespace AssignmentASE
         /// <remarks>Uses <see cref="parseCommand(string, int)"/></remarks>
         public void parseEditor(string input)
         {
+
             // Split the input on new line into lines
             string[] lines = input.Split('\n');
 
-            // Clear the board if editor is being used
-            // parseCommand("clear", 0);
-
+            int cursor = 0;
             // For each line
             for (int lineNum = 0; lineNum < lines.Length; lineNum++)
             {
@@ -339,9 +339,37 @@ namespace AssignmentASE
                 {
                     int ifLineNum;
 
-                    if (lines[lineNum].Contains("=") || lines[lineNum].Contains("if") || lines[lineNum].Contains("endif") || lines[lineNum].Contains("while"))
+                    if (lines[lineNum].Contains("=") || lines[lineNum].Contains("if") || lines[lineNum].Contains("endif") || lines[lineNum].Contains("while") || lines[lineNum].Contains("function") || lines[lineNum].Contains("()"))
                     {
-                        if (lines[lineNum].Contains("while") && !lines[lineNum].Contains("endwhile"))
+                        if (lines[lineNum].Contains("endfunction"))
+                        {
+                            lineNum = cursor;
+                        }
+
+                        else if (lines[lineNum].Contains("function"))
+                        {
+                            var tokens = lexer.Advance(lines[lineNum]);
+                            int functionLineNum = lineNum;
+                            for (; functionLineNum < lines.Length; functionLineNum++)
+                            {
+                                if (lines[functionLineNum].Contains("endfunction"))
+                                {
+                                    break;
+                                }
+                            }
+                            Variables.Add(tokens[1].getValue(), lineNum + "," + (functionLineNum - 1));
+                            lineNum = functionLineNum;
+                        }
+
+                        else if (lines[lineNum].Contains("()"))
+                        {
+                            cursor = lineNum;
+                            var tokens = lexer.Advance(lines[lineNum]);
+                            var functionLines = Variables[tokens[0].getValue()].Split(',');
+                            lineNum = Int32.Parse(functionLines[0]);
+                        }
+
+                        else if (lines[lineNum].Contains("while") && !lines[lineNum].Contains("endwhile"))
                         {
                             int whileNum = lineNum;
                             whileNum++;
@@ -380,13 +408,13 @@ namespace AssignmentASE
                                 lineNum = flag ? ifLineNum : lineNum + 1;
                             }
                         }
+
                         else if (lines[lineNum].Contains("="))
                         {
                             parseUsingLexer(lines[lineNum], lineNum);
                         }
 
                     }
-
                     else   // Call the parse command method passing the line , and the line num + 1
                         parseCommand(lines[lineNum], lineNum + 1);
                 }

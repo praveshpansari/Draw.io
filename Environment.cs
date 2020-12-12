@@ -61,7 +61,8 @@ namespace AssignmentASE
                 // If the code editor is not empty
                 if (codeEditor.Text != String.Empty)
                 {
-                    parser.parseCommand("clear",0);
+                    parser.parseCommand("clear", 0);
+                    parser.Variables.Clear();
                     // Parses the editor text
                     parser.parseEditor(codeEditor.Text);
                 }
@@ -76,6 +77,7 @@ namespace AssignmentASE
                 else
                 {
                     parser.parseCommand("clear", 0);
+                    parser.Variables.Clear();
                     parser.parseEditor(codeEditor.Text);
                 }
             }
