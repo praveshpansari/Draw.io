@@ -61,6 +61,7 @@ namespace AssignmentASE
                 // If the code editor is not empty
                 if (codeEditor.Text != String.Empty)
                 {
+                    parser.parseCommand("clear",0);
                     // Parses the editor text
                     parser.parseEditor(codeEditor.Text);
                 }
@@ -72,7 +73,11 @@ namespace AssignmentASE
                     // Parse the command line text
                     parser.parseCommand(input, 0);
                 // Else parse the code editor text
-                else parser.parseEditor(codeEditor.Text);
+                else
+                {
+                    parser.parseCommand("clear", 0);
+                    parser.parseEditor(codeEditor.Text);
+                }
             }
 
             // Write the log in the log window

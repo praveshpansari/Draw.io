@@ -12,7 +12,9 @@ namespace AssignmentASE
         IF,
         ELSEIF,
         ELSE,
+        ENDIF,
         WHILE,
+        ENDWHILE,
         FUNCTION,
         IDENTIFIER,
         OPERATOR,
@@ -139,6 +141,11 @@ namespace AssignmentASE
                             // Then a IF type token is added to the list
                             tokens.Add(new Token(Type.IF, "if"));
                             break;
+                        // Identifier is "endif"
+                        case "endif":
+                            // Then a ENDIF type token is added to the list
+                            tokens.Add(new Token(Type.ENDIF, "endif"));
+                            break;
                         // Identifier is "elseif"
                         case "elseif":
                             // Then a ELSEIF type token is added to the list
@@ -158,6 +165,11 @@ namespace AssignmentASE
                         case "while":
                             // Then a WHILE type token is added to the list
                             tokens.Add(new Token(Type.WHILE, "while"));
+                            break;
+                        // Identifier is "endwhile"
+                        case "endwhile":
+                            // Then a WHILE type token is added to the list
+                            tokens.Add(new Token(Type.ENDWHILE, "endwhile"));
                             break;
                         // Identifier is none of the above
                         default:
@@ -199,10 +211,28 @@ namespace AssignmentASE
                 }
 
                 // If a symbol is encountered
-                if (new Regex(@"[-+/*=]", RegexOptions.Compiled).IsMatch(LastChar.ToString()))
+                if (new Regex(@"[-+/*=<>]", RegexOptions.Compiled).IsMatch(LastChar.ToString()))
                 {
+
+                    // A temporary buffer string for storing all the numbers
+                    string op = "";
+                    do
+                    {
+                        // Add that letter to the identifier variable
+                        op += LastChar;
+                        if (num < line.Length - 1)
+                        {
+                            // Increment index
+                            num++;
+                            // Set last char as the char at num index in word
+                            LastChar = line[num];
+                        }
+                        else break;
+
+                    } while (new Regex(@"[-+/*=<>]", RegexOptions.Compiled).IsMatch(LastChar.ToString()) && num < line.Length);
+                    num--;
                     // Add a OPERATOR type token to the list
-                    tokens.Add(new Token(Type.OPERATOR, LastChar.ToString()));
+                    tokens.Add(new Token(Type.OPERATOR, op));
                 }
 
                 // If a punctuation is encountered
