@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
+
 namespace AssignmentASE
 {
     /// <summary>
@@ -204,7 +206,7 @@ namespace AssignmentASE
                 var operators = new Queue<string>();
 
                 // Check for variable statement
-                if (t.getType() == Type.IDENTIFIER) { variable_name = t.getValue(); }
+                if (t.getType() == Type.IDENTIFIER && i == 0) { variable_name = t.getValue(); }
 
                 // Check for variable in expression
                 if (t.getType() == Type.OPERATOR && t.getValue() == "=" && tokens.Count > 3)
@@ -224,6 +226,9 @@ namespace AssignmentASE
 
                         switch (operators.Dequeue())
                         {
+                            case "%":
+                                result %= numbersList[j];
+                                break;
                             case "+":
                                 result += numbersList[j];
                                 break;
@@ -252,7 +257,19 @@ namespace AssignmentASE
                 }
 
                 // Assign and store number to var
-                if (t.getType() == Type.NUMBER)
+
+                if (t.getType() == Type.IDENTIFIER && i > 0)
+                {
+                    if (!Variables.ContainsKey(variable_name))
+                    {
+                        Variables.Add(variable_name, Variables[t.getValue()]);
+                    }
+                    else
+                    {
+                        Variables[variable_name] = Variables[t.getValue()];
+                    }
+                }
+                if (t.getType() == Type.NUMBER && i > 0)
                 {
                     if (!Variables.ContainsKey(variable_name))
                     {
@@ -264,11 +281,6 @@ namespace AssignmentASE
                     }
                 }
 
-            }
-
-            foreach (KeyValuePair<string, string> kvp in Variables)
-            {
-                Console.WriteLine(kvp);
             }
 
         }
@@ -329,6 +341,8 @@ namespace AssignmentASE
 
             // Split the input on new line into lines
             string[] lines = input.Split('\n');
+            string currentFunction = "";
+            LinkedList<string> paramters = new LinkedList<string>();
 
             int cursor = 0;
             // For each line
@@ -338,34 +352,81 @@ namespace AssignmentASE
                 if (!String.IsNullOrWhiteSpace(lines[lineNum]))
                 {
                     int ifLineNum;
-
-                    if (lines[lineNum].Contains("=") || lines[lineNum].Contains("if") || lines[lineNum].Contains("endif") || lines[lineNum].Contains("while") || lines[lineNum].Contains("function") || lines[lineNum].Contains("()"))
+                    if (lines[lineNum].Contains("=") || lines[lineNum].Contains("if") || lines[lineNum].Contains("endif") || lines[lineNum].Contains("while") || lines[lineNum].Contains("method") || Regex.Match(lines[lineNum], @"(\(.*\))").Success)
                     {
-                        if (lines[lineNum].Contains("endfunction"))
+
+                        if (lines[lineNum].Contains("endmethod"))
                         {
+                            if (!currentFunction.Equals(""))
+                            {
+                                var formalParam = Variables[currentFunction].Split(',')[2].Split('|');
+                                foreach (var _parameter in formalParam)
+                                {
+                                    Variables.Remove(_parameter);
+                                }
+                            }
                             lineNum = cursor;
                         }
 
-                        else if (lines[lineNum].Contains("function"))
+                        else if (lines[lineNum].Contains("method"))
                         {
                             var tokens = lexer.Advance(lines[lineNum]);
+                            string formalParam = "";
+
+                            foreach (var _token in tokens.GetRange(2, tokens.Count - 2))
+                            {
+                                if (_token.getType() == Type.IDENTIFIER)
+                                {
+                                    formalParam += _token.getValue() + "|";
+                                }
+                            }
+
                             int functionLineNum = lineNum;
                             for (; functionLineNum < lines.Length; functionLineNum++)
                             {
-                                if (lines[functionLineNum].Contains("endfunction"))
+                                if (lines[functionLineNum].Contains("endmethod"))
                                 {
                                     break;
                                 }
                             }
-                            Variables.Add(tokens[1].getValue(), lineNum + "," + (functionLineNum - 1));
+                            if (!formalParam.Equals(""))
+                                formalParam = formalParam.Remove(formalParam.Length - 1);
+
+                            Variables.Add(tokens[1].getValue(), lineNum + "," + (functionLineNum - 1) + "," + formalParam);
+
                             lineNum = functionLineNum;
                         }
 
-                        else if (lines[lineNum].Contains("()"))
+                        else if (Regex.Match(lines[lineNum], @"(\(.*\))").Success)
                         {
+                            paramters.Clear();
                             cursor = lineNum;
                             var tokens = lexer.Advance(lines[lineNum]);
+                            currentFunction = tokens[0].getValue();
                             var functionLines = Variables[tokens[0].getValue()].Split(',');
+                            var formalParam = functionLines[2].Split('|');
+
+                            foreach (var _token in tokens.GetRange(1, tokens.Count - 1))
+                            {
+                                if (_token.getType() == Type.NUMBER)
+                                    paramters.AddLast(_token.getValue());
+                                else if (_token.getType() == Type.IDENTIFIER)
+                                    paramters.AddLast(Variables[_token.getValue()]);
+                            }
+
+                            if (formalParam.Length == paramters.Count)
+                            {
+                                for (int i = 0; i < formalParam.Length; i++)
+                                {
+                                    if (Variables.ContainsKey(formalParam[i]))
+                                    {
+                                        Variables[formalParam[i]] = paramters.ElementAt(i);
+                                    }
+                                    else
+                                        Variables.Add(formalParam[i], paramters.ElementAt(i));
+                                }
+                            }
+
                             lineNum = Int32.Parse(functionLines[0]);
                         }
 
@@ -379,7 +440,86 @@ namespace AssignmentASE
                                 {
                                     whileNum = lineNum;
                                 }
-                                else { parseEditor(lines[whileNum]); }
+                                else
+                                {
+                                    if (lines[whileNum].Contains("endmethod"))
+                                    {
+                                        if (!currentFunction.Equals(""))
+                                        {
+                                            var formalParam = Variables[currentFunction].Split(',')[2].Split('|');
+                                            foreach (var _parameter in formalParam)
+                                            {
+                                                Console.WriteLine(_parameter);
+                                                Variables.Remove(_parameter);
+                                            }
+                                        }
+                                        whileNum = cursor;
+                                    }
+                                    else if (Regex.Match(lines[whileNum], @"(\(.*\))").Success && !lines[whileNum].Contains("method"))
+                                    {
+                                        paramters.Clear();
+                                        cursor = whileNum;
+                                        var tokens = lexer.Advance(lines[whileNum]);
+                                        currentFunction = tokens[0].getValue();
+                                        var functionLines = Variables[tokens[0].getValue()].Split(',');
+                                        var formalParam = functionLines[2].Split('|');
+
+                                        foreach (var _token in tokens.GetRange(1, tokens.Count - 1))
+                                        {
+                                            if (_token.getType() == Type.NUMBER)
+                                                paramters.AddLast(_token.getValue());
+                                            else if (_token.getType() == Type.IDENTIFIER)
+                                                paramters.AddLast(Variables[_token.getValue()]);
+                                        }
+
+                                        if (formalParam.Length == paramters.Count)
+                                        {
+                                            for (int i = 0; i < formalParam.Length; i++)
+                                            {
+                                                if (Variables.ContainsKey(formalParam[i]))
+                                                {
+                                                    Variables[formalParam[i]] = paramters.ElementAt(i);
+                                                }
+                                                else
+                                                    Variables.Add(formalParam[i], paramters.ElementAt(i));
+                                            }
+                                        }
+
+                                        whileNum = Int32.Parse(functionLines[0]);
+                                    }
+                                    else if (lines[whileNum].Contains("endif"))
+                                    {
+                                        continue;
+                                    }
+
+                                    else if (lines[whileNum].Contains("if"))
+                                    {
+                                        if (!parseUsingIf(lines[whileNum]))
+
+                                        {
+                                            bool flag = false;
+                                            ifLineNum = whileNum;
+                                            for (; ifLineNum < lines.Length; ifLineNum++)
+                                            {
+                                                if (lines[ifLineNum].Contains("endif"))
+                                                {
+                                                    flag = true;
+                                                    break;
+                                                }
+                                            }
+                                            whileNum = flag ? ifLineNum : whileNum + 1;
+                                        }
+                                    }
+
+                                    else if (lines[whileNum].Contains("="))
+                                    {
+                                        parseUsingLexer(lines[whileNum], whileNum);
+                                    }
+
+                                    else
+                                        parseCommand(lines[whileNum], whileNum);
+
+                                }
                                 whileNum++;
                             }
                             lineNum = whileNum;
