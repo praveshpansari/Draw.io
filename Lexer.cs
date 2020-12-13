@@ -15,7 +15,7 @@ namespace AssignmentASE
         ENDIF,
         WHILE,
         ENDWHILE,
-        FUNCTION,
+        METHOD,
         IDENTIFIER,
         OPERATOR,
         BRACKET,
@@ -157,9 +157,9 @@ namespace AssignmentASE
                             tokens.Add(new Token(Type.ELSE, "else"));
                             break;
                         // Identifier is "function"
-                        case "function":
+                        case "method":
                             // Then a FUNCTION type token is added to the list
-                            tokens.Add(new Token(Type.FUNCTION, "function"));
+                            tokens.Add(new Token(Type.METHOD, "method"));
                             break;
                         // Identifier is "while"
                         case "while":
@@ -211,7 +211,7 @@ namespace AssignmentASE
                 }
 
                 // If a symbol is encountered
-                if (new Regex(@"[-+/*=<>]", RegexOptions.Compiled).IsMatch(LastChar.ToString()))
+                if (new Regex(@"[-%+/*=<>]", RegexOptions.Compiled).IsMatch(LastChar.ToString()))
                 {
 
                     // A temporary buffer string for storing all the numbers
@@ -229,7 +229,7 @@ namespace AssignmentASE
                         }
                         else break;
 
-                    } while (new Regex(@"[-+/*=<>]", RegexOptions.Compiled).IsMatch(LastChar.ToString()) && num < line.Length);
+                    } while (new Regex(@"[-%+/*=<>]", RegexOptions.Compiled).IsMatch(LastChar.ToString()) && num < line.Length);
                     num--;
                     // Add a OPERATOR type token to the list
                     tokens.Add(new Token(Type.OPERATOR, op));
