@@ -95,6 +95,28 @@ namespace AssignmentASE
         }
 
 
+        private void syntaxButton_Click(object sender, EventArgs e)
+        {
+            logBox.Clear();
+            if (codeEditor.Text != String.Empty)
+            {
+                logBox.Clear();
+                parser.Variables.Clear();
+                // Parses the editor text
+                parser.parseEditor(codeEditor.Text);
+                parser.parseCommand("clear", 0);
+                // Display any errors if encountered in the log
+                parser.displayError();
+                if (logBox.Text.Equals(""))
+                {
+                    logBox.SelectionColor = Color.Green;
+                    logBox.AppendText("[" + DateTime.Now.ToString("T") + "] Syntax Checked. No errors found.");
+                    logBox.SelectionColor = Color.Black;
+                }
+            }
+        }
+
+
         /// <summary>
         /// When enter key is pressed by the user after entering a command
         /// in the command line perform a run button click

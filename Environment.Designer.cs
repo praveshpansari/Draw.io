@@ -107,7 +107,6 @@
             // syntaxButton
             // 
             this.syntaxButton.BackColor = System.Drawing.Color.White;
-            this.syntaxButton.Enabled = false;
             this.syntaxButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.syntaxButton.FlatAppearance.BorderSize = 0;
             this.syntaxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -118,6 +117,7 @@
             this.syntaxButton.TabIndex = 5;
             this.syntaxButton.Text = "Syntax";
             this.syntaxButton.UseVisualStyleBackColor = false;
+            this.syntaxButton.Click += new System.EventHandler(this.syntaxButton_Click);
             // 
             // menuStrip1
             // 
