@@ -227,7 +227,7 @@ namespace AssignmentASE
                             // Set last char as the char at num index in word
                             LastChar = line[num];
                         }
-                        else break;
+                        else { num++; break; }
 
                     } while (new Regex(@"[-%+/*=<>]", RegexOptions.Compiled).IsMatch(LastChar.ToString()) && num < line.Length);
                     num--;

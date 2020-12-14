@@ -14,7 +14,7 @@ namespace AssignmentASE
         Painter p;
         String error;
         Lexer lexer;
-        // A dictionary for stroring variables
+        // A dictionary for storing variables
         public Dictionary<string, string> Variables { get; set; }
 
 
@@ -197,134 +197,197 @@ namespace AssignmentASE
         {
             var tokens = lexer.Advance(input);
             string variable_name = "";
-            //Console.WriteLine(tokens.Count);
-            for (int i = 0; i < tokens.Count; i++)
+            Console.WriteLine(tokens.Count);
+            try
             {
-
-                var t = tokens[i];
-                var numbersList = new List<int>();
-                var operators = new Queue<string>();
-
-                // Check for variable statement
-                if (t.getType() == Type.IDENTIFIER && i == 0) { variable_name = t.getValue(); }
-
-                // Check for variable in expression
-                if (t.getType() == Type.OPERATOR && t.getValue() == "=" && tokens.Count > 3)
+                if (tokens.Count >= 3)
                 {
-                    foreach (var _token in tokens.GetRange(2, tokens.Count - 2))
-                    {
-                        if (_token.getType() == Type.IDENTIFIER)
-                            numbersList.Add(int.Parse(Variables[_token.getValue()]));
-                        if (_token.getType() == Type.NUMBER)
-                            numbersList.Add(int.Parse(_token.getValue()));
-                        if (_token.getType() == Type.OPERATOR)
-                            operators.Enqueue(_token.getValue());
-                    }
-                    var result = numbersList[0];
-                    for (int j = 1; j < numbersList.Count; j++)
+                    for (int i = 0; i < tokens.Count; i++)
                     {
 
-                        switch (operators.Dequeue())
+                        var t = tokens[i];
+                        var numbersList = new List<int>();
+                        var operators = new Queue<string>();
+
+                        // Check for variable statement
+                        if (i == 0)
                         {
-                            case "%":
-                                result %= numbersList[j];
-                                break;
-                            case "+":
-                                result += numbersList[j];
-                                break;
-                            case "-":
-                                result -= numbersList[j];
-                                break;
-                            case "/":
-                                result /= numbersList[j];
-                                break;
-                            case "*":
-                                result *= numbersList[j];
-                                break;
+                            if (t.getType() == Type.IDENTIFIER) { variable_name = t.getValue(); }
+                            else
+                            {
+                                throw new SystemException("'" + t.getValue() + "' cannot be defined,");
+                            }
                         }
-                    }
 
-                    if (!Variables.ContainsKey(variable_name))
-                    {
-                        Variables.Add(variable_name, result.ToString());
-                    }
-                    else
-                    {
-                        Variables[variable_name] = result.ToString();
-                    }
+                        // Check for variable in expression
+                        if (t.getType() == Type.OPERATOR && t.getValue() == "=" && tokens.Count > 3)
+                        {
+                            foreach (var _token in tokens.GetRange(2, tokens.Count - 2))
+                            {
+                                if (_token.getType() == Type.IDENTIFIER)
+                                {
+                                    try
+                                    {
+                                        numbersList.Add(int.Parse(Variables[_token.getValue()]));
+                                    }
+                                    catch (KeyNotFoundException)
+                                    {
+                                        // If the identifier is not recognized show error
+                                        error += "[" + DateTime.Now.ToString("T") + "] '" + _token.getValue() + "' is not defined.";
+                                        error += (lineNum != 0) ? " at line " + lineNum : "";
+                                        error += ".\r\n";
+                                    }
+                                }
+                                if (_token.getType() == Type.NUMBER)
+                                    numbersList.Add(int.Parse(_token.getValue()));
+                                if (_token.getType() == Type.OPERATOR)
+                                    operators.Enqueue(_token.getValue());
+                            }
+                            var result = numbersList[0];
+                            for (int j = 1; j < numbersList.Count; j++)
+                            {
 
-                    break;
+                                switch (operators.Dequeue())
+                                {
+                                    case "%":
+                                        result %= numbersList[j];
+                                        break;
+                                    case "+":
+                                        result += numbersList[j];
+                                        break;
+                                    case "-":
+                                        result -= numbersList[j];
+                                        break;
+                                    case "/":
+                                        result /= numbersList[j];
+                                        break;
+                                    case "*":
+                                        result *= numbersList[j];
+                                        break;
+                                }
+                            }
+
+                            if (!Variables.ContainsKey(variable_name))
+                            {
+                                Variables.Add(variable_name, result.ToString());
+                            }
+                            else
+                            {
+                                Variables[variable_name] = result.ToString();
+                            }
+
+                            break;
+                        }
+
+                        // Assign and store number to var
+
+                        if (t.getType() == Type.IDENTIFIER && i > 0)
+                        {
+                            if (!Variables.ContainsKey(variable_name))
+                            {
+                                try
+                                {
+                                    Variables.Add(variable_name, Variables[t.getValue()]);
+                                }
+                                catch (KeyNotFoundException)
+                                {
+                                    // If the identifier is not recognized show error
+                                    throw new SystemException("'" + t.getValue() + "' is not defined,");
+                                }
+                            }
+                            else
+                            {
+                                Variables[variable_name] = Variables[t.getValue()];
+                            }
+                        }
+                        if (t.getType() == Type.NUMBER && i > 0)
+                        {
+                            if (!Variables.ContainsKey(variable_name))
+                            {
+                                Variables.Add(variable_name, t.getValue());
+                            }
+                            else
+                            {
+                                Variables[variable_name] = t.getValue();
+                            }
+                        }
+
+                    }
                 }
-
-                // Assign and store number to var
-
-                if (t.getType() == Type.IDENTIFIER && i > 0)
+                else
                 {
-                    if (!Variables.ContainsKey(variable_name))
-                    {
-                        Variables.Add(variable_name, Variables[t.getValue()]);
-                    }
-                    else
-                    {
-                        Variables[variable_name] = Variables[t.getValue()];
-                    }
+                    throw new SystemException("Assignment statement format is invalid,");
                 }
-                if (t.getType() == Type.NUMBER && i > 0)
-                {
-                    if (!Variables.ContainsKey(variable_name))
-                    {
-                        Variables.Add(variable_name, t.getValue());
-                    }
-                    else
-                    {
-                        Variables[variable_name] = t.getValue();
-                    }
-                }
-
             }
-
+            catch (SystemException c)
+            {
+                // If the command is not recognized show error
+                error += "[" + DateTime.Now.ToString("T") + "] " + c.Message;
+                error += (lineNum != 0) ? " at line " + lineNum : "";
+                error += ".\r\n";
+            }
         }
 
-        public bool parseUsingIf(string input)
+        public bool parseUsingIf(string input, int lineNum)
         {
             var tokens = lexer.Advance(input);
             bool result = false;
             string op = "";
             var numbersList = new List<int>();
-            foreach (var _token in tokens.GetRange(1, 3))
+            try
             {
+                foreach (var _token in tokens.GetRange(1, 3))
+                {
 
-                if (_token.getType() == Type.IDENTIFIER)
-                    numbersList.Add(int.Parse(Variables[_token.getValue()]));
-                if (_token.getType() == Type.NUMBER)
-                    numbersList.Add(int.Parse(_token.getValue()));
-                if (_token.getType() == Type.OPERATOR)
-                    op = _token.getValue();
+                    if (_token.getType() == Type.IDENTIFIER)
+
+                        numbersList.Add(int.Parse(Variables[_token.getValue()]));
+                    if (_token.getType() == Type.NUMBER)
+                        numbersList.Add(int.Parse(_token.getValue()));
+                    if (_token.getType() == Type.OPERATOR)
+                        op = _token.getValue();
+                }
+
+                int left = numbersList[0];
+                int right = numbersList[1];
+
+                switch (op)
+                {
+                    case "<":
+                        result = left < right;
+                        break;
+                    case ">":
+                        result = left > right;
+                        break;
+                    case "<=":
+                        result = left <= right;
+                        break;
+                    case ">=":
+                        result = left >= right;
+                        break;
+                    case "==":
+                        result = left == right;
+                        break;
+                    case "!=":
+                        result = left != right;
+                        break;
+                    default:
+                        throw new ArgumentException();
+                }
             }
-
-            int left = numbersList[0];
-            int right = numbersList[1];
-
-            switch (op)
+            catch (ArgumentException)
             {
-                case "<":
-                    result = left < right;
-                    break;
-                case ">":
-                    result = left > right;
-                    break;
-                case "<=":
-                    result = left <= right;
-                    break;
-                case ">=":
-                    result = left >= right;
-                    break;
-                case "==":
-                    result = left == right;
-                    break;
-                case "!=":
-                    result = left != right;
-                    break;
+                // If the identifier is not recognized show error
+                error += "[" + DateTime.Now.ToString("T") + "] Missing or invalid arguments given";
+                error += (lineNum != 0) ? " at line " + lineNum : "";
+                error += ".\r\n";
+            }
+            catch (KeyNotFoundException)
+            {
+                // If the identifier is not recognized show error
+                error += "[" + DateTime.Now.ToString("T") + "] One or more variable are not defined.";
+                error += (lineNum != 0) ? " at line " + lineNum : "";
+                error += ".\r\n";
             }
 
             return result;
@@ -357,43 +420,72 @@ namespace AssignmentASE
 
                         if (lines[lineNum].Contains("endmethod"))
                         {
-                            if (!currentFunction.Equals(""))
+                            if (!currentFunction.Equals("") && cursor != 0)
                             {
                                 var formalParam = Variables[currentFunction].Split(',')[2].Split('|');
                                 foreach (var _parameter in formalParam)
                                 {
                                     Variables.Remove(_parameter);
                                 }
+                                lineNum = cursor;
                             }
-                            lineNum = cursor;
+                            else
+                            {
+                                // If the identifier is not recognized show error
+                                error += "[" + DateTime.Now.ToString("T") + "] No method found before ending a method";
+                                error += " at line " + (lineNum + 1);
+                                error += ".\r\n";
+                            }
+                            currentFunction = "";
+                            cursor = 0;
                         }
 
                         else if (lines[lineNum].Contains("method"))
                         {
                             var tokens = lexer.Advance(lines[lineNum]);
                             string formalParam = "";
-
-                            foreach (var _token in tokens.GetRange(2, tokens.Count - 2))
-                            {
-                                if (_token.getType() == Type.IDENTIFIER)
-                                {
-                                    formalParam += _token.getValue() + "|";
-                                }
-                            }
-
                             int functionLineNum = lineNum;
-                            for (; functionLineNum < lines.Length; functionLineNum++)
+                            try
                             {
-                                if (lines[functionLineNum].Contains("endmethod"))
+                                foreach (var _token in tokens.GetRange(2, tokens.Count - 2))
                                 {
-                                    break;
+                                    if (_token.getType() == Type.IDENTIFIER)
+                                    {
+                                        formalParam += _token.getValue() + "|";
+                                    }
                                 }
+
+                                bool isEndMethod = false;
+
+                                for (; functionLineNum < lines.Length; functionLineNum++)
+                                {
+                                    if (lines[functionLineNum].Contains("endmethod"))
+                                    {
+                                        isEndMethod = true;
+                                        break;
+                                    }
+                                }
+                                if (!isEndMethod) throw new FormatException("Function not ended properly");
+                                if (!formalParam.Equals(""))
+                                    formalParam = formalParam.Remove(formalParam.Length - 1);
+
+                                if (tokens[1].getType() == Type.NUMBER) throw new FormatException("Function name cannot be a number");
+                                Variables.Add(tokens[1].getValue(), lineNum + "," + (functionLineNum - 1) + "," + formalParam);
                             }
-                            if (!formalParam.Equals(""))
-                                formalParam = formalParam.Remove(formalParam.Length - 1);
-
-                            Variables.Add(tokens[1].getValue(), lineNum + "," + (functionLineNum - 1) + "," + formalParam);
-
+                            catch (FormatException e)
+                            {
+                                // If the identifier is not recognized show error
+                                error += "[" + DateTime.Now.ToString("T") + "] " + e.Message + ",";
+                                error += " at line " + (lineNum + 1);
+                                error += ".\r\n";
+                            }
+                            catch (ArgumentOutOfRangeException)
+                            {
+                                // If the identifier is not recognized show error
+                                error += "[" + DateTime.Now.ToString("T") + "] Invalid number of arguments for this command,";
+                                error += " at line " + (lineNum + 1);
+                                error += ".\r\n";
+                            }
                             lineNum = functionLineNum;
                         }
 
@@ -403,38 +495,57 @@ namespace AssignmentASE
                             cursor = lineNum;
                             var tokens = lexer.Advance(lines[lineNum]);
                             currentFunction = tokens[0].getValue();
-                            var functionLines = Variables[tokens[0].getValue()].Split(',');
-                            var formalParam = functionLines[2].Split('|');
 
-                            foreach (var _token in tokens.GetRange(1, tokens.Count - 1))
+                            try
                             {
-                                if (_token.getType() == Type.NUMBER)
-                                    paramters.AddLast(_token.getValue());
-                                else if (_token.getType() == Type.IDENTIFIER)
-                                    paramters.AddLast(Variables[_token.getValue()]);
-                            }
+                                var functionLines = Variables[tokens[0].getValue()].Split(',');
+                                var formalParam = functionLines[2].Split('|');
 
-                            if (formalParam.Length == paramters.Count)
-                            {
-                                for (int i = 0; i < formalParam.Length; i++)
+                                foreach (var _token in tokens.GetRange(1, tokens.Count - 1))
                                 {
-                                    if (Variables.ContainsKey(formalParam[i]))
-                                    {
-                                        Variables[formalParam[i]] = paramters.ElementAt(i);
-                                    }
-                                    else
-                                        Variables.Add(formalParam[i], paramters.ElementAt(i));
+                                    if (_token.getType() == Type.NUMBER)
+                                        paramters.AddLast(_token.getValue());
+                                    else if (_token.getType() == Type.IDENTIFIER)
+                                        paramters.AddLast(Variables[_token.getValue()]);
                                 }
-                            }
 
-                            lineNum = Int32.Parse(functionLines[0]);
+                                if (formalParam.Length != 0 && !formalParam[0].Equals(""))
+                                {
+                                    for (int i = 0; i < formalParam.Length; i++)
+                                    {
+                                        if (Variables.ContainsKey(formalParam[i]))
+                                        {
+                                            Variables[formalParam[i]] = paramters.ElementAt(i);
+                                        }
+                                        else
+                                            Variables.Add(formalParam[i], paramters.ElementAt(i));
+                                    }
+                                }
+
+
+                                lineNum = Int32.Parse(functionLines[0]);
+                            }
+                            catch (ArgumentOutOfRangeException)
+                            {
+                                // If the identifier is not recognized show error
+                                error += "[" + DateTime.Now.ToString("T") + "] Invalid Number of arguments for this method,";
+                                error += " at line " + (lineNum + 1);
+                                error += ".\r\n";
+                            }
+                            catch (KeyNotFoundException)
+                            {
+                                // If the identifier is not recognized show error
+                                error += "[" + DateTime.Now.ToString("T") + "] Identifier not recognized or not defined,";
+                                error += " at line " + (lineNum + 1);
+                                error += ".\r\n";
+                            }
                         }
 
                         else if (lines[lineNum].Contains("while") && !lines[lineNum].Contains("endwhile"))
                         {
                             int whileNum = lineNum;
                             whileNum++;
-                            while (parseUsingIf(lines[lineNum]))
+                            while (parseUsingIf(lines[lineNum], lineNum + 1))
                             {
                                 if (lines[whileNum].Contains("endwhile"))
                                 {
@@ -444,16 +555,25 @@ namespace AssignmentASE
                                 {
                                     if (lines[whileNum].Contains("endmethod"))
                                     {
-                                        if (!currentFunction.Equals(""))
+                                        if (!currentFunction.Equals("") && cursor != 0)
                                         {
                                             var formalParam = Variables[currentFunction].Split(',')[2].Split('|');
                                             foreach (var _parameter in formalParam)
                                             {
-                                                Console.WriteLine(_parameter);
                                                 Variables.Remove(_parameter);
                                             }
+                                            whileNum = cursor;
                                         }
-                                        whileNum = cursor;
+                                        else
+                                        {
+                                            // If the identifier is not recognized show error
+                                            error += "[" + DateTime.Now.ToString("T") + "] No method found before ending a method";
+                                            error += " at line " + (lineNum + 1);
+                                            error += ".\r\n";
+                                        }
+                                        currentFunction = "";
+                                        cursor = 0;
+
                                     }
                                     else if (Regex.Match(lines[whileNum], @"(\(.*\))").Success && !lines[whileNum].Contains("method"))
                                     {
@@ -461,19 +581,21 @@ namespace AssignmentASE
                                         cursor = whileNum;
                                         var tokens = lexer.Advance(lines[whileNum]);
                                         currentFunction = tokens[0].getValue();
-                                        var functionLines = Variables[tokens[0].getValue()].Split(',');
-                                        var formalParam = functionLines[2].Split('|');
 
-                                        foreach (var _token in tokens.GetRange(1, tokens.Count - 1))
+                                        try
                                         {
-                                            if (_token.getType() == Type.NUMBER)
-                                                paramters.AddLast(_token.getValue());
-                                            else if (_token.getType() == Type.IDENTIFIER)
-                                                paramters.AddLast(Variables[_token.getValue()]);
-                                        }
 
-                                        if (formalParam.Length == paramters.Count)
-                                        {
+                                            var functionLines = Variables[tokens[0].getValue()].Split(',');
+                                            var formalParam = functionLines[2].Split('|');
+
+                                            foreach (var _token in tokens.GetRange(1, tokens.Count - 1))
+                                            {
+                                                if (_token.getType() == Type.NUMBER)
+                                                    paramters.AddLast(_token.getValue());
+                                                else if (_token.getType() == Type.IDENTIFIER)
+                                                    paramters.AddLast(Variables[_token.getValue()]);
+                                            }
+
                                             for (int i = 0; i < formalParam.Length; i++)
                                             {
                                                 if (Variables.ContainsKey(formalParam[i]))
@@ -483,9 +605,24 @@ namespace AssignmentASE
                                                 else
                                                     Variables.Add(formalParam[i], paramters.ElementAt(i));
                                             }
-                                        }
 
-                                        whileNum = Int32.Parse(functionLines[0]);
+
+                                            whileNum = Int32.Parse(functionLines[0]);
+                                        }
+                                        catch (ArgumentOutOfRangeException)
+                                        {
+                                            // If the identifier is not recognized show error
+                                            error += "[" + DateTime.Now.ToString("T") + "] Invalid Number of arguments for this method,";
+                                            error += " at line " + (whileNum + 1);
+                                            error += ".\r\n";
+                                        }
+                                        catch (KeyNotFoundException)
+                                        {
+                                            // If the identifier is not recognized show error
+                                            error += "[" + DateTime.Now.ToString("T") + "] Identifier not recognized or not defined,";
+                                            error += " at line " + (whileNum + 1);
+                                            error += ".\r\n";
+                                        }
                                     }
                                     else if (lines[whileNum].Contains("endif"))
                                     {
@@ -494,7 +631,7 @@ namespace AssignmentASE
 
                                     else if (lines[whileNum].Contains("if"))
                                     {
-                                        if (!parseUsingIf(lines[whileNum]))
+                                        if (!parseUsingIf(lines[whileNum], lineNum + 1))
 
                                         {
                                             bool flag = false;
@@ -517,7 +654,7 @@ namespace AssignmentASE
                                     }
 
                                     else
-                                        parseCommand(lines[whileNum], whileNum);
+                                        parseCommand(lines[whileNum], whileNum + 1);
 
                                 }
                                 whileNum++;
@@ -532,7 +669,7 @@ namespace AssignmentASE
 
                         else if (lines[lineNum].Contains("if"))
                         {
-                            if (!parseUsingIf(lines[lineNum]))
+                            if (!parseUsingIf(lines[lineNum], lineNum + 1))
 
                             {
                                 bool flag = false;
@@ -551,7 +688,7 @@ namespace AssignmentASE
 
                         else if (lines[lineNum].Contains("="))
                         {
-                            parseUsingLexer(lines[lineNum], lineNum);
+                            parseUsingLexer(lines[lineNum], lineNum + 1);
                         }
 
                     }
