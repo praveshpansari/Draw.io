@@ -267,7 +267,7 @@ namespace AssignmentASE
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Show the about message box
-            MessageBox.Show("Simple Programming Environment 2020 is a program environement which contains simple commands for drawing in different shapes and colors.\n\nVersion 1.0.0\n\u00a9 2020 Pravesh Pansari.\nAll rights reserved.", "Simple Programming Environment", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Simple Programming Environment 2020 is a program environment that allows drawing of shapes and lines, with support for loops, conditionals, variables and methods.\n\nVersion 1.1\n\u00a9 2020 Pravesh Pansari.\nAll rights reserved.", "Simple Programming Environment", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /// <summary>

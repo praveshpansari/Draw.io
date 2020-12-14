@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="AssignmentASE.Circle" Collapsed="true">
-    <Position X="0.5" Y="4.75" Width="1.5" />
+    <Position X="1.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAACAAAAAAAAAYAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Circle.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AssignmentASE.Clear" Collapsed="true">
-    <Position X="2.75" Y="1.75" Width="1.5" />
+    <Position X="3.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Clear.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AssignmentASE.Command" Collapsed="true">
-    <Position X="3.75" Y="0.5" Width="1.5" />
+    <Position X="4.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAQEAAAAAACAAAAIAEBgAAAAYAA=</HashCode>
       <FileName>Command.cs</FileName>
@@ -23,56 +23,56 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="AssignmentASE.CommandFactory" Collapsed="true">
-    <Position X="9.75" Y="6.25" Width="1.5" />
+    <Position X="8.5" Y="5.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
       <FileName>CommandFactory.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AssignmentASE.DrawLine" Collapsed="true">
-    <Position X="0.5" Y="1.75" Width="1.5" />
+    <Position X="6" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAQEAAgAAACAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DrawLine.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AssignmentASE.MoveTo" Collapsed="true">
-    <Position X="5" Y="1.75" Width="1.5" />
+    <Position X="1.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAQEAAgAAACAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>MoveTo.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AssignmentASE.Painter" Collapsed="true">
-    <Position X="7.5" Y="5.25" Width="1.5" />
+    <Position X="10.25" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAQAAABAgIACBAAQEgAGgAIAAYAAIAIMAgAAQIIBAA=</HashCode>
       <FileName>Painter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AssignmentASE.Parser" Collapsed="true">
-    <Position X="9.75" Y="5.25" Width="1.5" />
+    <Position X="8.5" Y="6.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAEQAAAAAAAAAAAAAEQAAAAAAgA=</HashCode>
+      <HashCode>AAACAAAAAAAAAAAAAAGQAAAAAAAAAAAAQEQAAAAAAgA=</HashCode>
       <FileName>Parser.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AssignmentASE.Rectangle" Collapsed="true">
-    <Position X="2.75" Y="4.75" Width="1.5" />
+    <Position X="3.75" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAQAYAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Rectangle.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AssignmentASE.Reset" Collapsed="true">
-    <Position X="7.25" Y="1.75" Width="1.5" />
+    <Position X="8.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Reset.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AssignmentASE.Shape" Collapsed="true">
-    <Position X="2.75" Y="3.5" Width="1.5" />
+    <Position X="3.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
       <FileName>Shape.cs</FileName>
@@ -80,42 +80,60 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="AssignmentASE.ShapeFactory" Collapsed="true">
-    <Position X="7.5" Y="6.25" Width="1.5" />
+    <Position X="10.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
       <FileName>ShapeFactory.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AssignmentASE.Square" Collapsed="true">
-    <Position X="2.75" Y="6.25" Width="1.5" />
+    <Position X="3.75" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Square.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AssignmentASE.Triangle" Collapsed="true">
-    <Position X="5" Y="4.75" Width="1.5" />
+    <Position X="6" Y="5.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAQAYAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Triangle.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="AssignmentASE.Token" Collapsed="true">
+    <Position X="12" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAABAABAQABAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Lexer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AssignmentASE.Lexer" Collapsed="true">
+    <Position X="8.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAgAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Lexer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Interface Name="AssignmentASE.CommandInterface" Collapsed="true">
-    <Position X="9.75" Y="4" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Methods" Collapsed="true" />
-    </Compartments>
+    <Position X="8.5" Y="4.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAQEAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CommandInterface.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="AssignmentASE.Shapes" Collapsed="true">
-    <Position X="7.5" Y="4" Width="1.5" />
+    <Position X="10.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ShapesInterface.cs</FileName>
     </TypeIdentifier>
   </Interface>
+  <Enum Name="AssignmentASE.Type" Collapsed="true">
+    <Position X="10.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAQAAAAAAAQAgECAAAAAAACAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Lexer.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
   <Font Name="Segoe UI Semibold" Size="9.75" />
 </ClassDiagram>
