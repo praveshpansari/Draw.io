@@ -1,0 +1,559 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AssignmentASE</name>
+    </assembly>
+    <members>
+        <member name="T:AssignmentASE.Circle">
+            <summary>
+            Circle Shape class inherited from <see cref="T:AssignmentASE.Shape"/>
+            </summary>
+            <remarks>
+            This class allows to set and draw a circle of specified radius
+            </remarks>
+        </member>
+        <member name="T:AssignmentASE.Clear">
+            <summary>
+            Clear Command class inherited from <see cref="T:AssignmentASE.Command"/>
+            </summary>
+            <remarks>
+            Allows to Execute the clear command and clear the output window
+            </remarks>
+        </member>
+        <member name="T:AssignmentASE.CommandInterface">
+            <summary>
+            The interface for the shape classes
+            </summary>
+        </member>
+        <member name="M:AssignmentASE.CommandInterface.execute">
+            <summary>
+            Executes the command
+            </summary>
+            <remarks>
+            Performs the respective function of the command
+            </remarks>
+        </member>
+        <member name="M:AssignmentASE.CommandInterface.set(System.Drawing.Graphics,System.Drawing.Pen,System.Int32[])">
+            <summary>  
+            Sets the source and destination where the command is to be executed
+            </summary>
+            <param name="g">The graphics object where the command is executed</param>
+            <param name="p">The pen to be used to execute the command</param>
+            <param name="list">The list of integers containing source and destination</param>
+        </member>
+        <member name="M:AssignmentASE.CommandInterface.getLog">
+            <summary>
+            Provides information about what the command has done
+            </summary>
+            <returns>A string containing the lof of the action this command performed</returns>
+        </member>
+        <member name="T:AssignmentASE.CommandFactory">
+            <summary>
+            This is the factory for the <see cref="T:AssignmentASE.Command"/>
+            </summary>
+            <remarks>
+            Allows to create an object of commands below.
+            <list type="bullet">
+            <item>
+            <term>Draw Line</term>
+            <description><see cref="T:AssignmentASE.DrawLine"/></description>
+            </item>
+            <item>
+            <term>Move To</term>
+            <description><see cref="T:AssignmentASE.MoveTo"/></description>
+            </item>
+            <item>
+            <term>Clear</term>
+            <description><see cref="T:AssignmentASE.Clear"/></description>
+            </item>
+            <item>
+            <term>Reset</term>
+            <description><see cref="T:AssignmentASE.Reset"/></description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:AssignmentASE.CommandFactory.getCommand(System.String)">
+            <summary>
+            Used to instantiate and get a specific command object
+            </summary>
+            <param name="command">The type of the command to be generated</param>
+            <returns>An instance of the inherited classes of <see cref="T:AssignmentASE.Command"/></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="T:AssignmentASE.Command">
+            <summary>
+            Abstract class command implementing the <see cref="T:AssignmentASE.CommandInterface"/> interface
+            </summary>
+            <remarks>
+            Implements the execute, set and log method
+            </remarks>
+        </member>
+        <member name="T:AssignmentASE.DrawLine">
+            <summary>
+            Draw Line Command class inherited from <see cref="T:AssignmentASE.Command"/>
+            </summary>
+            <remarks>
+            Allows to Execute the drawto command and draw a line from
+            current position to a given position
+            </remarks>
+        </member>
+        <member name="T:AssignmentASE.Environment">
+            <summary>
+            The main window with a command line, code editor, output window and a log.
+            </summary>
+        </member>
+        <member name="M:AssignmentASE.Environment.#ctor">
+            <summary>
+            Constructor which initializes form components and instance objects
+            </summary>
+        </member>
+        <member name="M:AssignmentASE.Environment.outputWindow_Paint(System.Object,System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Paint method for the output window. Draws the ouputImage on it;
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AssignmentASE.Environment.runButton_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler when the user clicks on the run button.
+            This method parses commands from the command line and code editor
+            and executes them and displays them in the  ouputWindow
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AssignmentASE.Environment.commandLine_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+            <summary>
+            When enter key is pressed by the user after entering a command
+            in the command line perform a run button click
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AssignmentASE.Environment.saveToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the save button click
+            This method displays a save dialog box to user
+            And allows them to save file in the rtf format
+            From the code editor window
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AssignmentASE.Environment.openToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the open button click
+            This method displays a open dialog box to user
+            And allows them to open a rtf file in the code editor
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AssignmentASE.Environment.exitToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the exit button click
+            Exits the application
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AssignmentASE.Environment.newFileToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handle for the new file button click
+            Clear the code editor and close the current file
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AssignmentASE.Environment.aboutToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handler for the about button click
+            Shows the information about the program
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AssignmentASE.Environment.button1_Click(System.Object,System.EventArgs)">
+            <summary>
+            Event handle for the close button "X"
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:AssignmentASE.Environment.WndProc(System.Windows.Forms.Message@)">
+            <summary>
+            Allows the window form app to be dragged by the mouse
+            </summary>
+            <param name="m"></param>
+        </member>
+        <member name="F:AssignmentASE.Environment.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:AssignmentASE.Environment.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:AssignmentASE.Environment.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:AssignmentASE.Type">
+            <summary>
+            An enum which contains all the required keywords and types for the language.
+            </summary>
+        </member>
+        <member name="T:AssignmentASE.Token">
+            <summary>
+            This class takes in a enum type and the corresponding value to the type.
+            </summary>
+        </member>
+        <member name="M:AssignmentASE.Token.#ctor(AssignmentASE.Type,System.String)">
+            <summary>
+            A parameterized constructor for Token, where the value of token is a string.
+            </summary>
+            <param name="type">Type of the token</param>
+            <param name="keyword">A string of the value</param>
+        </member>
+        <member name="M:AssignmentASE.Token.toString">
+            <summary>
+            This method coverts this class to a String in a specific format.
+            </summary>
+            <returns>A string displaying token and value</returns>
+        </member>
+        <member name="T:AssignmentASE.Lexer">
+            <summary>
+            This class takes in a string input and produces tokens based on provided enum type.
+            </summary>
+        </member>
+        <member name="M:AssignmentASE.Lexer.Advance(System.String)">
+            <summary>
+            This function splits a given string on spaces and the runs a loop for each word, thereafter 
+            a loop for each character. Adds required tokens to a list whenever whitespace is not encountered.
+            </summary>
+            <param name="commandLine">A string to be tokenised for the Parser.</param>
+            <returns>A list of tokens containg tokens for the given string</returns>
+        </member>
+        <member name="T:AssignmentASE.MoveTo">
+            <summary>
+            MoveTo Command class inherited from <see cref="T:AssignmentASE.Command"/>
+            </summary>
+            <remarks>
+            Allows to Execute the moveto command and move the cursor to given position
+            </remarks>
+        </member>
+        <member name="T:AssignmentASE.Painter">
+            <summary>
+            Responsible for drawing on a graphics object and write log
+            </summary>
+            <remarks>
+            Contains methods for drawing shapes, lines and setting pen and cursor
+            </remarks>
+        </member>
+        <member name="P:AssignmentASE.Painter.fill">
+            <summary>
+            The fill flag for the drawing
+            </summary>
+        </member>
+        <member name="P:AssignmentASE.Painter.xPos">
+            <summary>
+            The x-coordinate of the cursor
+            </summary>
+        </member>
+        <member name="P:AssignmentASE.Painter.yPos">
+            <summary>
+            The y-coordinate of the cursor
+            </summary>
+        </member>
+        <member name="P:AssignmentASE.Painter.Pen">
+            <summary>
+            Returns the color name of the pen
+            </summary>
+        </member>
+        <member name="M:AssignmentASE.Painter.#ctor">
+            <summary>
+            Constructor with no paramters which initializes only the the drawing tools
+            </summary>
+        </member>
+        <member name="M:AssignmentASE.Painter.#ctor(System.Windows.Forms.PictureBox,System.Windows.Forms.RichTextBox)">
+            <summary>
+            The parameterized constructor for initializing the drawing tools, images and the cursor
+            </summary>
+            <param name="outputWindow">The picturebox where the image is to be drawn</param>
+            <param name="logBox">The rich text box where the log and error of the program is displayed</param>
+            <remarks>
+            Sets cursor to top left initially and creates two images of ouput window size
+            </remarks>
+        </member>
+        <member name="M:AssignmentASE.Painter.Center">
+            <summary>
+            The command to center the cursor position in the output window
+            </summary>
+        </member>
+        <member name="M:AssignmentASE.Painter.SetColor(System.String)">
+            <summary>
+            The command to set the color of the pen and brush
+            </summary>
+            <param name="color">The color which the pen is to be set</param>
+            <remarks>Also sets the color of vrush used to draw filled shapes</remarks>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:AssignmentASE.Painter.SetFill(System.String)">
+            <summary>
+            The command to set whether the shapes drawn are filled or not
+            </summary>
+            <param name="flag">'On' for fill and 'off' for no fill</param>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="M:AssignmentASE.Painter.DrawCursor">
+            <summary>
+            Draws the cursor on the temporary image
+            </summary>
+            <remarks>To be called after every method</remarks>
+        </member>
+        <member name="M:AssignmentASE.Painter.updateImage">
+            <summary>
+            Updates the output window image to be the original image
+            </summary>
+            <remarks>To be called before every method</remarks>
+        </member>
+        <member name="M:AssignmentASE.Painter.storeTempImage">
+            <summary>
+            Copies the original image to a temporary image
+            </summary>
+            <remarks>To be used before <see cref="M:AssignmentASE.Painter.DrawCursor"/> and after <see cref="M:AssignmentASE.Painter.updateImage"/></remarks>
+        </member>
+        <member name="M:AssignmentASE.Painter.ExecuteCommand(System.String,System.Int32[])">
+            <summary>
+            Responsible for executing the following commands present in <see cref="T:AssignmentASE.CommandFactory"/>
+            </summary>
+            <param name="commandType">The command to be executed</param>
+            <param name="p">The list of arguments for the respective commands</param>
+            <exception cref="T:System.IndexOutOfRangeException"></exception>
+        </member>
+        <member name="M:AssignmentASE.Painter.DrawShape(System.String,System.Int32[])">
+            <summary>
+            Responsible for drawing the shapes present in <see cref="T:AssignmentASE.ShapeFactory"/>
+            </summary>
+            <param name="shapeType">The shape type to be drawn</param>
+            <param name="p">The list of parameters for the respective shape</param>
+            <exception cref="T:System.IndexOutOfRangeException"></exception>
+        </member>
+        <member name="M:AssignmentASE.Painter.WriteLog">
+            <summary>
+            Write the log in the logbox
+            </summary>
+        </member>
+        <member name="M:AssignmentASE.Painter.WhileLoop(System.Int32,System.Char,System.Int32)">
+            <summary>
+            The while loop command for the while loop
+            </summary>
+            <param name="var">The value for which the condition is to bec checked</param>
+            <param name="op">The type of check to be done</param>
+            <param name="value">The value against which to check the operation</param>
+        </member>
+        <member name="M:AssignmentASE.Painter.Varaible(System.String,System.Int32)">
+            <summary>
+            The variable assignment command
+            </summary>
+            <param name="var">The variable name to which the value is assigned</param>
+            <param name="x">The value to be assigned to the variable</param>
+        </member>
+        <member name="M:AssignmentASE.Painter.WriteError(System.String)">
+            <summary>
+            Write the error in the logbox
+            </summary>
+            <param name="error"></param>
+        </member>
+        <member name="T:AssignmentASE.Parser">
+            <summary>
+            Responsible for parsing commands from command line and code editor
+            </summary>
+        </member>
+        <member name="P:AssignmentASE.Parser.Variables">
+            <summary>
+            Gets or sets the dictionary of variables.
+            </summary>
+            <value>
+            Contains the name and the value of variables.
+            </value>
+        </member>
+        <member name="M:AssignmentASE.Parser.#ctor(AssignmentASE.Painter)">
+            <summary>
+            Parameterized Constructor to initialize the painter object
+            </summary>
+            <param name="p">The painter object which knows where to draw on</param>
+        </member>
+        <member name="M:AssignmentASE.Parser.parseCommand(System.String,System.Int32)">
+            <summary>
+            Parses a single string input
+            </summary>
+            <param name="input">The string to be parsed</param>
+            <param name="lineNum">The current line number</param>
+            <remarks>The line number is 0 when a single command is to be parsed</remarks>
+        </member>
+        <member name="M:AssignmentASE.Parser.parseUsingLexer(System.String,System.Int32)">
+            <summary>
+            Parses a single expression statement
+            </summary>
+            <param name="input">The string to be parsed</param>
+            <param name="lineNum">The current line number</param>
+            <remarks>The line number is 0 when a single command is to be parsed</remarks>
+        </member>
+        <member name="M:AssignmentASE.Parser.parseUsingIf(System.String,System.Int32)">
+            <summary>
+            Parses a single if statement
+            </summary>
+            <param name="input">The string to be parsed</param>
+            <param name="lineNum">The current line number</param>
+            <returns>Boolean indicating wheter the statement is true or false</returns>
+            <remarks>The line number is 0 when a single command is to be parsed</remarks>
+        </member>
+        <member name="M:AssignmentASE.Parser.parseEditor(System.String)">
+            <summary>
+            Parses the text form the code editor
+            </summary>
+            <param name="input">The text from the code editor</param>
+            <remarks>Uses <see cref="M:AssignmentASE.Parser.parseCommand(System.String,System.Int32)"/>, <see cref="M:AssignmentASE.Parser.parseUsingIf(System.String,System.Int32)"/>, <see cref="M:AssignmentASE.Parser.parseUsingLexer(System.String,System.Int32)"/></remarks>
+        </member>
+        <member name="M:AssignmentASE.Parser.displayError">
+            <summary>
+            Displays the errors encountered
+            </summary>
+            /// <remarks>Uses <see cref="M:AssignmentASE.Painter.WriteError(System.String)"/></remarks>
+        </member>
+        <member name="M:AssignmentASE.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:AssignmentASE.Rectangle">
+            <summary>
+            Rectangle Shape class inherited from <see cref="T:AssignmentASE.Shape"/>
+            </summary>
+            <remarks>
+            This class allows to set and draw a rectangle of specified width and height
+            </remarks>
+        </member>
+        <member name="T:AssignmentASE.Reset">
+            <summary>
+            Reset Command class inherited from <see cref="T:AssignmentASE.Command"/>
+            </summary>
+            <remarks>
+            Allows to Execute the reset command and place the cursor to top left
+            </remarks>
+        </member>
+        <member name="T:AssignmentASE.Shape">
+            <summary>
+            Abstract class shape implementing the <see cref="T:AssignmentASE.Shapes"/> interface
+            </summary>
+            <remarks>
+            Implements the draw and set methods
+            </remarks>
+        </member>
+        <member name="F:AssignmentASE.Shape.x">
+            <summary>
+            The x and y postion of the shape
+            </summary>
+        </member>
+        <member name="F:AssignmentASE.Shape.y">
+            <summary>
+            The x and y postion of the shape
+            </summary>
+        </member>
+        <member name="T:AssignmentASE.ShapeFactory">
+            <summary>
+            This is the factory for the <see cref="T:AssignmentASE.Shape"/>
+            </summary>
+            <remarks>
+            Allows to create an object of shapes below.
+            <list type="bullet">
+            <item>
+            <term>Rectangle</term>
+            <description><see cref="T:AssignmentASE.Rectangle"/></description>
+            </item>
+            <item>
+            <term>Square</term>
+            <description><see cref="T:AssignmentASE.Square"/></description>
+            </item>
+            <item>
+            <term>Circle</term>
+            <description><see cref="T:AssignmentASE.Circle"/></description>
+            </item>
+            <item>
+            <term>Triangle</term>
+            <description><see cref="T:AssignmentASE.Triangle"/></description>
+            </item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:AssignmentASE.ShapeFactory.getShape(System.String)">
+            <summary>
+            Used to instantiate and get a specific Shape object
+            </summary>
+            <param name="shapeType">The shape type of the shape to be generated</param>
+            <returns>An instance of the inherited classes of <see cref="T:AssignmentASE.Shape"/></returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="T:AssignmentASE.Shapes">
+            <summary>
+            The interface for the shape classes
+            </summary>
+        </member>
+        <member name="M:AssignmentASE.Shapes.set(System.Int32[])">
+            <summary>
+            Sets the size and position of the shape
+            </summary>
+            <param name="list">The list of integers containing postion and size of the shape</param>
+        </member>
+        <member name="M:AssignmentASE.Shapes.draw(System.Drawing.Graphics,System.Boolean,System.Drawing.Pen,System.Drawing.Brush)">
+            <summary>
+            Draws the shape on a graphics object using a given pen,fill information and brush
+            </summary>
+            <param name="g">The graphics object where the shape is to be drawn</param>
+            <param name="fill">Whether the shape drawn is filled or not</param>
+            <param name="p">The pen used to draw the shape</param>
+            <param name="b">The brush used to draw the shape</param>
+        </member>
+        <member name="T:AssignmentASE.Square">
+            <summary>
+            Square Shape class inherited from <see cref="T:AssignmentASE.Rectangle"/>
+            </summary>
+            <remarks>
+            This class allows to set and draw a rectangle of same size
+            </remarks>
+        </member>
+        <member name="T:AssignmentASE.Triangle">
+            <summary>
+            Triangle Shape class inherited from <see cref="T:AssignmentASE.Shape"/>
+            </summary>
+            <remarks>
+            This class allows to set and draw a rectangle of specifice base length,
+            and height
+            </remarks>
+        </member>
+        <member name="T:AssignmentASE.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:AssignmentASE.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:AssignmentASE.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

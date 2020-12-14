@@ -61,7 +61,9 @@ namespace AssignmentASE
                 // If the code editor is not empty
                 if (codeEditor.Text != String.Empty)
                 {
+                    // Clear the artboard
                     parser.parseCommand("clear", 0);
+                    // Clear the variables dictionary
                     parser.Variables.Clear();
                     // Parses the editor text
                     parser.parseEditor(codeEditor.Text);
@@ -76,8 +78,11 @@ namespace AssignmentASE
                 // Else parse the code editor text
                 else
                 {
+                    // Clear the artboard
                     parser.parseCommand("clear", 0);
+                    // Clear the variables dictionary
                     parser.Variables.Clear();
+                    // Parses the editor text
                     parser.parseEditor(codeEditor.Text);
                 }
             }
@@ -97,18 +102,24 @@ namespace AssignmentASE
 
         private void syntaxButton_Click(object sender, EventArgs e)
         {
+            // Clear the logbox
             logBox.Clear();
+
+            // If the editor is not empty
             if (codeEditor.Text != String.Empty)
             {
-                logBox.Clear();
+                // Clear the variables
                 parser.Variables.Clear();
                 // Parses the editor text
                 parser.parseEditor(codeEditor.Text);
+                // Clear the artboard
                 parser.parseCommand("clear", 0);
                 // Display any errors if encountered in the log
                 parser.displayError();
+                // If no errors encountered means syntax is correct
                 if (logBox.Text.Equals(""))
                 {
+                    // Show relevant message
                     logBox.SelectionColor = Color.Green;
                     logBox.AppendText("[" + DateTime.Now.ToString("T") + "] Syntax Checked. No errors found.");
                     logBox.SelectionColor = Color.Black;

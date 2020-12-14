@@ -16,6 +16,9 @@ namespace AssignmentASE
     /// </remarks>
     public abstract class Shape : Shapes
     {
+        /// <summary>
+        /// The x and y postion of the shape
+        /// </summary>
         protected int x, y;
 
         //here we are passing on the obligation to implement them to the derived classes by declaring them as abstract

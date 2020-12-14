@@ -35,7 +35,7 @@ namespace AssignmentASE
         /// <summary>
         /// Used to instantiate and get a specific command object
         /// </summary>
-        /// <param name="shapeType">The type of the command to be generated</param>
+        /// <param name="command">The type of the command to be generated</param>
         /// <returns>An instance of the inherited classes of <see cref="Command"/></returns>
         /// <exception cref="ArgumentException"></exception>
         public Command getCommand(String command)

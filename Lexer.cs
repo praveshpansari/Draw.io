@@ -10,18 +10,13 @@ namespace AssignmentASE
     public enum Type
     {
         IF,
-        ELSEIF,
-        ELSE,
         ENDIF,
         WHILE,
         ENDWHILE,
         METHOD,
         IDENTIFIER,
         OPERATOR,
-        BRACKET,
         NUMBER,
-        COMPARE,
-        ERROR
     }
 
     /// <summary>
@@ -77,14 +72,6 @@ namespace AssignmentASE
         String curText;
         // A variable for storing the current encountered number.
         double curNumber;
-
-        /// <summary>
-        /// An enum for error type.
-        /// </summary>
-        public enum error
-        {
-            INVALID_COMMAND = 0x01
-        }
 
         /// <summary>
         /// This function splits a given string on spaces and the runs a loop for each word, thereafter 
@@ -146,16 +133,6 @@ namespace AssignmentASE
                             // Then a ENDIF type token is added to the list
                             tokens.Add(new Token(Type.ENDIF, "endif"));
                             break;
-                        // Identifier is "elseif"
-                        case "elseif":
-                            // Then a ELSEIF type token is added to the list
-                            tokens.Add(new Token(Type.ELSEIF, "elseif"));
-                            break;
-                        // Identifier is "else"
-                        case "else":
-                            // Then a ELSE type token is added to the list
-                            tokens.Add(new Token(Type.ELSE, "else"));
-                            break;
                         // Identifier is "function"
                         case "method":
                             // Then a FUNCTION type token is added to the list
@@ -211,14 +188,14 @@ namespace AssignmentASE
                 }
 
                 // If a symbol is encountered
-                if (new Regex(@"[-%+/*=<>]", RegexOptions.Compiled).IsMatch(LastChar.ToString()))
+                if (new Regex(@"[-%+/!*=<>]", RegexOptions.Compiled).IsMatch(LastChar.ToString()))
                 {
 
-                    // A temporary buffer string for storing all the numbers
+                    // A temporary buffer string for storing all the symbols
                     string op = "";
                     do
                     {
-                        // Add that letter to the identifier variable
+                        // Add that symbol to the variable
                         op += LastChar;
                         if (num < line.Length - 1)
                         {
@@ -229,17 +206,14 @@ namespace AssignmentASE
                         }
                         else { num++; break; }
 
-                    } while (new Regex(@"[-%+/*=<>]", RegexOptions.Compiled).IsMatch(LastChar.ToString()) && num < line.Length);
+                    }
+                    // Do this until symbols encountered and stop at end
+                    while (new Regex(@"[-%+/!*=<>]", RegexOptions.Compiled).IsMatch(LastChar.ToString()) && num < line.Length);
+
                     num--;
+
                     // Add a OPERATOR type token to the list
                     tokens.Add(new Token(Type.OPERATOR, op));
-                }
-
-                // If a punctuation is encountered
-                if (new Regex(@"[()]", RegexOptions.Compiled).IsMatch(LastChar.ToString()))
-                {
-                    // Add a BRACKET type token to the list
-                    tokens.Add(new Token(Type.BRACKET, LastChar.ToString()));
                 }
             }
             // Return the list of tokens
