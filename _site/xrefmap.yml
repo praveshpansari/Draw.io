@@ -384,6 +384,19 @@ references:
   isSpec: "True"
   fullName: AssignmentASE.Parser.parseUsingIf
   nameWithType: Parser.parseUsingIf
+- uid: AssignmentASE.Parser.parseUsingLexer(System.String,System.Int32)
+  name: parseUsingLexer(String, Int32)
+  href: api/AssignmentASE.Parser.html#AssignmentASE_Parser_parseUsingLexer_System_String_System_Int32_
+  commentId: M:AssignmentASE.Parser.parseUsingLexer(System.String,System.Int32)
+  fullName: AssignmentASE.Parser.parseUsingLexer(System.String, System.Int32)
+  nameWithType: Parser.parseUsingLexer(String, Int32)
+- uid: AssignmentASE.Parser.parseUsingLexer*
+  name: parseUsingLexer
+  href: api/AssignmentASE.Parser.html#AssignmentASE_Parser_parseUsingLexer_
+  commentId: Overload:AssignmentASE.Parser.parseUsingLexer
+  isSpec: "True"
+  fullName: AssignmentASE.Parser.parseUsingLexer
+  nameWithType: Parser.parseUsingLexer
 - uid: AssignmentASE.Parser.Variables
   name: Variables
   href: api/AssignmentASE.Parser.html#AssignmentASE_Parser_Variables

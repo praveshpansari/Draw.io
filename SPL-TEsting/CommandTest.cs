@@ -111,7 +111,7 @@ namespace SPL_Testing
 
         /// <summary>
         /// Tests the variable command
-        /// Tests the parsecommand method
+        /// Tests the parseusinglexer method
         /// Tests the painter class
         /// Checks if the value has been assigned to variable
         /// </summary>
@@ -120,31 +120,60 @@ namespace SPL_Testing
         {
             p = new Painter();
             Parser parser = new Parser(p);
-            parser.parseCommand("num = 5", 0);
+            parser.parseUsingLexer("num = 5", 0);
             Assert.IsTrue(5 == Int32.Parse(parser.Variables["num"]));
         }
 
         /// <summary>
         /// Tests the if command
-        /// Tests the parsecommand method
+        /// Tests the parseusingif method
         /// Tests the painter class
-        /// Checks if the while condition has been evaluated
+        /// Checks if the condition has been evaluated
         /// </summary>
         [TestMethod]
         public void TestParseCommandIf()
         {
             p = new Painter();
             Parser parser = new Parser(p);
-            parser.parseCommand("num = 3", 1);
-            parser.parseCommand("if num < 5", 2);
-            parser.parseCommand("num = 20", 3);
-            Assert.IsTrue(20 == Int32.Parse(parser.Variables["num"]));
+            bool result = parser.parseUsingIf("if 5 > 20", 0);
+            Assert.IsFalse(result);
+        }
+
+        /// <summary>
+        /// Tests the method command
+        /// Tests the parseEditor method
+        /// Tests the painter class
+        /// Checks if the method has been created
+        /// </summary>
+        [TestMethod]
+        public void TestParseCommandMethod()
+        {
+            p = new Painter();
+            Parser parser = new Parser(p);
+            parser.parseEditor("method example()\r\ncircle 20\r\nendmethod");
+            Assert.IsTrue(parser.Variables.ContainsKey("example"));
+        }
+
+        /// <summary>
+        /// Tests expressions
+        /// Tests the parseUsingLexer method
+        /// Tests the painter class
+        /// Checks if the method has been created
+        /// </summary>
+        [TestMethod]
+        public void TestParseExpression()
+        {
+            p = new Painter();
+            Parser parser = new Parser(p);
+            parser.parseUsingLexer("x = 15", 0);
+            parser.parseUsingLexer("num = 5 + x *2", 0);
+            Assert.AreEqual(40, Int32.Parse(parser.Variables["num"]));
         }
 
 
         /// <summary>
         /// Tests the whileLoop method
-        /// Tests the parsecommand method
+        /// Tests the parseEditor method
         /// Tests the painter class
         /// Checks if the while condition has been evaluated
         /// </summary>
@@ -153,9 +182,8 @@ namespace SPL_Testing
         {
             p = new Painter();
             Parser parser = new Parser(p);
-            parser.parseCommand("num = 5", 0);
-            parser.parseCommand("while num < 20", 0);
-            Assert.IsTrue(20 > Int32.Parse(parser.Variables["num"]));
+            parser.parseEditor("num = 5\r\nwhile num > 3\r\nnum = num - 1\r\nendwhile");
+            Assert.AreEqual(3, Int32.Parse(parser.Variables["num"]));
         }
 
     }

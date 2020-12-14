@@ -206,7 +206,7 @@ namespace AssignmentASE
         /// <param name="input">The string to be parsed</param>
         /// <param name="lineNum">The current line number</param>
         /// <remarks>The line number is 0 when a single command is to be parsed</remarks>
-        private void parseUsingLexer(string input, int lineNum)
+        public void parseUsingLexer(string input, int lineNum)
         {
             // Get tokens from lexer
             var tokens = lexer.Advance(input);
