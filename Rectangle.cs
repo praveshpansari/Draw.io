@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace AssignmentASE
 {
@@ -13,20 +8,20 @@ namespace AssignmentASE
     /// <remarks>
     /// This class allows to set and draw a rectangle of specified width and height
     /// </remarks>
-    class Rectangle : Shape
+    public class Rectangle : Shape
     {
         // The width and height of the rectangle
         int width, height;
 
-        public override void set(params int[] list)
+        public override void Set(params int[] list)
         {
             //list[0] is x, list[1] is y, list[2] is width, list[3] is height
-            base.set(list[0], list[1]);
+            base.Set(list[0], list[1]);
             this.width = list[2];
             this.height = list[3];
         }
 
-        public override void draw(Graphics g, bool fill, Pen p, Brush b)
+        public override void Draw(Graphics g, bool fill, Pen p, Brush b)
         {
             // If fill is on
             if (fill)

@@ -14,43 +14,43 @@ namespace AssignmentASE
         // The graphics object
         Graphics g;
         // The image the shapes are to be drawn on
-        Bitmap bitmap;
+        readonly Bitmap bitmap;
         // The temporary image before the cursor is drawn
         Bitmap tempBit;
         // The Pen used for drawing
-        Pen pen;
+        readonly Pen pen;
         // The log of every action performed
         String log;
         // The pen for drawing the cursor
-        Pen cursorPen = new Pen(Color.Red);
+        readonly Pen cursorPen = new Pen(Color.Red);
         // The output box where the log is written
-        System.Windows.Forms.RichTextBox logBox;
+        readonly System.Windows.Forms.RichTextBox logBox;
 
         /// <summary>
         /// The fill flag for the drawing
         /// </summary>
-        public bool fill { get; set; }
+        public bool Fill { get; set; }
 
         // The shape factory for generating shapes
-        ShapeFactory shapes;
+        readonly ShapeFactory shapes;
 
         // The command factory for generating commands
-        CommandFactory commands;
+        readonly CommandFactory commands;
 
         /// <summary>
         /// The x-coordinate of the cursor
         /// </summary>
-        public int xPos { get; set; }
+        public int XPos { get; set; }
 
         /// <summary>
         /// The y-coordinate of the cursor
         /// </summary>
-        public int yPos { get; set; }
+        public int YPos { get; set; }
 
         // The brush used to draw filled shapes
-        SolidBrush brush;
+        readonly SolidBrush brush;
         // The output window where the image is drawn
-        System.Windows.Forms.PictureBox outputWindow;
+        readonly System.Windows.Forms.PictureBox outputWindow;
 
         /// <summary>
         /// Returns the color name of the pen
@@ -65,7 +65,7 @@ namespace AssignmentASE
         /// </summary>
         public Painter()
         {
-            xPos = yPos = 0;
+            XPos = YPos = 0;
             log = "";
             pen = new Pen(Color.Black, 1);
             brush = new SolidBrush(Color.Black);
@@ -97,9 +97,9 @@ namespace AssignmentASE
             // Set the graphics object from the image
             this.g = Graphics.FromImage(bitmap);
 
-            xPos = yPos = 0;
+            XPos = YPos = 0;
             this.log = "";
-            fill = false;
+            Fill = false;
 
             shapes = new ShapeFactory();
             commands = new CommandFactory();
@@ -117,8 +117,8 @@ namespace AssignmentASE
         public void Center()
         {
             // Set the xpos and ypos to output width / 2 and height / 2
-            xPos = outputWindow.Width / 2;
-            yPos = outputWindow.Height / 2;
+            XPos = outputWindow.Width / 2;
+            YPos = outputWindow.Height / 2;
             log += "[" + DateTime.Now.ToString("T") + "] " + "Cursor centered in the drawing area.\r\n";
         }
 
@@ -169,14 +169,14 @@ namespace AssignmentASE
             if (flag == "on")
             {
                 // Set the fill to true
-                fill = true;
+                Fill = true;
                 log += "[" + DateTime.Now.ToString("T") + "] " + "Set the drawing shapes to be filled.\r\n";
             }
             // If the flag is "off"
             else if (flag == "off")
             {
                 // Set the fill to false
-                fill = false;
+                Fill = false;
                 log += "[" + DateTime.Now.ToString("T") + "] " + "Set the drawing shapes to be outlined.\r\n";
             }
             else
@@ -197,15 +197,15 @@ namespace AssignmentASE
             // Get the graphics object from the current image in the output window
             g = Graphics.FromImage(outputWindow.Image);
             // Draw the cursor
-            g.DrawLine(cursorPen, xPos + 6, yPos, xPos - 6, yPos);
-            g.DrawLine(cursorPen, xPos, yPos + 6, xPos, yPos - 6);
+            g.DrawLine(cursorPen, XPos + 6, YPos, XPos - 6, YPos);
+            g.DrawLine(cursorPen, XPos, YPos + 6, XPos, YPos - 6);
         }
 
         /// <summary>
         /// Updates the output window image to be the original image
         /// </summary>
         /// <remarks>To be called before every method</remarks>
-        public void updateImage()
+        public void UpdateImage()
         {
             // Set the output window image as the original image
             outputWindow.Image = bitmap;
@@ -216,8 +216,8 @@ namespace AssignmentASE
         /// <summary>
         /// Copies the original image to a temporary image
         /// </summary>
-        /// <remarks>To be used before <see cref="DrawCursor"/> and after <see cref="updateImage"/></remarks>
-        public void storeTempImage()
+        /// <remarks>To be used before <see cref="DrawCursor"/> and after <see cref="UpdateImage"/></remarks>
+        public void StoreTempImage()
         {
             // Create a clone of the original image
             tempBit = new Bitmap(bitmap);
@@ -234,20 +234,20 @@ namespace AssignmentASE
             // List of parameters of length the argument list + 2
             int[] list = new int[p.Length + 2];
             // Set the 1st and 2nd element of the list as the xpos and ypos
-            list[0] = xPos;
-            list[1] = yPos;
+            list[0] = XPos;
+            list[1] = YPos;
 
             // Add the elements from the argument list
             for (int i = 2; i < list.Length; i++)
                 list[i] = p[i - 2];
 
             // Generate an command using the command factory
-            Command command = commands.getCommand(commandType);
+            Command command = commands.GetCommand(commandType);
 
             try
             {
                 // Try to set the command using the provided arguments
-                command.set(g, pen, list);
+                command.Set(g, pen, list);
             }
             catch (IndexOutOfRangeException)
             {
@@ -256,14 +256,14 @@ namespace AssignmentASE
             }
 
             // Execute the  command
-            command.execute();
+            command.Execute();
 
             // Set the coordinates of the cursor after execution
-            this.xPos = command.X;
-            this.yPos = command.Y;
+            this.XPos = command.X;
+            this.YPos = command.Y;
 
             // Add the log
-            log += command.getLog();
+            log += command.GetLog();
         }
 
         /// <summary>
@@ -277,20 +277,20 @@ namespace AssignmentASE
             // List of parameters of length the argument list + 2
             int[] list = new int[p.Length + 2];
             // Set the 1st and 2nd element of the list as the xpos and ypos
-            list[0] = xPos;
-            list[1] = yPos;
+            list[0] = XPos;
+            list[1] = YPos;
 
             // Add the elements from the argument list
             for (int i = 2; i < list.Length; i++)
                 list[i] = p[i - 2];
 
             // Generate an shape from the shape factory
-            Shape shape = shapes.getShape(shapeType);
+            Shape shape = shapes.GetShape(shapeType);
 
             try
             {
                 // Try to set the shape with given arguments
-                shape.set(list);
+                shape.Set(list);
             }
             catch (IndexOutOfRangeException)
             {
@@ -299,10 +299,10 @@ namespace AssignmentASE
             }
 
             // Draw the shape 
-            shape.draw(g, fill, pen, brush);
+            shape.Draw(g, Fill, pen, brush);
 
             // Log the info
-            log += "[" + DateTime.Now.ToString("T") + "] " + "Drew a " + shape.GetType().Name + " at (" + xPos + "," + yPos + ").\r\n";
+            log += "[" + DateTime.Now.ToString("T") + "] " + "Drew a " + shape.GetType().Name + " at (" + XPos + "," + YPos + ").\r\n";
         }
 
         /// <summary>
@@ -312,27 +312,6 @@ namespace AssignmentASE
         {
             logBox.AppendText(log);
             log = "";
-        }
-
-        /// <summary>
-        /// The while loop command for the while loop
-        /// </summary>
-        /// <param name="var">The value for which the condition is to bec checked</param>
-        /// <param name="op">The type of check to be done</param>
-        /// <param name="value">The value against which to check the operation</param>
-        public void WhileLoop(int var, char op, int value)
-        {
-            // TODO: Implement while loop
-        }
-
-        /// <summary>
-        /// The variable assignment command
-        /// </summary>
-        /// <param name="var">The variable name to which the value is assigned</param>
-        /// <param name="x">The value to be assigned to the variable</param>
-        public void Varaible(string var, int x)
-        {
-            // TODO: Implement the var command
         }
 
         /// <summary>

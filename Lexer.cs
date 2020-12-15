@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 namespace AssignmentASE
 {
 
@@ -9,13 +9,37 @@ namespace AssignmentASE
     /// </summary>
     public enum Type
     {
+        /// <summary>
+        /// The type for the if statement
+        /// </summary>
         IF,
+        /// <summary>
+        /// The type for ending an if statement
+        /// </summary>
         ENDIF,
+        /// <summary>
+        /// The type for a while loop
+        /// </summary>
         WHILE,
+        /// <summary>
+        /// The type for ending a while loop
+        /// </summary>
         ENDWHILE,
+        /// <summary>
+        /// The type for creating a method
+        /// </summary>
         METHOD,
+        /// <summary>
+        /// The type for variable names or function names
+        /// </summary>
         IDENTIFIER,
+        /// <summary>
+        /// The type for arithmetic and comparisn operators
+        /// </summary>
         OPERATOR,
+        /// <summary>
+        /// The type for numericals
+        /// </summary>
         NUMBER,
     }
 
@@ -24,11 +48,17 @@ namespace AssignmentASE
     /// </summary>
     public class Token
     {
-        // The type of the token
+        /// <summary>
+        /// The type of the token
+        /// </summary>
         public Type type;
-        // If it is a String
+        /// <summary>
+        /// The value of the token if it is a string
+        /// </summary>
         public string keyword;
-        // If it is a number
+        /// <summary>
+        /// THe value of the token if it is a number
+        /// </summary>
         public double numerical;
 
         /// <summary>
@@ -42,12 +72,20 @@ namespace AssignmentASE
             this.keyword = keyword;
         }
 
-        public String getValue()
+        /// <summary>
+        /// Get the value of the current token
+        /// </summary>
+        /// <returns>A string containing the value of the token</returns>
+        public String GetValue()
         {
             return keyword;
         }
 
-        public Type getType()
+        /// <summary>
+        /// Get the type of the token
+        /// </summary>
+        /// <returns>The Type<see cref="Type"/> of the token</returns>
+        public Type GetTokenType()
         {
             return this.type;
         }
@@ -56,7 +94,7 @@ namespace AssignmentASE
         /// This method coverts this class to a String in a specific format.
         /// </summary>
         /// <returns>A string displaying token and value</returns>
-        public String toString()
+        public override String ToString()
         {
             return type.ToString() + ": " + keyword;
         }
@@ -70,8 +108,6 @@ namespace AssignmentASE
     {
         // A variable for storing the current encountered identifier.
         String curText;
-        // A variable for storing the current encountered number.
-        double curNumber;
 
         /// <summary>
         /// This function splits a given string on spaces and the runs a loop for each word, thereafter 
@@ -89,18 +125,15 @@ namespace AssignmentASE
             // A loop for each word in line
             for (int num = 0; num < line.Length; num++)
             {
-                // The last character in the word
-                Char LastChar = ' ';
                 // Initialize the identifier text
                 curText = "";
-                // Initialize the number
-                curNumber = 0;
 
 
+                // The last character in the word
                 // Increment index
 
                 // Set last char as the char at num index in word
-                LastChar = line[num];
+                char LastChar = line[num];
 
                 // If a letter is encountered
                 if (Char.IsLetter(LastChar))
@@ -181,8 +214,6 @@ namespace AssignmentASE
                         NumStr += LastChar;
                     }
 
-                    // Parse the buffer to double and store in number variable
-                    curNumber = Double.Parse(NumStr);
                     // Add a NUMBER type token to the list
                     tokens.Add(new Token(Type.NUMBER, NumStr));
                 }

@@ -1,6 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using AssignmentASE;
+﻿using AssignmentASE;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SPL_Testing
 {
@@ -20,7 +19,7 @@ namespace SPL_Testing
         public void TestShapeFactoryRectangle()
         {
             shapes = new ShapeFactory();
-            Shape shape = shapes.getShape("rect");
+            Shape shape = shapes.GetShape("rect");
             Assert.AreEqual(shape.GetType().Name, "Rectangle");
         }
 
@@ -32,7 +31,7 @@ namespace SPL_Testing
         public void TestShapeFactoryCircle()
         {
             ShapeFactory shapes = new ShapeFactory();
-            Shape shape = shapes.getShape("circle");
+            Shape shape = shapes.GetShape("circle");
             Assert.AreEqual(shape.GetType().Name, "Circle");
         }
 
@@ -44,7 +43,7 @@ namespace SPL_Testing
         public void TestShapeFactoryTriangle()
         {
             ShapeFactory shapes = new ShapeFactory();
-            Shape shape = shapes.getShape("triangle");
+            Shape shape = shapes.GetShape("triangle");
             Assert.AreEqual(shape.GetType().Name, "Triangle");
         }
 
@@ -56,7 +55,7 @@ namespace SPL_Testing
         public void TestShapeFactorySquare()
         {
             ShapeFactory shapes = new ShapeFactory();
-            Shape shape = shapes.getShape("square");
+            Shape shape = shapes.GetShape("square");
             Assert.AreEqual(shape.GetType().Name, "Square");
         }
     }

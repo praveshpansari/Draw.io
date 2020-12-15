@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AssignmentASE
 {
@@ -13,14 +9,14 @@ namespace AssignmentASE
     /// <remarks>
     /// Allows to Execute the clear command and clear the output window
     /// </remarks>
-    class Clear : Command
+    public class Clear : Command
     {
-        public override void execute()
+        public override void Execute()
         {
             g.Clear(Color.FromKnownColor(KnownColor.Gainsboro));
         }
 
-        public override string getLog()
+        public override string GetLog()
         {
             return "[" + DateTime.Now.ToString("T") + "] " + "Cleared the drawing area.\r\n";
         }

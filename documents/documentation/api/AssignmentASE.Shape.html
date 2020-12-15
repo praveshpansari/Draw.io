@@ -73,13 +73,20 @@
   
   <h1 id="AssignmentASE_Shape" data-uid="AssignmentASE.Shape" class="text-break">Class Shape
   </h1>
-  <div class="markdown level0 summary"><p>Abstract class shape implementing the <span class="xref">AssignmentASE.Shapes</span> interface</p>
+  <div class="markdown level0 summary"><p>Abstract class shape implementing the <a class="xref" href="AssignmentASE.IShapes.html">IShapes</a> interface</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">Shape</span></div>
+      <div class="level2"><a class="xref" href="AssignmentASE.Circle.html">Circle</a></div>
+      <div class="level2"><a class="xref" href="AssignmentASE.Rectangle.html">Rectangle</a></div>
+      <div class="level2"><a class="xref" href="AssignmentASE.Triangle.html">Triangle</a></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="AssignmentASE.IShapes.html">IShapes</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -109,7 +116,7 @@
   <h6><strong>Assembly</strong>: AssignmentASE.dll</h6>
   <h5 id="AssignmentASE_Shape_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class Shape : Shapes</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract class Shape : IShapes</code></pre>
   </div>
   <h5 id="AssignmentASE_Shape_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>Implements the draw and set methods</p>
@@ -121,7 +128,7 @@
     <a href="https://github.com/praveshpansari/PLEnvironment/new/master/apiSpec/new?filename=AssignmentASE_Shape_x.md&amp;value=---%0Auid%3A%20AssignmentASE.Shape.x%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/praveshpansari/PLEnvironment/blob/master/Shape.cs/#L22">View Source</a>
+    <a href="https://github.com/praveshpansari/PLEnvironment/blob/master/Shape.cs/#L17">View Source</a>
   </span>
   <h4 id="AssignmentASE_Shape_x" data-uid="AssignmentASE.Shape.x">x</h4>
   <div class="markdown level1 summary"><p>The x and y postion of the shape</p>
@@ -151,7 +158,7 @@
     <a href="https://github.com/praveshpansari/PLEnvironment/new/master/apiSpec/new?filename=AssignmentASE_Shape_y.md&amp;value=---%0Auid%3A%20AssignmentASE.Shape.y%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/praveshpansari/PLEnvironment/blob/master/Shape.cs/#L22">View Source</a>
+    <a href="https://github.com/praveshpansari/PLEnvironment/blob/master/Shape.cs/#L17">View Source</a>
   </span>
   <h4 id="AssignmentASE_Shape_y" data-uid="AssignmentASE.Shape.y">y</h4>
   <div class="markdown level1 summary"><p>The x and y postion of the shape</p>
@@ -180,18 +187,19 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/praveshpansari/PLEnvironment/new/master/apiSpec/new?filename=AssignmentASE_Shape_draw_System_Drawing_Graphics_System_Boolean_System_Drawing_Pen_System_Drawing_Brush_.md&amp;value=---%0Auid%3A%20AssignmentASE.Shape.draw(System.Drawing.Graphics%2CSystem.Boolean%2CSystem.Drawing.Pen%2CSystem.Drawing.Brush)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/praveshpansari/PLEnvironment/new/master/apiSpec/new?filename=AssignmentASE_Shape_Draw_System_Drawing_Graphics_System_Boolean_System_Drawing_Pen_System_Drawing_Brush_.md&amp;value=---%0Auid%3A%20AssignmentASE.Shape.Draw(System.Drawing.Graphics%2CSystem.Boolean%2CSystem.Drawing.Pen%2CSystem.Drawing.Brush)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/praveshpansari/PLEnvironment/blob/master/Shape.cs/#L25">View Source</a>
+    <a href="https://github.com/praveshpansari/PLEnvironment/blob/master/Shape.cs/#L26">View Source</a>
   </span>
-  <a id="AssignmentASE_Shape_draw_" data-uid="AssignmentASE.Shape.draw*"></a>
-  <h4 id="AssignmentASE_Shape_draw_System_Drawing_Graphics_System_Boolean_System_Drawing_Pen_System_Drawing_Brush_" data-uid="AssignmentASE.Shape.draw(System.Drawing.Graphics,System.Boolean,System.Drawing.Pen,System.Drawing.Brush)">draw(Graphics, Boolean, Pen, Brush)</h4>
-  <div class="markdown level1 summary"></div>
+  <a id="AssignmentASE_Shape_Draw_" data-uid="AssignmentASE.Shape.Draw*"></a>
+  <h4 id="AssignmentASE_Shape_Draw_System_Drawing_Graphics_System_Boolean_System_Drawing_Pen_System_Drawing_Brush_" data-uid="AssignmentASE.Shape.Draw(System.Drawing.Graphics,System.Boolean,System.Drawing.Pen,System.Drawing.Brush)">Draw(Graphics, Boolean, Pen, Brush)</h4>
+  <div class="markdown level1 summary"><p>Draws the shape on a graphics object using a given pen,fill information and brush</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract void draw(Graphics g, bool fill, Pen p, Brush b)</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract void Draw(Graphics g, bool fill, Pen p, Brush b)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -206,39 +214,44 @@
       <tr>
         <td><span class="xref">System.Drawing.Graphics</span></td>
         <td><span class="parametername">g</span></td>
-        <td></td>
+        <td><p>The graphics object where the shape is to be drawn</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">fill</span></td>
-        <td></td>
+        <td><p>Whether the shape drawn is filled or not</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Drawing.Pen</span></td>
         <td><span class="parametername">p</span></td>
-        <td></td>
+        <td><p>The pen used to draw the shape</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Drawing.Brush</span></td>
         <td><span class="parametername">b</span></td>
-        <td></td>
+        <td><p>The brush used to draw the shape</p>
+</td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/praveshpansari/PLEnvironment/new/master/apiSpec/new?filename=AssignmentASE_Shape_set_System_Int32___.md&amp;value=---%0Auid%3A%20AssignmentASE.Shape.set(System.Int32%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/praveshpansari/PLEnvironment/new/master/apiSpec/new?filename=AssignmentASE_Shape_Set_System_Int32___.md&amp;value=---%0Auid%3A%20AssignmentASE.Shape.Set(System.Int32%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/praveshpansari/PLEnvironment/blob/master/Shape.cs/#L30">View Source</a>
+    <a href="https://github.com/praveshpansari/PLEnvironment/blob/master/Shape.cs/#L32">View Source</a>
   </span>
-  <a id="AssignmentASE_Shape_set_" data-uid="AssignmentASE.Shape.set*"></a>
-  <h4 id="AssignmentASE_Shape_set_System_Int32___" data-uid="AssignmentASE.Shape.set(System.Int32[])">set(Int32[])</h4>
-  <div class="markdown level1 summary"></div>
+  <a id="AssignmentASE_Shape_Set_" data-uid="AssignmentASE.Shape.Set*"></a>
+  <h4 id="AssignmentASE_Shape_Set_System_Int32___" data-uid="AssignmentASE.Shape.Set(System.Int32[])">Set(Int32[])</h4>
+  <div class="markdown level1 summary"><p>Sets the size and position of the shape</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual void set(params int[] list)</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual void Set(params int[] list)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -253,10 +266,15 @@
       <tr>
         <td><span class="xref">System.Int32</span>[]</td>
         <td><span class="parametername">list</span></td>
-        <td></td>
+        <td><p>The list of integers containing postion and size of the shape</p>
+</td>
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="AssignmentASE.IShapes.html">IShapes</a>
+  </div>
 </article>
           </div>
           
@@ -268,7 +286,7 @@
                     <a href="https://github.com/praveshpansari/PLEnvironment/new/master/apiSpec/new?filename=AssignmentASE_Shape.md&amp;value=---%0Auid%3A%20AssignmentASE.Shape%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/praveshpansari/PLEnvironment/blob/master/Shape.cs/#L17" class="contribution-link">View Source</a>
+                    <a href="https://github.com/praveshpansari/PLEnvironment/blob/master/Shape.cs/#L12" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

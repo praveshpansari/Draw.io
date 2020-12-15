@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class Lexer
+    <title>Class Clear
    </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class Lexer
+    <meta name="title" content="Class Clear
    ">
     <meta name="generator" content="docfx 2.56.6.0">
     
@@ -68,21 +68,47 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="AssignmentASE.Lexer">
+            <article class="content wrap" id="_content" data-uid="AssignmentASE.Clear">
   
   
-  <h1 id="AssignmentASE_Lexer" data-uid="AssignmentASE.Lexer" class="text-break">Class Lexer
+  <h1 id="AssignmentASE_Clear" data-uid="AssignmentASE.Clear" class="text-break">Class Clear
   </h1>
-  <div class="markdown level0 summary"><p>This class takes in a string input and produces tokens based on provided enum type.</p>
+  <div class="markdown level0 summary"><p>Clear Command class inherited from <a class="xref" href="AssignmentASE.Command.html">Command</a></p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">Lexer</span></div>
+    <div class="level1"><a class="xref" href="AssignmentASE.Command.html">Command</a></div>
+    <div class="level2"><span class="xref">Clear</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="AssignmentASE.ICommands.html">ICommands</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="AssignmentASE.Command.html#AssignmentASE_Command_x">Command.x</a>
+    </div>
+    <div>
+      <a class="xref" href="AssignmentASE.Command.html#AssignmentASE_Command_y">Command.y</a>
+    </div>
+    <div>
+      <a class="xref" href="AssignmentASE.Command.html#AssignmentASE_Command_g">Command.g</a>
+    </div>
+    <div>
+      <a class="xref" href="AssignmentASE.Command.html#AssignmentASE_Command_p">Command.p</a>
+    </div>
+    <div>
+      <a class="xref" href="AssignmentASE.Command.html#AssignmentASE_Command_X">Command.X</a>
+    </div>
+    <div>
+      <a class="xref" href="AssignmentASE.Command.html#AssignmentASE_Command_Y">Command.Y</a>
+    </div>
+    <div>
+      <a class="xref" href="AssignmentASE.Command.html#AssignmentASE_Command_Set_System_Drawing_Graphics_System_Drawing_Pen_System_Int32___">Command.Set(Graphics, Pen, Int32[])</a>
+    </div>
     <div>
       <span class="xref">System.Object.ToString()</span>
     </div>
@@ -107,47 +133,47 @@
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="AssignmentASE.html">AssignmentASE</a></h6>
   <h6><strong>Assembly</strong>: AssignmentASE.dll</h6>
-  <h5 id="AssignmentASE_Lexer_syntax">Syntax</h5>
+  <h5 id="AssignmentASE_Clear_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Lexer</code></pre>
+    <pre><code class="lang-csharp hljs">public class Clear : Command, ICommands</code></pre>
   </div>
+  <h5 id="AssignmentASE_Clear_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Allows to Execute the clear command and clear the output window</p>
+</div>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/praveshpansari/PLEnvironment/new/master/apiSpec/new?filename=AssignmentASE_Lexer_Advance_System_String_.md&amp;value=---%0Auid%3A%20AssignmentASE.Lexer.Advance(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/praveshpansari/PLEnvironment/new/master/apiSpec/new?filename=AssignmentASE_Clear_Execute.md&amp;value=---%0Auid%3A%20AssignmentASE.Clear.Execute%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/praveshpansari/PLEnvironment/blob/master/Lexer.cs/#L118">View Source</a>
+    <a href="https://github.com/praveshpansari/PLEnvironment/blob/master/Clear.cs/#L14">View Source</a>
   </span>
-  <a id="AssignmentASE_Lexer_Advance_" data-uid="AssignmentASE.Lexer.Advance*"></a>
-  <h4 id="AssignmentASE_Lexer_Advance_System_String_" data-uid="AssignmentASE.Lexer.Advance(System.String)">Advance(String)</h4>
-  <div class="markdown level1 summary"><p>This function splits a given string on spaces and the runs a loop for each word, thereafter 
-a loop for each character. Adds required tokens to a list whenever whitespace is not encountered.</p>
-</div>
+  <a id="AssignmentASE_Clear_Execute_" data-uid="AssignmentASE.Clear.Execute*"></a>
+  <h4 id="AssignmentASE_Clear_Execute" data-uid="AssignmentASE.Clear.Execute">Execute()</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;Token&gt; Advance(string commandLine)</code></pre>
+    <pre><code class="lang-csharp hljs">public override void Execute()</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">commandLine</span></td>
-        <td><p>A string to be tokenised for the Parser.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="AssignmentASE.Command.html#AssignmentASE_Command_Execute">Command.Execute()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/praveshpansari/PLEnvironment/new/master/apiSpec/new?filename=AssignmentASE_Clear_GetLog.md&amp;value=---%0Auid%3A%20AssignmentASE.Clear.GetLog%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/praveshpansari/PLEnvironment/blob/master/Clear.cs/#L19">View Source</a>
+  </span>
+  <a id="AssignmentASE_Clear_GetLog_" data-uid="AssignmentASE.Clear.GetLog*"></a>
+  <h4 id="AssignmentASE_Clear_GetLog" data-uid="AssignmentASE.Clear.GetLog">GetLog()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string GetLog()</code></pre>
+  </div>
   <h5 class="returns">Returns</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
@@ -158,12 +184,17 @@ a loop for each character. Adds required tokens to a list whenever whitespace is
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="AssignmentASE.Token.html">Token</a>&gt;</td>
-        <td><p>A list of tokens containg tokens for the given string</p>
-</td>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="AssignmentASE.Command.html#AssignmentASE_Command_GetLog">Command.GetLog()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="AssignmentASE.ICommands.html">ICommands</a>
+  </div>
 </article>
           </div>
           
@@ -172,10 +203,10 @@ a loop for each character. Adds required tokens to a list whenever whitespace is
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/praveshpansari/PLEnvironment/new/master/apiSpec/new?filename=AssignmentASE_Lexer.md&amp;value=---%0Auid%3A%20AssignmentASE.Lexer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/praveshpansari/PLEnvironment/new/master/apiSpec/new?filename=AssignmentASE_Clear.md&amp;value=---%0Auid%3A%20AssignmentASE.Clear%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/praveshpansari/PLEnvironment/blob/master/Lexer.cs/#L107" class="contribution-link">View Source</a>
+                    <a href="https://github.com/praveshpansari/PLEnvironment/blob/master/Clear.cs/#L12" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

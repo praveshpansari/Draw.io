@@ -11,9 +11,9 @@ namespace AssignmentASE
     {
 
         // Instance variables for parser, painter and the output image
-        Parser parser;
-        Painter painter;
-        Bitmap outputImage;
+        readonly Parser parser;
+        readonly Painter painter;
+        readonly Bitmap outputImage;
 
         /// <summary>
         /// Constructor which initializes form components and instance objects
@@ -34,7 +34,7 @@ namespace AssignmentASE
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void outputWindow_Paint(object sender, PaintEventArgs e)
+        private void OutputWindow_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             g.DrawImageUnscaled(outputImage, 0, 0);
@@ -47,13 +47,13 @@ namespace AssignmentASE
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void runButton_Click(object sender, EventArgs e)
+        private void RunButton_Click(object sender, EventArgs e)
         {
             // Assign command from command line to a variable
             string input = commandLine.Text;
 
             // Draw the updated image on screen with the curson on it
-            painter.updateImage();
+            painter.UpdateImage();
 
             // If the command line is empty
             if (input == String.Empty)
@@ -62,11 +62,11 @@ namespace AssignmentASE
                 if (codeEditor.Text != String.Empty)
                 {
                     // Clear the artboard
-                    parser.parseCommand("clear", 0);
+                    parser.ParseCommand("clear", 0);
                     // Clear the variables dictionary
                     parser.Variables.Clear();
                     // Parses the editor text
-                    parser.parseEditor(codeEditor.Text);
+                    parser.ParseEditor(codeEditor.Text);
                 }
             }
             else
@@ -74,33 +74,33 @@ namespace AssignmentASE
                 // If the command line command is not "run"
                 if (!input.ToLower().Trim().Equals("run"))
                     // Parse the command line text
-                    parser.parseCommand(input, 0);
+                    parser.ParseCommand(input, 0);
                 // Else parse the code editor text
                 else
                 {
                     // Clear the artboard
-                    parser.parseCommand("clear", 0);
+                    parser.ParseCommand("clear", 0);
                     // Clear the variables dictionary
                     parser.Variables.Clear();
                     // Parses the editor text
-                    parser.parseEditor(codeEditor.Text);
+                    parser.ParseEditor(codeEditor.Text);
                 }
             }
 
             // Write the log in the log window
             painter.WriteLog();
             // Copy the drawn image to a temporary image
-            painter.storeTempImage();
+            painter.StoreTempImage();
             // Draw the cursor on the drawn image
             painter.DrawCursor();
             // Refresh the ouput window
             outputWindow.Refresh();
             // Display any errors if encountered in the log
-            parser.displayError();
+            parser.DisplayError();
         }
 
 
-        private void syntaxButton_Click(object sender, EventArgs e)
+        private void SyntaxButton_Click(object sender, EventArgs e)
         {
             // Clear the logbox
             logBox.Clear();
@@ -111,11 +111,11 @@ namespace AssignmentASE
                 // Clear the variables
                 parser.Variables.Clear();
                 // Parses the editor text
-                parser.parseEditor(codeEditor.Text);
+                parser.ParseEditor(codeEditor.Text);
                 // Clear the artboard
-                parser.parseCommand("clear", 0);
+                parser.ParseCommand("clear", 0);
                 // Display any errors if encountered in the log
-                parser.displayError();
+                parser.DisplayError();
                 // If no errors encountered means syntax is correct
                 if (logBox.Text.Equals(""))
                 {
@@ -134,7 +134,7 @@ namespace AssignmentASE
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void commandLine_KeyDown(object sender, KeyEventArgs e)
+        private void CommandLine_KeyDown(object sender, KeyEventArgs e)
         {
             // If the key pressed is 'enter'
             if (e.KeyCode == Keys.Enter)
@@ -152,7 +152,7 @@ namespace AssignmentASE
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Displays a SaveFileDialog so the user can save the file
             SaveFileDialog saveFileDialog = new SaveFileDialog
@@ -180,7 +180,7 @@ namespace AssignmentASE
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //The result of dialogbox
             DialogResult result;
@@ -220,7 +220,7 @@ namespace AssignmentASE
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // If a messageloop exists in the application
             if (Application.MessageLoop)
@@ -237,7 +237,7 @@ namespace AssignmentASE
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void newFileToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NewFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // REsult of the dialog box
             DialogResult result;
@@ -264,7 +264,7 @@ namespace AssignmentASE
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Show the about message box
             MessageBox.Show("Simple Programming Environment 2020 is a program environment that allows drawing of shapes and lines, with support for loops, conditionals, variables and methods.\n\nVersion 1.1\n\u00a9 2020 Pravesh Pansari.\nAll rights reserved.", "Simple Programming Environment", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -275,7 +275,7 @@ namespace AssignmentASE
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             // If a messageloop exists in the application
             if (Application.MessageLoop)

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AssignmentASE
 {
@@ -30,7 +26,7 @@ namespace AssignmentASE
     /// </item>
     /// </list>
     /// </remarks>
-    class CommandFactory
+    public class CommandFactory
     {
         /// <summary>
         /// Used to instantiate and get a specific command object
@@ -38,7 +34,7 @@ namespace AssignmentASE
         /// <param name="command">The type of the command to be generated</param>
         /// <returns>An instance of the inherited classes of <see cref="Command"/></returns>
         /// <exception cref="ArgumentException"></exception>
-        public Command getCommand(String command)
+        public Command GetCommand(String command)
         {
             // Tidy the command
             command = command.ToLower().Trim();
@@ -68,8 +64,6 @@ namespace AssignmentASE
                 System.ArgumentException argEx = new System.ArgumentException("Factory error: " + command + " does not exist");
                 throw argEx;
             }
-
-
         }
     }
 }

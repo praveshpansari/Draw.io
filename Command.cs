@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace AssignmentASE
 {
     /// <summary>
-    /// Abstract class command implementing the <see cref="CommandInterface"/> interface
+    /// Abstract class command implementing the <see cref="ICommands"/> interface
     /// </summary>
     /// <remarks>
     /// Implements the execute, set and log method
     /// </remarks>
-    abstract class Command : CommandInterface
+    public abstract class Command : ICommands
     {
         // The current x and y coordinate in the graphics object
         protected int x, y;
@@ -32,7 +27,7 @@ namespace AssignmentASE
             get { return y; }
         }
 
-        public virtual void set(Graphics g, Pen p, params int[] list)
+        public virtual void Set(Graphics g, Pen p, params int[] list)
         {
             this.g = g;
             this.p = p;
@@ -40,8 +35,8 @@ namespace AssignmentASE
             this.y = list[1];
         }
 
-        public abstract void execute();
+        public abstract void Execute();
 
-        public abstract string getLog();
+        public abstract string GetLog();
     }
 }

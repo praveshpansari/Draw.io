@@ -64,7 +64,7 @@
             this.commandLine.Name = "commandLine";
             this.commandLine.Size = new System.Drawing.Size(322, 20);
             this.commandLine.TabIndex = 0;
-            this.commandLine.KeyDown += new System.Windows.Forms.KeyEventHandler(this.commandLine_KeyDown);
+            this.commandLine.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CommandLine_KeyDown);
             // 
             // outputWindow
             // 
@@ -75,7 +75,7 @@
             this.outputWindow.Size = new System.Drawing.Size(406, 348);
             this.outputWindow.TabIndex = 2;
             this.outputWindow.TabStop = false;
-            this.outputWindow.Paint += new System.Windows.Forms.PaintEventHandler(this.outputWindow_Paint);
+            this.outputWindow.Paint += new System.Windows.Forms.PaintEventHandler(this.OutputWindow_Paint);
             // 
             // codeEditor
             // 
@@ -102,7 +102,7 @@
             this.runButton.TabIndex = 4;
             this.runButton.Text = "Run";
             this.runButton.UseVisualStyleBackColor = false;
-            this.runButton.Click += new System.EventHandler(this.runButton_Click);
+            this.runButton.Click += new System.EventHandler(this.RunButton_Click);
             // 
             // syntaxButton
             // 
@@ -117,7 +117,7 @@
             this.syntaxButton.TabIndex = 5;
             this.syntaxButton.Text = "Syntax";
             this.syntaxButton.UseVisualStyleBackColor = false;
-            this.syntaxButton.Click += new System.EventHandler(this.syntaxButton_Click);
+            this.syntaxButton.Click += new System.EventHandler(this.SyntaxButton_Click);
             // 
             // menuStrip1
             // 
@@ -152,28 +152,28 @@
             this.newFileToolStripMenuItem.Name = "newFileToolStripMenuItem";
             this.newFileToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.newFileToolStripMenuItem.Text = "New";
-            this.newFileToolStripMenuItem.Click += new System.EventHandler(this.newFileToolStripMenuItem_Click);
+            this.newFileToolStripMenuItem.Click += new System.EventHandler(this.NewFileToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.openToolStripMenuItem.Text = "Open";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.saveToolStripMenuItem.Text = "Save";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -192,7 +192,7 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
             // logBox
             // 
@@ -289,7 +289,7 @@
             this.closeButton.TabIndex = 12;
             this.closeButton.Text = "✖";
             this.closeButton.UseVisualStyleBackColor = false;
-            this.closeButton.Click += new System.EventHandler(this.button1_Click);
+            this.closeButton.Click += new System.EventHandler(this.Button1_Click);
             // 
             // Environment
             // 

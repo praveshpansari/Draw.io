@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AssignmentASE
 {
@@ -12,15 +8,15 @@ namespace AssignmentASE
     /// <remarks>
     /// Allows to Execute the reset command and place the cursor to top left
     /// </remarks>
-    class Reset : Command
+    public class Reset : Command
     {
-        public override void execute()
+        public override void Execute()
         {
             x = 0;
             y = 0;
         }
 
-        public override string getLog()
+        public override string GetLog()
         {
             return "[" + DateTime.Now.ToString("T") + "] " + "Cursor position reset to top left.\r\n";
         }

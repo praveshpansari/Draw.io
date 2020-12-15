@@ -1,18 +1,30 @@
 {
   "homepages": [],
-  "source_base_path": "E:/College/L6/ASE/Assignment C1/SPL-Testing",
+  "source_base_path": "E:/College/L6/ASE/AssignmentASE",
   "xrefmap": "xrefmap.yml",
   "files": [
+    {
+      "type": "Conceptual",
+      "source_relative_path": "README.md",
+      "output": {
+        ".html": {
+          "relative_path": "README.html",
+          "hash": "FkYLaCQwOdhnD8VXe0ma+A=="
+        }
+      },
+      "is_incremental": true,
+      "version": ""
+    },
     {
       "type": "Conceptual",
       "source_relative_path": "api/index.md",
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "3NzZlQvOnXTZ6L5Gi4Lbxw=="
+          "hash": "+sQ3D2pDKS4blpObI8+ZIQ=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -21,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "mKHiExYqpBlq+irg/P27LA=="
+          "hash": "jGQ1aSACHIPIu/pRXuIyCA=="
         }
       },
       "is_incremental": true,
@@ -45,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "0bRegL7oKww4mwOHOBAQ/A=="
+          "hash": "gwOewBSAYQ/893CcOIdLLw=="
         }
       },
       "is_incremental": true,
@@ -53,38 +65,254 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "obj/api/SPL_Testing.CommandTest.yml",
+      "source_relative_path": "obj/api/AssignmentASE.Circle.yml",
       "output": {
         ".html": {
-          "relative_path": "api/SPL_Testing.CommandTest.html",
-          "hash": "cvl/lqpbEJLg2ekfQ7YTnQ=="
+          "relative_path": "api/AssignmentASE.Circle.html",
+          "hash": "/VHBIwSzTQImNoMVT7eL+A=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "obj/api/SPL_Testing.ShapeFactoryTest.yml",
+      "source_relative_path": "obj/api/AssignmentASE.Clear.yml",
       "output": {
         ".html": {
-          "relative_path": "api/SPL_Testing.ShapeFactoryTest.html",
-          "hash": "JQ1+2QJ13ggeqfI1FtnmNQ=="
+          "relative_path": "api/AssignmentASE.Clear.html",
+          "hash": "Vt17rMjVp510cI7giq9DGw=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "obj/api/SPL_Testing.yml",
+      "source_relative_path": "obj/api/AssignmentASE.Command.yml",
       "output": {
         ".html": {
-          "relative_path": "api/SPL_Testing.html",
-          "hash": "CvTmtC3bZmfSJMVY6Tmf0g=="
+          "relative_path": "api/AssignmentASE.Command.html",
+          "hash": "oExw+W1WDXSB64XfWe6JWg=="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/AssignmentASE.CommandFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/AssignmentASE.CommandFactory.html",
+          "hash": "fm5+4WGqSnIIsPqMcerGBg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/AssignmentASE.DrawLine.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/AssignmentASE.DrawLine.html",
+          "hash": "LQgXYLNz3h63hNfLay5RzQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/AssignmentASE.Environment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/AssignmentASE.Environment.html",
+          "hash": "c3hSquAE1bxMh22UwkjuZg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/AssignmentASE.ICommands.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/AssignmentASE.ICommands.html",
+          "hash": "4AIVni8f1Xkod8B0nHT/Vg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/AssignmentASE.IShapes.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/AssignmentASE.IShapes.html",
+          "hash": "HEo0WvC1y6lwcU3HGt7IfA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/AssignmentASE.Lexer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/AssignmentASE.Lexer.html",
+          "hash": "jyoSJOHkkJQy7+0kaWxpvg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/AssignmentASE.MoveTo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/AssignmentASE.MoveTo.html",
+          "hash": "41Gdf1QF2xA2QCZzLpak2Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/AssignmentASE.Painter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/AssignmentASE.Painter.html",
+          "hash": "7c6ynKq1ISS1jOy0NgmyYw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/AssignmentASE.Parser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/AssignmentASE.Parser.html",
+          "hash": "Kz4VM7anrBpxebt05SGB8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/AssignmentASE.Rectangle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/AssignmentASE.Rectangle.html",
+          "hash": "ROdhT/iXxxR2iYVZ3JWOqg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/AssignmentASE.Reset.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/AssignmentASE.Reset.html",
+          "hash": "xJXJhqzuwUbJm5dR58oS9w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/AssignmentASE.Shape.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/AssignmentASE.Shape.html",
+          "hash": "Wd+9qgRoUQdmoFzgCvd3kg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/AssignmentASE.ShapeFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/AssignmentASE.ShapeFactory.html",
+          "hash": "FQEQfusRHhwBaPfYWPs/lg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/AssignmentASE.Square.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/AssignmentASE.Square.html",
+          "hash": "rODn5UObp1g/2tNOvafdGA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/AssignmentASE.Token.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/AssignmentASE.Token.html",
+          "hash": "HIcXb4IXVk2jLFKp3Wiq0g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/AssignmentASE.Triangle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/AssignmentASE.Triangle.html",
+          "hash": "JAht6EjabfDenXF0qX+NbA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/AssignmentASE.Type.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/AssignmentASE.Type.html",
+          "hash": "+WsMYNdCJX0zzfkrLP+GGQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/AssignmentASE.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/AssignmentASE.html",
+          "hash": "K3LgYnuzDaw6kCcaq3syzA=="
+        }
+      },
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -93,7 +321,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "RYJiIVu8PQsH6g448YNZWA=="
+          "hash": "JkG1HPJljmVpf9CdUaimlA=="
         }
       },
       "is_incremental": false,
@@ -124,14 +352,14 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 3,
-          "skipped_file_count": 3
+          "total_file_count": 4,
+          "skipped_file_count": 4
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 3,
-          "skipped_file_count": 3
+          "total_file_count": 21,
+          "skipped_file_count": 5
         },
         "TocDocumentProcessor": {
           "can_incremental": false,

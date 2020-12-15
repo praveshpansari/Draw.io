@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AssignmentASE
 {
@@ -38,7 +34,7 @@ namespace AssignmentASE
         /// <param name="shapeType">The shape type of the shape to be generated</param>
         /// <returns>An instance of the inherited classes of <see cref="Shape"/></returns>
         /// <exception cref="ArgumentException"></exception>
-        public Shape getShape(String shapeType)
+        public Shape GetShape(String shapeType)
         {
             shapeType = shapeType.ToUpper().Trim();
 

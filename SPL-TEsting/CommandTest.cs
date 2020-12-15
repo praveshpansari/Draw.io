@@ -1,8 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using AssignmentASE;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using AssignmentASE;
-using System.Text.RegularExpressions;
-using System.Linq;
 
 namespace SPL_Testing
 {
@@ -25,9 +23,9 @@ namespace SPL_Testing
         {
             p = new Painter();
             Parser parser = new Parser(p);
-            parser.parseCommand("moveto 50,50", 0);
-            Assert.AreEqual(50, p.xPos);
-            Assert.AreEqual(50, p.yPos);
+            parser.ParseCommand("moveto 50,50", 0);
+            Assert.AreEqual(50, p.XPos);
+            Assert.AreEqual(50, p.YPos);
         }
         /// <summary>
         /// Tests the drawto method
@@ -40,9 +38,9 @@ namespace SPL_Testing
         {
             p = new Painter();
             Parser parser = new Parser(p);
-            parser.parseCommand("drawto 120,90", 0);
-            Assert.AreEqual(120, p.xPos);
-            Assert.AreEqual(90, p.yPos);
+            parser.ParseCommand("drawto 120,90", 0);
+            Assert.AreEqual(120, p.XPos);
+            Assert.AreEqual(90, p.YPos);
         }
 
         /// <summary>
@@ -57,11 +55,11 @@ namespace SPL_Testing
         {
             p = new Painter();
             Parser parser = new Parser(p);
-            parser.parseCommand("moveto 80,50", 0);
-            Assert.AreEqual(80, p.xPos);
-            parser.parseCommand("reset", 0);
-            Assert.AreEqual(0, p.xPos);
-            Assert.AreEqual(0, p.yPos);
+            parser.ParseCommand("moveto 80,50", 0);
+            Assert.AreEqual(80, p.XPos);
+            parser.ParseCommand("reset", 0);
+            Assert.AreEqual(0, p.XPos);
+            Assert.AreEqual(0, p.YPos);
         }
 
         /// <summary>
@@ -75,7 +73,7 @@ namespace SPL_Testing
         {
             p = new Painter();
             Parser parser = new Parser(p);
-            parser.parseCommand("pen blue", 0);
+            parser.ParseCommand("pen blue", 0);
             Assert.AreEqual("blue", p.Pen.ToLower());
         }
 
@@ -90,8 +88,8 @@ namespace SPL_Testing
         {
             p = new Painter();
             Parser parser = new Parser(p);
-            parser.parseCommand("fill on", 0);
-            Assert.IsTrue(p.fill);
+            parser.ParseCommand("fill on", 0);
+            Assert.IsTrue(p.Fill);
         }
 
         /// <summary>
@@ -105,8 +103,8 @@ namespace SPL_Testing
         {
             p = new Painter();
             Parser parser = new Parser(p);
-            parser.parseCommand("fill off", 0);
-            Assert.IsFalse(p.fill);
+            parser.ParseCommand("fill off", 0);
+            Assert.IsFalse(p.Fill);
         }
 
         /// <summary>
@@ -120,7 +118,7 @@ namespace SPL_Testing
         {
             p = new Painter();
             Parser parser = new Parser(p);
-            parser.parseUsingLexer("num = 5", 0);
+            parser.ParseUsingLexer("num = 5", 0);
             Assert.IsTrue(5 == Int32.Parse(parser.Variables["num"]));
         }
 
@@ -135,7 +133,7 @@ namespace SPL_Testing
         {
             p = new Painter();
             Parser parser = new Parser(p);
-            bool result = parser.parseUsingIf("if 5 > 20", 0);
+            bool result = parser.ParseUsingIf("if 5 > 20", 0);
             Assert.IsFalse(result);
         }
 
@@ -150,7 +148,7 @@ namespace SPL_Testing
         {
             p = new Painter();
             Parser parser = new Parser(p);
-            parser.parseEditor("method example()\r\ncircle 20\r\nendmethod");
+            parser.ParseEditor("method example()\r\ncircle 20\r\nendmethod");
             Assert.IsTrue(parser.Variables.ContainsKey("example"));
         }
 
@@ -165,8 +163,8 @@ namespace SPL_Testing
         {
             p = new Painter();
             Parser parser = new Parser(p);
-            parser.parseUsingLexer("x = 15", 0);
-            parser.parseUsingLexer("num = 5 + x *2", 0);
+            parser.ParseUsingLexer("x = 15", 0);
+            parser.ParseUsingLexer("num = 5 + x *2", 0);
             Assert.AreEqual(40, Int32.Parse(parser.Variables["num"]));
         }
 
@@ -182,7 +180,7 @@ namespace SPL_Testing
         {
             p = new Painter();
             Parser parser = new Parser(p);
-            parser.parseEditor("num = 5\r\nwhile num > 3\r\nnum = num - 1\r\nendwhile");
+            parser.ParseEditor("num = 5\r\nwhile num > 3\r\nnum = num - 1\r\nendwhile");
             Assert.AreEqual(3, Int32.Parse(parser.Variables["num"]));
         }
 

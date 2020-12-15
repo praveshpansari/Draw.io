@@ -11,12 +11,12 @@ namespace AssignmentASE
     public class Parser
     {
         // The painter object where apporopriate methods are called
-        Painter p;
+        readonly Painter p;
 
         String error;
 
         // The lexer for tokenizing input
-        Lexer lexer;
+        readonly Lexer lexer;
 
         /// <summary>
         /// Gets or sets the dictionary of variables.
@@ -44,7 +44,7 @@ namespace AssignmentASE
         /// <param name="input">The string to be parsed</param>
         /// <param name="lineNum">The current line number</param>
         /// <remarks>The line number is 0 when a single command is to be parsed</remarks>
-        public void parseCommand(string input, int lineNum)
+        public void ParseCommand(string input, int lineNum)
         {
             // Tidy the input string
             input = input.ToLower().Trim();
@@ -206,7 +206,7 @@ namespace AssignmentASE
         /// <param name="input">The string to be parsed</param>
         /// <param name="lineNum">The current line number</param>
         /// <remarks>The line number is 0 when a single command is to be parsed</remarks>
-        public void parseUsingLexer(string input, int lineNum)
+        public void ParseUsingLexer(string input, int lineNum)
         {
             // Get tokens from lexer
             var tokens = lexer.Advance(input);
@@ -231,45 +231,45 @@ namespace AssignmentASE
                         if (i == 0)
                         {
                             // If the 1st token is identifier
-                            if (t.getType() == Type.IDENTIFIER)
+                            if (t.GetTokenType() == Type.IDENTIFIER)
                                 // Get the name of the variable
-                                variable_name = t.getValue();
+                                variable_name = t.GetValue();
                             else
                                 // Else throw an exception as no variable in assignment
-                                throw new SystemException("'" + t.getValue() + "' cannot be defined,");
+                                throw new SystemException("'" + t.GetValue() + "' cannot be defined,");
                         }
 
                         // If an exprssion has multiple operations
-                        if (t.getType() == Type.OPERATOR && t.getValue() == "=" && tokens.Count > 3)
+                        if (t.GetTokenType() == Type.OPERATOR && t.GetValue() == "=" && tokens.Count > 3)
                         {
                             // Loop all the tokens after the assignment operator
                             foreach (var _token in tokens.GetRange(2, tokens.Count - 2))
                             {
                                 // If encountered a variable
-                                if (_token.getType() == Type.IDENTIFIER)
+                                if (_token.GetTokenType() == Type.IDENTIFIER)
                                 {
                                     try
                                     {
                                         // Try to add the number from the Variables dictionary to the number list
-                                        numbersList.Add(int.Parse(Variables[_token.getValue()]));
+                                        numbersList.Add(int.Parse(Variables[_token.GetValue()]));
                                     }
                                     catch (KeyNotFoundException)
                                     {
                                         // If the identifier is not recognized show error
-                                        error += "[" + DateTime.Now.ToString("T") + "] '" + _token.getValue() + "' is not defined.";
+                                        error += "[" + DateTime.Now.ToString("T") + "] '" + _token.GetValue() + "' is not defined.";
                                         error += (lineNum != 0) ? " at line " + lineNum : "";
                                         error += ".\r\n";
                                     }
                                 }
 
                                 // If encountered a numerical
-                                if (_token.getType() == Type.NUMBER)
+                                if (_token.GetTokenType() == Type.NUMBER)
                                     // Add the number to the list
-                                    numbersList.Add(int.Parse(_token.getValue()));
+                                    numbersList.Add(int.Parse(_token.GetValue()));
                                 // If encountered an operator
-                                if (_token.getType() == Type.OPERATOR)
+                                if (_token.GetTokenType() == Type.OPERATOR)
                                     // Add the operator to the queue
-                                    operators.Enqueue(_token.getValue());
+                                    operators.Enqueue(_token.GetValue());
                             }
 
                             // Initialize result as the first element
@@ -316,7 +316,7 @@ namespace AssignmentASE
                         }
 
                         // If the last toke in identifier
-                        if (t.getType() == Type.IDENTIFIER && i > 0)
+                        if (t.GetTokenType() == Type.IDENTIFIER && i > 0)
                         {
                             // If the variable exists
                             if (!Variables.ContainsKey(variable_name))
@@ -324,12 +324,12 @@ namespace AssignmentASE
                                 try
                                 {
                                     // Try to get and the value of the operand
-                                    Variables.Add(variable_name, Variables[t.getValue()]);
+                                    Variables.Add(variable_name, Variables[t.GetValue()]);
                                 }
                                 catch (KeyNotFoundException)
                                 {
                                     // If the identifier is not recognized show error
-                                    throw new SystemException("'" + t.getValue() + "' is not defined,");
+                                    throw new SystemException("'" + t.GetValue() + "' is not defined,");
                                 }
                             }
                             else
@@ -337,29 +337,29 @@ namespace AssignmentASE
                                 try
                                 {
                                     // Reassign the variable if it is a new variable
-                                    Variables[variable_name] = Variables[t.getValue()];
+                                    Variables[variable_name] = Variables[t.GetValue()];
                                 }
                                 catch (KeyNotFoundException)
                                 {
                                     // If the identifier is not recognized show error
-                                    throw new SystemException("'" + t.getValue() + "' is not defined,");
+                                    throw new SystemException("'" + t.GetValue() + "' is not defined,");
                                 }
                             }
                         }
 
                         // If the last token is number
-                        if (t.getType() == Type.NUMBER && i > 0)
+                        if (t.GetTokenType() == Type.NUMBER && i > 0)
                         {
                             // If the variable doesn't exists
                             if (!Variables.ContainsKey(variable_name))
                             {
                                 // Add a new entry to the dictionary
-                                Variables.Add(variable_name, t.getValue());
+                                Variables.Add(variable_name, t.GetValue());
                             }
                             else
                             {
                                 // REassign the existing variable
-                                Variables[variable_name] = t.getValue();
+                                Variables[variable_name] = t.GetValue();
                             }
                         }
                     }
@@ -386,7 +386,7 @@ namespace AssignmentASE
         /// <param name="lineNum">The current line number</param>
         /// <returns>Boolean indicating wheter the statement is true or false</returns>
         /// <remarks>The line number is 0 when a single command is to be parsed</remarks>
-        public bool parseUsingIf(string input, int lineNum)
+        public bool ParseUsingIf(string input, int lineNum)
         {
             // Get all the tokens for the line
             var tokens = lexer.Advance(input);
@@ -403,17 +403,17 @@ namespace AssignmentASE
                 foreach (var _token in tokens.GetRange(1, 3))
                 {
                     // If the token is identifier
-                    if (_token.getType() == Type.IDENTIFIER)
+                    if (_token.GetTokenType() == Type.IDENTIFIER)
                         // Add the value of that identifier to the number list
-                        numbersList.Add(int.Parse(Variables[_token.getValue()]));
+                        numbersList.Add(int.Parse(Variables[_token.GetValue()]));
                     // If the token in a number
-                    if (_token.getType() == Type.NUMBER)
+                    if (_token.GetTokenType() == Type.NUMBER)
                         // Add the number to the number list
-                        numbersList.Add(int.Parse(_token.getValue()));
+                        numbersList.Add(int.Parse(_token.GetValue()));
                     // If the token is an operator
-                    if (_token.getType() == Type.OPERATOR)
+                    if (_token.GetTokenType() == Type.OPERATOR)
                         // Assign the operator var
-                        op = _token.getValue();
+                        op = _token.GetValue();
                 }
 
                 // Left side of the condition
@@ -471,13 +471,181 @@ namespace AssignmentASE
             return result;
         }
 
+        /// <summary>
+        ///  Parses a method definition statement
+        /// </summary>
+        /// <param name="lines">The text from the text editor split on return</param>
+        /// <param name="lineNum">The line number where the method decleration has started</param>
+        /// <returns>The line number where the function ends</returns>
+        public int ParseUsingMethod(string[] lines, int lineNum)
+        {
+            // Get tokens for the line
+            var tokens = lexer.Advance(lines[lineNum]);
+            // Empty string for storing the formal params
+            string formalParam = "";
+            // Get the lineNum for the current function start
+            int functionLineNum = lineNum;
+
+            try
+            {
+                // Try to loop the tokens after the method keyword & name
+                foreach (var _token in tokens.GetRange(2, tokens.Count - 2))
+                {
+                    // If type is identifier add to the string seperated by '|'
+                    if (_token.GetTokenType() == Type.IDENTIFIER)
+                    {
+                        formalParam += _token.GetValue() + "|";
+                    }
+                }
+
+                // Flag for method is ended
+                bool isEndMethod = false;
+
+                // For all the lines
+                for (; functionLineNum < lines.Length; functionLineNum++)
+                {
+                    // If encountered an endmethod
+                    if (lines[functionLineNum].Contains("endmethod"))
+                    {
+                        // Set flag to true
+                        isEndMethod = true;
+                        break;
+                    }
+                }
+
+                // If no endmethod then throw exception
+                if (!isEndMethod) throw new FormatException("Function not ended properly");
+
+                // If no params remove the last '|'
+                if (!formalParam.Equals(""))
+                    formalParam = formalParam.Remove(formalParam.Length - 1);
+
+                // If function name is a number throw exception
+                if (tokens[1].GetTokenType() == Type.NUMBER) throw new FormatException("Function name cannot be a number");
+
+                // Add the method to variable dictionary along with the linNum,endFunctionLine and the params
+                Variables.Add(tokens[1].GetValue(), lineNum + "," + (functionLineNum - 1) + "," + formalParam);
+            }
+            catch (FormatException e)
+            {
+                // Catch exception and display relevant message
+                error += "[" + DateTime.Now.ToString("T") + "] " + e.Message + ",";
+                error += " at line " + (lineNum + 1);
+                error += ".\r\n";
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                // If the method declaration is invalid
+                error += "[" + DateTime.Now.ToString("T") + "] Invalid number of arguments for this command,";
+                error += " at line " + (lineNum + 1);
+                error += ".\r\n";
+            }
+            return functionLineNum;
+        }
+
+        /// <summary>
+        /// Handles the end of a method
+        /// </summary>
+        /// <param name="currentFunction">The name of the current called function</param>
+        /// <param name="cursor">Cursor for going back to line number after completing a function</param>
+        /// <param name="lineNum">The lineNum where the endmethod is</param>
+        /// <returns>The lineNum where the original function was called</returns>
+        public int ParseEndMethod(string currentFunction, int cursor, int lineNum)
+        {
+            // If the cursor is not 0 and their is a currentfunction
+            if (!currentFunction.Equals("") && cursor != 0)
+            {
+                // Get the parameters name from the function
+                var formalParam = Variables[currentFunction].Split(',')[2].Split('|');
+                // Loop for each paramerter
+                foreach (var _parameter in formalParam)
+                {
+                    // Remove parameter from the variables table
+                    Variables.Remove(_parameter);
+                }
+            }
+            else
+            {
+                // Else if no method declaration before a function
+                error += "[" + DateTime.Now.ToString("T") + "] No method found before ending a method";
+                error += " at line " + (lineNum + 1);
+                error += ".\r\n";
+            }
+            // Return cursor
+            return cursor;
+        }
+
+        /// <summary>
+        /// Parses a function call
+        /// </summary>
+        /// <param name="tokens">The tokens of the line where function is called</param>
+        /// <param name="lineNum">The line number where the function is called</param>
+        /// <param name="paramters">The parameters required by the function</param>
+        /// <returns>The line number where the function call ends</returns>
+        public int ParseMethodCall(List<Token> tokens, int lineNum, LinkedList<string> paramters)
+        {
+            try
+            {
+                // Get the function start line, end line and parameters from the dictionary
+                var functionLines = Variables[tokens[0].GetValue()].Split(',');
+                // Get each paramter after splitting on '|'
+                var formalParam = functionLines[2].Split('|');
+
+                // For each tokens after the name
+                foreach (var _token in tokens.GetRange(1, tokens.Count - 1))
+                {
+                    // If argument is number store in paramters
+                    if (_token.GetTokenType() == Type.NUMBER)
+                        paramters.AddLast(_token.GetValue());
+                    // Else if argument is a identfier store its value from variable in the parametrs
+                    else if (_token.GetTokenType() == Type.IDENTIFIER)
+                        paramters.AddLast(Variables[_token.GetValue()]);
+                }
+
+                // If the function call requires parameters
+                if (formalParam.Length != 0 && !formalParam[0].Equals(""))
+                {
+                    // For the length of the paramters
+                    for (int i = 0; i < formalParam.Length; i++)
+                    {
+                        // If the variable is already assigned reassign it
+                        if (Variables.ContainsKey(formalParam[i]))
+                        {
+                            Variables[formalParam[i]] = paramters.ElementAt(i);
+                        }
+                        else
+                            // Else store it as a new entry
+                            Variables.Add(formalParam[i], paramters.ElementAt(i));
+                    }
+                }
+                // Return the function start line
+                return Int32.Parse(functionLines[0]);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                // If the function call is not done correctly or parameters wrong
+                error += "[" + DateTime.Now.ToString("T") + "] Invalid Number of arguments for this method,";
+                error += " at line " + (lineNum + 1);
+                error += ".\r\n";
+
+            }
+            catch (KeyNotFoundException)
+            {
+                // If the identifier is not recognized show error
+                error += "[" + DateTime.Now.ToString("T") + "] Identifier not recognized or not defined,";
+                error += " at line " + (lineNum + 1);
+                error += ".\r\n";
+            }
+            // Return line number if no function found
+            return lineNum;
+        }
 
         /// <summary>
         /// Parses the text form the code editor
         /// </summary>
         /// <param name="input">The text from the code editor</param>
-        /// <remarks>Uses <see cref="parseCommand(string, int)"/>, <see cref="parseUsingIf(string, int)"/>, <see cref="parseUsingLexer(string, int)"/></remarks>
-        public void parseEditor(string input)
+        /// <remarks>Uses <see cref="ParseCommand(string, int)"/>, <see cref="ParseUsingIf(string, int)"/>, <see cref="ParseUsingLexer(string, int)"/></remarks>
+        public void ParseEditor(string input)
         {
 
             // Split the input on new line into lines
@@ -507,27 +675,8 @@ namespace AssignmentASE
                         // If an endmnethod is encountered
                         if (lines[lineNum].Contains("endmethod"))
                         {
-                            // If the cursor is not 0 and their is a currentfunction
-                            if (!currentFunction.Equals("") && cursor != 0)
-                            {
-                                // Get the parameters name from the function
-                                var formalParam = Variables[currentFunction].Split(',')[2].Split('|');
-                                // Loop for each paramerter
-                                foreach (var _parameter in formalParam)
-                                {
-                                    // Remove parameter from the variables table
-                                    Variables.Remove(_parameter);
-                                }
-                                // Set linenum as the cursor
-                                lineNum = cursor;
-                            }
-                            else
-                            {
-                                // Else if no method declaration before a function
-                                error += "[" + DateTime.Now.ToString("T") + "] No method found before ending a method";
-                                error += " at line " + (lineNum + 1);
-                                error += ".\r\n";
-                            }
+                            lineNum = ParseEndMethod(currentFunction, cursor, lineNum);
+
                             // Reset currentfunction & cursor
                             currentFunction = "";
                             cursor = 0;
@@ -536,70 +685,8 @@ namespace AssignmentASE
                         // If there is a method definition
                         else if (lines[lineNum].Contains("method"))
                         {
-                            // Get tokens for the line
-                            var tokens = lexer.Advance(lines[lineNum]);
-                            // Empty string for storing the formal params
-                            string formalParam = "";
-                            // Get the lineNum for the current function start
-                            int functionLineNum = lineNum;
-
-                            try
-                            {
-                                // Try to loop the tokens after the method keyword & name
-                                foreach (var _token in tokens.GetRange(2, tokens.Count - 2))
-                                {
-                                    // If type is identifier add to the string seperated by '|'
-                                    if (_token.getType() == Type.IDENTIFIER)
-                                    {
-                                        formalParam += _token.getValue() + "|";
-                                    }
-                                }
-
-                                // Flag for method is ended
-                                bool isEndMethod = false;
-
-                                // For all the lines
-                                for (; functionLineNum < lines.Length; functionLineNum++)
-                                {
-                                    // If encountered an endmethod
-                                    if (lines[functionLineNum].Contains("endmethod"))
-                                    {
-                                        // Set flag to true
-                                        isEndMethod = true;
-                                        break;
-                                    }
-                                }
-
-                                // If no endmethod then throw exception
-                                if (!isEndMethod) throw new FormatException("Function not ended properly");
-
-                                // If no params remove the last '|'
-                                if (!formalParam.Equals(""))
-                                    formalParam = formalParam.Remove(formalParam.Length - 1);
-
-                                // If function name is a number throw exception
-                                if (tokens[1].getType() == Type.NUMBER) throw new FormatException("Function name cannot be a number");
-
-                                // Add the method to variable dictionary along with the linNum,endFunctionLine and the params
-                                Variables.Add(tokens[1].getValue(), lineNum + "," + (functionLineNum - 1) + "," + formalParam);
-                            }
-                            catch (FormatException e)
-                            {
-                                // Catch exception and display relevant message
-                                error += "[" + DateTime.Now.ToString("T") + "] " + e.Message + ",";
-                                error += " at line " + (lineNum + 1);
-                                error += ".\r\n";
-                            }
-                            catch (ArgumentOutOfRangeException)
-                            {
-                                // If the method declaration is invalid
-                                error += "[" + DateTime.Now.ToString("T") + "] Invalid number of arguments for this command,";
-                                error += " at line " + (lineNum + 1);
-                                error += ".\r\n";
-                            }
-
                             // Set linenum to the end of the function
-                            lineNum = functionLineNum;
+                            lineNum = ParseUsingMethod(lines, lineNum);
                         }
 
                         // If there is a method call
@@ -612,60 +699,9 @@ namespace AssignmentASE
                             // Get the tokens from the line
                             var tokens = lexer.Advance(lines[lineNum]);
                             // Set current function to the first token
-                            currentFunction = tokens[0].getValue();
+                            currentFunction = tokens[0].GetValue();
 
-                            try
-                            {
-                                // Get the function start line, end line and parameters from the dictionary
-                                var functionLines = Variables[tokens[0].getValue()].Split(',');
-                                // Get each paramter after splitting on '|'
-                                var formalParam = functionLines[2].Split('|');
-
-                                // For each tokens after the name
-                                foreach (var _token in tokens.GetRange(1, tokens.Count - 1))
-                                {
-                                    // If argument is number store in paramters
-                                    if (_token.getType() == Type.NUMBER)
-                                        paramters.AddLast(_token.getValue());
-                                    // Else if argument is a identfier store its value from variable in the parametrs
-                                    else if (_token.getType() == Type.IDENTIFIER)
-                                        paramters.AddLast(Variables[_token.getValue()]);
-                                }
-
-                                // If the function call requires parameters
-                                if (formalParam.Length != 0 && !formalParam[0].Equals(""))
-                                {
-                                    // For the length of the paramters
-                                    for (int i = 0; i < formalParam.Length; i++)
-                                    {
-                                        // If the variable is already assigned reassign it
-                                        if (Variables.ContainsKey(formalParam[i]))
-                                        {
-                                            Variables[formalParam[i]] = paramters.ElementAt(i);
-                                        }
-                                        else
-                                            // Else store it as a new entry
-                                            Variables.Add(formalParam[i], paramters.ElementAt(i));
-                                    }
-                                }
-
-                                // Set line num as the start of the function
-                                lineNum = Int32.Parse(functionLines[0]);
-                            }
-                            catch (ArgumentOutOfRangeException)
-                            {
-                                // If the function call is not done correctly or parameters wrong
-                                error += "[" + DateTime.Now.ToString("T") + "] Invalid Number of arguments for this method,";
-                                error += " at line " + (lineNum + 1);
-                                error += ".\r\n";
-                            }
-                            catch (KeyNotFoundException)
-                            {
-                                // If the identifier is not recognized show error
-                                error += "[" + DateTime.Now.ToString("T") + "] Identifier not recognized or not defined,";
-                                error += " at line " + (lineNum + 1);
-                                error += ".\r\n";
-                            }
+                            lineNum = ParseMethodCall(tokens, lineNum, paramters);
                         }
 
                         // If there is a while loop
@@ -677,7 +713,7 @@ namespace AssignmentASE
                             whileNum++;
 
                             // While the condition fo while is true
-                            while (parseUsingIf(lines[lineNum], lineNum + 1))
+                            while (ParseUsingIf(lines[lineNum], lineNum + 1))
                             {
                                 // If the loop has end loop then set whilenum to linenum for looping
                                 if (lines[whileNum].Contains("endwhile"))
@@ -689,31 +725,10 @@ namespace AssignmentASE
                                     // If an endmnethod is encountered
                                     if (lines[whileNum].Contains("endmethod"))
                                     {
-                                        // If the cursor is not 0 and their is a currentfunction
-                                        if (!currentFunction.Equals("") && cursor != 0)
-                                        {
-                                            // Get the parameters name from the function
-                                            var formalParam = Variables[currentFunction].Split(',')[2].Split('|');
-                                            // Loop for each paramerter
-                                            foreach (var _parameter in formalParam)
-                                            {
-                                                // Remove parameter from the variables table
-                                                Variables.Remove(_parameter);
-                                            }
-                                            // Set whilenum as the cursor
-                                            whileNum = cursor;
-                                        }
-                                        else
-                                        {
-                                            // Else if no method declaration before a function
-                                            error += "[" + DateTime.Now.ToString("T") + "] No method found before ending a method";
-                                            error += " at line " + (lineNum + 1);
-                                            error += ".\r\n";
-                                        }
+                                        whileNum = ParseEndMethod(currentFunction, cursor, whileNum);
                                         // Reset currentfunction & cursor
                                         currentFunction = "";
                                         cursor = 0;
-
                                     }
 
                                     // If there is a method call
@@ -726,56 +741,9 @@ namespace AssignmentASE
                                         // Get the tokens from the line
                                         var tokens = lexer.Advance(lines[whileNum]);
                                         // Set current function to the first token
-                                        currentFunction = tokens[0].getValue();
+                                        currentFunction = tokens[0].GetValue();
 
-                                        try
-                                        {
-                                            // Get the function start line, end line and parameters from the dictionary
-                                            var functionLines = Variables[tokens[0].getValue()].Split(',');
-                                            // Get each paramter after splitting on '|'
-                                            var formalParam = functionLines[2].Split('|');
-
-                                            // For each tokens after the name
-                                            foreach (var _token in tokens.GetRange(1, tokens.Count - 1))
-                                            {
-                                                // If argument is number store in paramters
-                                                if (_token.getType() == Type.NUMBER)
-                                                    paramters.AddLast(_token.getValue());
-                                                // Else if argument is a identfier store its value from variable in the parametrs
-                                                else if (_token.getType() == Type.IDENTIFIER)
-                                                    paramters.AddLast(Variables[_token.getValue()]);
-                                            }
-                                            // If the function call requires parameters
-                                            for (int i = 0; i < formalParam.Length; i++)
-                                            {
-                                                // For the length of the paramters
-                                                if (Variables.ContainsKey(formalParam[i]))
-                                                {
-                                                    // If the variable is already assigned reassign it
-                                                    Variables[formalParam[i]] = paramters.ElementAt(i);
-                                                }
-                                                else
-                                                    // Else store it as a new entry
-                                                    Variables.Add(formalParam[i], paramters.ElementAt(i));
-                                            }
-
-                                            // Set line num as the start of the function
-                                            whileNum = Int32.Parse(functionLines[0]);
-                                        }
-                                        catch (ArgumentOutOfRangeException)
-                                        {
-                                            // If the function call is not done correctly or parameters wrong
-                                            error += "[" + DateTime.Now.ToString("T") + "] Invalid Number of arguments for this method,";
-                                            error += " at line " + (whileNum + 1);
-                                            error += ".\r\n";
-                                        }
-                                        catch (KeyNotFoundException)
-                                        {
-                                            // If the identifier is not recognized show error
-                                            error += "[" + DateTime.Now.ToString("T") + "] Identifier not recognized or not defined,";
-                                            error += " at line " + (whileNum + 1);
-                                            error += ".\r\n";
-                                        }
+                                        whileNum = ParseMethodCall(tokens, whileNum, paramters);
                                     }
 
                                     // If endif is encountered just continue
@@ -788,7 +756,7 @@ namespace AssignmentASE
                                     else if (lines[whileNum].Contains("if"))
                                     {
                                         // If the condition is false
-                                        if (!parseUsingIf(lines[whileNum], lineNum + 1))
+                                        if (!ParseUsingIf(lines[whileNum], lineNum + 1))
                                         {
                                             // A bool flag for 1 line
                                             bool flag = false;
@@ -814,12 +782,12 @@ namespace AssignmentASE
                                     else if (lines[whileNum].Contains("="))
                                     {
                                         // Parse using the expression method
-                                        parseUsingLexer(lines[whileNum], whileNum);
+                                        ParseUsingLexer(lines[whileNum], whileNum);
                                     }
 
                                     // Else parse using parsecommand
                                     else
-                                        parseCommand(lines[whileNum], whileNum + 1);
+                                        ParseCommand(lines[whileNum], whileNum + 1);
 
                                 }
                                 // Increment whilenum
@@ -839,7 +807,7 @@ namespace AssignmentASE
                         else if (lines[lineNum].Contains("if"))
                         {
                             // If the condition is false
-                            if (!parseUsingIf(lines[lineNum], lineNum + 1))
+                            if (!ParseUsingIf(lines[lineNum], lineNum + 1))
                             {
                                 // A bool flag for 1 line
                                 bool flag = false;
@@ -864,13 +832,13 @@ namespace AssignmentASE
                         else if (lines[lineNum].Contains("="))
                         {
                             // Parse using the expression method
-                            parseUsingLexer(lines[lineNum], lineNum + 1);
+                            ParseUsingLexer(lines[lineNum], lineNum + 1);
                         }
                     }
                     // Else parse using parsecommand
                     else
                         // Call the parse command method passing the line , and the line num + 1
-                        parseCommand(lines[lineNum], lineNum + 1);
+                        ParseCommand(lines[lineNum], lineNum + 1);
                 }
             }
         }
@@ -880,7 +848,7 @@ namespace AssignmentASE
         /// Displays the errors encountered
         /// </summary>
         /// /// <remarks>Uses <see cref="Painter.WriteError(string)"/></remarks>
-        public void displayError()
+        public void DisplayError()
         {
             // IF there are errors
             if (error != "")

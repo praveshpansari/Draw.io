@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AssignmentASE
 {
@@ -14,20 +10,20 @@ namespace AssignmentASE
     /// This class allows to set and draw a rectangle of specifice base length,
     /// and height
     /// </remarks>
-    class Triangle : Shape
+    public class Triangle : Shape
     {
         // The base and height of the triangle
         int width, height;
 
-        public override void set(params int[] list)
+        public override void Set(params int[] list)
         {
             //list[0] is x, list[1] is y, list[2] is width, list[3] is height
-            base.set(list[0], list[1]);
+            base.Set(list[0], list[1]);
             this.width = list[2];
             this.height = list[3];
         }
 
-        public override void draw(Graphics g, bool fill, Pen p, Brush b)
+        public override void Draw(Graphics g, bool fill, Pen p, Brush b)
         {
             //coords[0].X = (x - width);
             //coords[0].Y = (y + height);

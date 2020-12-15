@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 
 namespace AssignmentASE
@@ -14,19 +9,19 @@ namespace AssignmentASE
     /// <remarks>
     /// This class allows to set and draw a circle of specified radius
     /// </remarks>
-    class Circle : Shape
+    public class Circle : Shape
     {
         // The radius of the circle
         int radius;
 
-        public override void set(params int[] list)
+        public override void Set(params int[] list)
         {
             //list[0] is x, list[1] is y, list[2] is radius
-            base.set(list[0], list[1]);
+            base.Set(list[0], list[1]);
             this.radius = list[2];
         }
 
-        public override void draw(Graphics g, bool fill, Pen p, Brush b)
+        public override void Draw(Graphics g, bool fill, Pen p, Brush b)
         {
             // iF fill is on draw filled else draw outlined
             if (fill)

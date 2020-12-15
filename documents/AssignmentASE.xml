@@ -20,12 +20,12 @@
             Allows to Execute the clear command and clear the output window
             </remarks>
         </member>
-        <member name="T:AssignmentASE.CommandInterface">
+        <member name="T:AssignmentASE.ICommands">
             <summary>
             The interface for the shape classes
             </summary>
         </member>
-        <member name="M:AssignmentASE.CommandInterface.execute">
+        <member name="M:AssignmentASE.ICommands.Execute">
             <summary>
             Executes the command
             </summary>
@@ -33,7 +33,7 @@
             Performs the respective function of the command
             </remarks>
         </member>
-        <member name="M:AssignmentASE.CommandInterface.set(System.Drawing.Graphics,System.Drawing.Pen,System.Int32[])">
+        <member name="M:AssignmentASE.ICommands.Set(System.Drawing.Graphics,System.Drawing.Pen,System.Int32[])">
             <summary>  
             Sets the source and destination where the command is to be executed
             </summary>
@@ -41,7 +41,7 @@
             <param name="p">The pen to be used to execute the command</param>
             <param name="list">The list of integers containing source and destination</param>
         </member>
-        <member name="M:AssignmentASE.CommandInterface.getLog">
+        <member name="M:AssignmentASE.ICommands.GetLog">
             <summary>
             Provides information about what the command has done
             </summary>
@@ -73,7 +73,7 @@
             </list>
             </remarks>
         </member>
-        <member name="M:AssignmentASE.CommandFactory.getCommand(System.String)">
+        <member name="M:AssignmentASE.CommandFactory.GetCommand(System.String)">
             <summary>
             Used to instantiate and get a specific command object
             </summary>
@@ -83,7 +83,7 @@
         </member>
         <member name="T:AssignmentASE.Command">
             <summary>
-            Abstract class command implementing the <see cref="T:AssignmentASE.CommandInterface"/> interface
+            Abstract class command implementing the <see cref="T:AssignmentASE.ICommands"/> interface
             </summary>
             <remarks>
             Implements the execute, set and log method
@@ -108,14 +108,14 @@
             Constructor which initializes form components and instance objects
             </summary>
         </member>
-        <member name="M:AssignmentASE.Environment.outputWindow_Paint(System.Object,System.Windows.Forms.PaintEventArgs)">
+        <member name="M:AssignmentASE.Environment.OutputWindow_Paint(System.Object,System.Windows.Forms.PaintEventArgs)">
             <summary>
             Paint method for the output window. Draws the ouputImage on it;
             </summary>
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:AssignmentASE.Environment.runButton_Click(System.Object,System.EventArgs)">
+        <member name="M:AssignmentASE.Environment.RunButton_Click(System.Object,System.EventArgs)">
             <summary>
             Event handler when the user clicks on the run button.
             This method parses commands from the command line and code editor
@@ -124,7 +124,7 @@
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:AssignmentASE.Environment.commandLine_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+        <member name="M:AssignmentASE.Environment.CommandLine_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
             <summary>
             When enter key is pressed by the user after entering a command
             in the command line perform a run button click
@@ -132,7 +132,7 @@
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:AssignmentASE.Environment.saveToolStripMenuItem_Click(System.Object,System.EventArgs)">
+        <member name="M:AssignmentASE.Environment.SaveToolStripMenuItem_Click(System.Object,System.EventArgs)">
             <summary>
             Event handler for the save button click
             This method displays a save dialog box to user
@@ -142,7 +142,7 @@
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:AssignmentASE.Environment.openToolStripMenuItem_Click(System.Object,System.EventArgs)">
+        <member name="M:AssignmentASE.Environment.OpenToolStripMenuItem_Click(System.Object,System.EventArgs)">
             <summary>
             Event handler for the open button click
             This method displays a open dialog box to user
@@ -151,7 +151,7 @@
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:AssignmentASE.Environment.exitToolStripMenuItem_Click(System.Object,System.EventArgs)">
+        <member name="M:AssignmentASE.Environment.ExitToolStripMenuItem_Click(System.Object,System.EventArgs)">
             <summary>
             Event handler for the exit button click
             Exits the application
@@ -159,7 +159,7 @@
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:AssignmentASE.Environment.newFileToolStripMenuItem_Click(System.Object,System.EventArgs)">
+        <member name="M:AssignmentASE.Environment.NewFileToolStripMenuItem_Click(System.Object,System.EventArgs)">
             <summary>
             Event handle for the new file button click
             Clear the code editor and close the current file
@@ -167,7 +167,7 @@
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:AssignmentASE.Environment.aboutToolStripMenuItem_Click(System.Object,System.EventArgs)">
+        <member name="M:AssignmentASE.Environment.AboutToolStripMenuItem_Click(System.Object,System.EventArgs)">
             <summary>
             Event handler for the about button click
             Shows the information about the program
@@ -175,7 +175,7 @@
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:AssignmentASE.Environment.button1_Click(System.Object,System.EventArgs)">
+        <member name="M:AssignmentASE.Environment.Button1_Click(System.Object,System.EventArgs)">
             <summary>
             Event handle for the close button "X"
             </summary>
@@ -210,9 +210,64 @@
             An enum which contains all the required keywords and types for the language.
             </summary>
         </member>
+        <member name="F:AssignmentASE.Type.IF">
+            <summary>
+            The type for the if statement
+            </summary>
+        </member>
+        <member name="F:AssignmentASE.Type.ENDIF">
+            <summary>
+            The type for ending an if statement
+            </summary>
+        </member>
+        <member name="F:AssignmentASE.Type.WHILE">
+            <summary>
+            The type for a while loop
+            </summary>
+        </member>
+        <member name="F:AssignmentASE.Type.ENDWHILE">
+            <summary>
+            The type for ending a while loop
+            </summary>
+        </member>
+        <member name="F:AssignmentASE.Type.METHOD">
+            <summary>
+            The type for creating a method
+            </summary>
+        </member>
+        <member name="F:AssignmentASE.Type.IDENTIFIER">
+            <summary>
+            The type for variable names or function names
+            </summary>
+        </member>
+        <member name="F:AssignmentASE.Type.OPERATOR">
+            <summary>
+            The type for arithmetic and comparisn operators
+            </summary>
+        </member>
+        <member name="F:AssignmentASE.Type.NUMBER">
+            <summary>
+            The type for numericals
+            </summary>
+        </member>
         <member name="T:AssignmentASE.Token">
             <summary>
             This class takes in a enum type and the corresponding value to the type.
+            </summary>
+        </member>
+        <member name="F:AssignmentASE.Token.type">
+            <summary>
+            The type of the token
+            </summary>
+        </member>
+        <member name="F:AssignmentASE.Token.keyword">
+            <summary>
+            The value of the token if it is a string
+            </summary>
+        </member>
+        <member name="F:AssignmentASE.Token.numerical">
+            <summary>
+            THe value of the token if it is a number
             </summary>
         </member>
         <member name="M:AssignmentASE.Token.#ctor(AssignmentASE.Type,System.String)">
@@ -222,7 +277,19 @@
             <param name="type">Type of the token</param>
             <param name="keyword">A string of the value</param>
         </member>
-        <member name="M:AssignmentASE.Token.toString">
+        <member name="M:AssignmentASE.Token.GetValue">
+            <summary>
+            Get the value of the current token
+            </summary>
+            <returns>A string containing the value of the token</returns>
+        </member>
+        <member name="M:AssignmentASE.Token.GetTokenType">
+            <summary>
+            Get the type of the token
+            </summary>
+            <returns>The Type<see cref="T:AssignmentASE.Type"/> of the token</returns>
+        </member>
+        <member name="M:AssignmentASE.Token.ToString">
             <summary>
             This method coverts this class to a String in a specific format.
             </summary>
@@ -257,17 +324,17 @@
             Contains methods for drawing shapes, lines and setting pen and cursor
             </remarks>
         </member>
-        <member name="P:AssignmentASE.Painter.fill">
+        <member name="P:AssignmentASE.Painter.Fill">
             <summary>
             The fill flag for the drawing
             </summary>
         </member>
-        <member name="P:AssignmentASE.Painter.xPos">
+        <member name="P:AssignmentASE.Painter.XPos">
             <summary>
             The x-coordinate of the cursor
             </summary>
         </member>
-        <member name="P:AssignmentASE.Painter.yPos">
+        <member name="P:AssignmentASE.Painter.YPos">
             <summary>
             The y-coordinate of the cursor
             </summary>
@@ -318,17 +385,17 @@
             </summary>
             <remarks>To be called after every method</remarks>
         </member>
-        <member name="M:AssignmentASE.Painter.updateImage">
+        <member name="M:AssignmentASE.Painter.UpdateImage">
             <summary>
             Updates the output window image to be the original image
             </summary>
             <remarks>To be called before every method</remarks>
         </member>
-        <member name="M:AssignmentASE.Painter.storeTempImage">
+        <member name="M:AssignmentASE.Painter.StoreTempImage">
             <summary>
             Copies the original image to a temporary image
             </summary>
-            <remarks>To be used before <see cref="M:AssignmentASE.Painter.DrawCursor"/> and after <see cref="M:AssignmentASE.Painter.updateImage"/></remarks>
+            <remarks>To be used before <see cref="M:AssignmentASE.Painter.DrawCursor"/> and after <see cref="M:AssignmentASE.Painter.UpdateImage"/></remarks>
         </member>
         <member name="M:AssignmentASE.Painter.ExecuteCommand(System.String,System.Int32[])">
             <summary>
@@ -350,21 +417,6 @@
             <summary>
             Write the log in the logbox
             </summary>
-        </member>
-        <member name="M:AssignmentASE.Painter.WhileLoop(System.Int32,System.Char,System.Int32)">
-            <summary>
-            The while loop command for the while loop
-            </summary>
-            <param name="var">The value for which the condition is to bec checked</param>
-            <param name="op">The type of check to be done</param>
-            <param name="value">The value against which to check the operation</param>
-        </member>
-        <member name="M:AssignmentASE.Painter.Varaible(System.String,System.Int32)">
-            <summary>
-            The variable assignment command
-            </summary>
-            <param name="var">The variable name to which the value is assigned</param>
-            <param name="x">The value to be assigned to the variable</param>
         </member>
         <member name="M:AssignmentASE.Painter.WriteError(System.String)">
             <summary>
@@ -391,7 +443,7 @@
             </summary>
             <param name="p">The painter object which knows where to draw on</param>
         </member>
-        <member name="M:AssignmentASE.Parser.parseCommand(System.String,System.Int32)">
+        <member name="M:AssignmentASE.Parser.ParseCommand(System.String,System.Int32)">
             <summary>
             Parses a single string input
             </summary>
@@ -399,7 +451,7 @@
             <param name="lineNum">The current line number</param>
             <remarks>The line number is 0 when a single command is to be parsed</remarks>
         </member>
-        <member name="M:AssignmentASE.Parser.parseUsingLexer(System.String,System.Int32)">
+        <member name="M:AssignmentASE.Parser.ParseUsingLexer(System.String,System.Int32)">
             <summary>
             Parses a single expression statement
             </summary>
@@ -407,7 +459,7 @@
             <param name="lineNum">The current line number</param>
             <remarks>The line number is 0 when a single command is to be parsed</remarks>
         </member>
-        <member name="M:AssignmentASE.Parser.parseUsingIf(System.String,System.Int32)">
+        <member name="M:AssignmentASE.Parser.ParseUsingIf(System.String,System.Int32)">
             <summary>
             Parses a single if statement
             </summary>
@@ -416,14 +468,40 @@
             <returns>Boolean indicating wheter the statement is true or false</returns>
             <remarks>The line number is 0 when a single command is to be parsed</remarks>
         </member>
-        <member name="M:AssignmentASE.Parser.parseEditor(System.String)">
+        <member name="M:AssignmentASE.Parser.ParseUsingMethod(System.String[],System.Int32)">
+            <summary>
+             Parses a method definition statement
+            </summary>
+            <param name="lines">The text from the text editor split on return</param>
+            <param name="lineNum">The line number where the method decleration has started</param>
+            <returns>The line number where the function ends</returns>
+        </member>
+        <member name="M:AssignmentASE.Parser.ParseEndMethod(System.String,System.Int32,System.Int32)">
+            <summary>
+            Handles the end of a method
+            </summary>
+            <param name="currentFunction">The name of the current called function</param>
+            <param name="cursor">Cursor for going back to line number after completing a function</param>
+            <param name="lineNum">The lineNum where the endmethod is</param>
+            <returns>The lineNum where the original function was called</returns>
+        </member>
+        <member name="M:AssignmentASE.Parser.ParseMethodCall(System.Collections.Generic.List{AssignmentASE.Token},System.Int32,System.Collections.Generic.LinkedList{System.String})">
+            <summary>
+            Parses a function call
+            </summary>
+            <param name="tokens">The tokens of the line where function is called</param>
+            <param name="lineNum">The line number where the function is called</param>
+            <param name="paramters">The parameters required by the function</param>
+            <returns>The line number where the function call ends</returns>
+        </member>
+        <member name="M:AssignmentASE.Parser.ParseEditor(System.String)">
             <summary>
             Parses the text form the code editor
             </summary>
             <param name="input">The text from the code editor</param>
-            <remarks>Uses <see cref="M:AssignmentASE.Parser.parseCommand(System.String,System.Int32)"/>, <see cref="M:AssignmentASE.Parser.parseUsingIf(System.String,System.Int32)"/>, <see cref="M:AssignmentASE.Parser.parseUsingLexer(System.String,System.Int32)"/></remarks>
+            <remarks>Uses <see cref="M:AssignmentASE.Parser.ParseCommand(System.String,System.Int32)"/>, <see cref="M:AssignmentASE.Parser.ParseUsingIf(System.String,System.Int32)"/>, <see cref="M:AssignmentASE.Parser.ParseUsingLexer(System.String,System.Int32)"/></remarks>
         </member>
-        <member name="M:AssignmentASE.Parser.displayError">
+        <member name="M:AssignmentASE.Parser.DisplayError">
             <summary>
             Displays the errors encountered
             </summary>
@@ -452,7 +530,7 @@
         </member>
         <member name="T:AssignmentASE.Shape">
             <summary>
-            Abstract class shape implementing the <see cref="T:AssignmentASE.Shapes"/> interface
+            Abstract class shape implementing the <see cref="T:AssignmentASE.IShapes"/> interface
             </summary>
             <remarks>
             Implements the draw and set methods
@@ -467,6 +545,21 @@
             <summary>
             The x and y postion of the shape
             </summary>
+        </member>
+        <member name="M:AssignmentASE.Shape.Draw(System.Drawing.Graphics,System.Boolean,System.Drawing.Pen,System.Drawing.Brush)">
+            <summary>
+            Draws the shape on a graphics object using a given pen,fill information and brush
+            </summary>
+            <param name="g">The graphics object where the shape is to be drawn</param>
+            <param name="fill">Whether the shape drawn is filled or not</param>
+            <param name="p">The pen used to draw the shape</param>
+            <param name="b">The brush used to draw the shape</param>
+        </member>
+        <member name="M:AssignmentASE.Shape.Set(System.Int32[])">
+            <summary>
+            Sets the size and position of the shape
+            </summary>
+            <param name="list">The list of integers containing postion and size of the shape</param>
         </member>
         <member name="T:AssignmentASE.ShapeFactory">
             <summary>
@@ -494,7 +587,7 @@
             </list>
             </remarks>
         </member>
-        <member name="M:AssignmentASE.ShapeFactory.getShape(System.String)">
+        <member name="M:AssignmentASE.ShapeFactory.GetShape(System.String)">
             <summary>
             Used to instantiate and get a specific Shape object
             </summary>
@@ -502,18 +595,18 @@
             <returns>An instance of the inherited classes of <see cref="T:AssignmentASE.Shape"/></returns>
             <exception cref="T:System.ArgumentException"></exception>
         </member>
-        <member name="T:AssignmentASE.Shapes">
+        <member name="T:AssignmentASE.IShapes">
             <summary>
             The interface for the shape classes
             </summary>
         </member>
-        <member name="M:AssignmentASE.Shapes.set(System.Int32[])">
+        <member name="M:AssignmentASE.IShapes.Set(System.Int32[])">
             <summary>
             Sets the size and position of the shape
             </summary>
             <param name="list">The list of integers containing postion and size of the shape</param>
         </member>
-        <member name="M:AssignmentASE.Shapes.draw(System.Drawing.Graphics,System.Boolean,System.Drawing.Pen,System.Drawing.Brush)">
+        <member name="M:AssignmentASE.IShapes.Draw(System.Drawing.Graphics,System.Boolean,System.Drawing.Pen,System.Drawing.Brush)">
             <summary>
             Draws the shape on a graphics object using a given pen,fill information and brush
             </summary>
