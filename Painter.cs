@@ -127,7 +127,7 @@ namespace AssignmentASE
         /// </summary>
         /// <param name="color">The color which the pen is to be set</param>
         /// <remarks>Also sets the color of vrush used to draw filled shapes</remarks>
-        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="InvalidParameterException"></exception>
         public void SetColor(String color)
         {
             // flag whether the color is valid
@@ -155,14 +155,14 @@ namespace AssignmentASE
             }
             else
                 // Else throw color not found error
-                throw new ArgumentException("Color not found");
+                throw new InvalidParameterException("Color not found");
         }
 
         /// <summary>
         /// The command to set whether the shapes drawn are filled or not
         /// </summary>
         /// <param name="flag">'On' for fill and 'off' for no fill</param>
-        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="InvalidParameterException"></exception>
         public void SetFill(String flag)
         {
             // If the flag is "on"
@@ -182,7 +182,7 @@ namespace AssignmentASE
             else
             {
                 // Else throw paramter wrong error
-                throw new ArgumentException("Parameter mus be either 'on' or 'off'.");
+                throw new InvalidParameterException("Parameter mus be either 'on' or 'off'.");
             }
         }
 
@@ -228,7 +228,7 @@ namespace AssignmentASE
         /// </summary>
         /// <param name="commandType">The command to be executed</param>
         /// <param name="p">The list of arguments for the respective commands</param>
-        /// <exception cref="IndexOutOfRangeException"></exception>
+        /// <exception cref="InvalidParameterException"></exception>
         public void ExecuteCommand(string commandType, params int[] p)
         {
             // List of parameters of length the argument list + 2
@@ -252,7 +252,7 @@ namespace AssignmentASE
             catch (IndexOutOfRangeException)
             {
                 // Catch and Throw Exception if parameters length invalid
-                throw new IndexOutOfRangeException();
+                throw new InvalidParameterException("Invalid Number of parameters");
             }
 
             // Execute the  command
@@ -271,7 +271,7 @@ namespace AssignmentASE
         /// </summary>
         /// <param name="shapeType">The shape type to be drawn</param>
         /// <param name="p">The list of parameters for the respective shape</param>
-        /// <exception cref="IndexOutOfRangeException"></exception>
+        /// <exception cref="InvalidParameterException"></exception>
         public void DrawShape(string shapeType, params int[] p)
         {
             // List of parameters of length the argument list + 2
@@ -295,7 +295,7 @@ namespace AssignmentASE
             catch (IndexOutOfRangeException)
             {
                 // Catch and Throw exception if invalid parameters
-                throw new IndexOutOfRangeException();
+                throw new InvalidParameterException("Invalid Number of Parameters");
             }
 
             // Draw the shape 

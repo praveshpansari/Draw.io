@@ -75,7 +75,7 @@ namespace AssignmentASE
                 if (parameters.Length == 1)
                 {   // Try to set the fill
                     try { p.SetFill(parameters[0]); }
-                    catch (ArgumentException c)
+                    catch (InvalidParameterException c)
                     {
                         // If exception caught then display error for wrong parameter
                         error += "[" + DateTime.Now.ToString("T") + "] " + c.Message;
@@ -99,7 +99,7 @@ namespace AssignmentASE
                 {
                     // Try to set the color
                     try { p.SetColor(parameters[0]); }
-                    catch (ArgumentException c)
+                    catch (InvalidParameterException c)
                     {
                         // If exception caught then display error for wrong parameter
                         error += "[" + DateTime.Now.ToString("T") + "] " + c.Message;
@@ -182,7 +182,7 @@ namespace AssignmentASE
                     error += (lineNum != 0) ? " at line " + lineNum : "";
                     error += ".\r\n";
                 }
-                catch (IndexOutOfRangeException)
+                catch (InvalidParameterException)
                 {
                     // Catch Exception and display incorrect number of parameters error
                     error += "[" + DateTime.Now.ToString("T") + "] " + "Incorrect number of parameters for this command.";
@@ -205,6 +205,8 @@ namespace AssignmentASE
         /// </summary>
         /// <param name="input">The string to be parsed</param>
         /// <param name="lineNum">The current line number</param>
+        /// <exception cref="IdentifierNotDefinedException"></exception>
+        /// <exception cref="InvalidParameterException"></exception>
         /// <remarks>The line number is 0 when a single command is to be parsed</remarks>
         public void ParseUsingLexer(string input, int lineNum)
         {
@@ -236,7 +238,7 @@ namespace AssignmentASE
                                 variable_name = t.GetValue();
                             else
                                 // Else throw an exception as no variable in assignment
-                                throw new SystemException("'" + t.GetValue() + "' cannot be defined,");
+                                throw new InvalidParameterException("'" + t.GetValue() + "' cannot be defined,");
                         }
 
                         // If an exprssion has multiple operations
@@ -329,7 +331,7 @@ namespace AssignmentASE
                                 catch (KeyNotFoundException)
                                 {
                                     // If the identifier is not recognized show error
-                                    throw new SystemException("'" + t.GetValue() + "' is not defined,");
+                                    throw new IdentifierNotDefinedException("'" + t.GetValue() + "' is not defined,");
                                 }
                             }
                             else
@@ -342,7 +344,7 @@ namespace AssignmentASE
                                 catch (KeyNotFoundException)
                                 {
                                     // If the identifier is not recognized show error
-                                    throw new SystemException("'" + t.GetValue() + "' is not defined,");
+                                    throw new IdentifierNotDefinedException("'" + t.GetValue() + "' is not defined,");
                                 }
                             }
                         }
@@ -367,10 +369,10 @@ namespace AssignmentASE
                 else
                 {
                     // If token length is less than 3 throw an exception
-                    throw new SystemException("Assignment statement format is invalid,");
+                    throw new InvalidParameterException("Assignment statement format is invalid,");
                 }
             }
-            catch (SystemException c)
+            catch (Exception c)
             {
                 // Catch each exception and display apt messages
                 error += "[" + DateTime.Now.ToString("T") + "] " + c.Message;
@@ -392,6 +394,17 @@ namespace AssignmentASE
             var tokens = lexer.Advance(input);
             // Initialize result
             bool result = false;
+
+            // Check if command is correct
+            if (tokens[0].GetTokenType() != Type.IF && tokens[0].GetTokenType() != Type.WHILE)
+            {
+                // Log error as keyword not matched
+                error += "[" + DateTime.Now.ToString("T") + "] Invalid command '" + tokens[0].GetValue() + "',";
+                error += " at line " + (lineNum + 1);
+                error += ".\r\n";
+                return result;
+            }
+
             // operation variable
             string op = "";
             // A list for storing operands
@@ -481,10 +494,21 @@ namespace AssignmentASE
         {
             // Get tokens for the line
             var tokens = lexer.Advance(lines[lineNum]);
+
             // Empty string for storing the formal params
             string formalParam = "";
             // Get the lineNum for the current function start
             int functionLineNum = lineNum;
+
+            // Check if command is correct
+            if (tokens[0].GetTokenType() != Type.METHOD)
+            {
+                // Log error as keyword not matched
+                error += "[" + DateTime.Now.ToString("T") + "] Invalid command '" + tokens[0].GetValue() + "',";
+                error += " at line " + (lineNum + 1);
+                error += ".\r\n";
+                return functionLineNum;
+            }
 
             try
             {
@@ -514,19 +538,19 @@ namespace AssignmentASE
                 }
 
                 // If no endmethod then throw exception
-                if (!isEndMethod) throw new FormatException("Function not ended properly");
+                if (!isEndMethod) throw new InvalidParameterException("Function not ended properly");
 
                 // If no params remove the last '|'
                 if (!formalParam.Equals(""))
                     formalParam = formalParam.Remove(formalParam.Length - 1);
 
                 // If function name is a number throw exception
-                if (tokens[1].GetTokenType() == Type.NUMBER) throw new FormatException("Function name cannot be a number");
+                if (tokens[1].GetTokenType() == Type.NUMBER) throw new InvalidParameterException("Function name cannot be a number");
 
                 // Add the method to variable dictionary along with the linNum,endFunctionLine and the params
                 Variables.Add(tokens[1].GetValue(), lineNum + "," + (functionLineNum - 1) + "," + formalParam);
             }
-            catch (FormatException e)
+            catch (InvalidParameterException e)
             {
                 // Catch exception and display relevant message
                 error += "[" + DateTime.Now.ToString("T") + "] " + e.Message + ",";
@@ -710,91 +734,103 @@ namespace AssignmentASE
                             // temp line number for the while loop
                             int whileNum = lineNum;
 
-                            whileNum++;
-
-                            // While the condition fo while is true
-                            while (ParseUsingIf(lines[lineNum], lineNum + 1))
+                            // Check if command is correct
+                            var temp = lexer.Advance(lines[lineNum]);
+                            if (temp[0].GetTokenType() == Type.WHILE)
                             {
-                                // If the loop has end loop then set whilenum to linenum for looping
-                                if (lines[whileNum].Contains("endwhile"))
-                                {
-                                    whileNum = lineNum;
-                                }
-                                else
-                                {
-                                    // If an endmnethod is encountered
-                                    if (lines[whileNum].Contains("endmethod"))
-                                    {
-                                        whileNum = ParseEndMethod(currentFunction, cursor, whileNum);
-                                        // Reset currentfunction & cursor
-                                        currentFunction = "";
-                                        cursor = 0;
-                                    }
-
-                                    // If there is a method call
-                                    else if (Regex.Match(lines[whileNum], @"(\(.*\))").Success && !lines[whileNum].Contains("method"))
-                                    {
-                                        // Clear the current parametrs
-                                        paramters.Clear();
-                                        // Set  the cursor to the current linenum
-                                        cursor = whileNum;
-                                        // Get the tokens from the line
-                                        var tokens = lexer.Advance(lines[whileNum]);
-                                        // Set current function to the first token
-                                        currentFunction = tokens[0].GetValue();
-
-                                        whileNum = ParseMethodCall(tokens, whileNum, paramters);
-                                    }
-
-                                    // If endif is encountered just continue
-                                    else if (lines[whileNum].Contains("endif"))
-                                    {
-                                        continue;
-                                    }
-
-                                    // If 'if' is encountered
-                                    else if (lines[whileNum].Contains("if"))
-                                    {
-                                        // If the condition is false
-                                        if (!ParseUsingIf(lines[whileNum], lineNum + 1))
-                                        {
-                                            // A bool flag for 1 line
-                                            bool flag = false;
-                                            // Store the current linenum in temp var
-                                            ifLineNum = whileNum;
-                                            // Loop for all the lines
-                                            for (; ifLineNum < lines.Length; ifLineNum++)
-                                            {
-                                                // If a line contains endif break and set the flag to true
-                                                if (lines[ifLineNum].Contains("endif"))
-                                                {
-                                                    flag = true;
-                                                    break;
-                                                }
-                                            }
-
-                                            // If flag is not set only skip one line else skip till endif
-                                            whileNum = flag ? ifLineNum : whileNum + 1;
-                                        }
-                                    }
-
-                                    // If assignment statement is encountered
-                                    else if (lines[whileNum].Contains("="))
-                                    {
-                                        // Parse using the expression method
-                                        ParseUsingLexer(lines[whileNum], whileNum);
-                                    }
-
-                                    // Else parse using parsecommand
-                                    else
-                                        ParseCommand(lines[whileNum], whileNum + 1);
-
-                                }
-                                // Increment whilenum
                                 whileNum++;
+
+                                // While the condition fo while is true
+                                while (ParseUsingIf(lines[lineNum], lineNum + 1))
+                                {
+                                    // If the loop has end loop then set whilenum to linenum for looping
+                                    if (lines[whileNum].Contains("endwhile"))
+                                    {
+                                        whileNum = lineNum;
+                                    }
+                                    else
+                                    {
+                                        // If an endmnethod is encountered
+                                        if (lines[whileNum].Contains("endmethod"))
+                                        {
+                                            whileNum = ParseEndMethod(currentFunction, cursor, whileNum);
+                                            // Reset currentfunction & cursor
+                                            currentFunction = "";
+                                            cursor = 0;
+                                        }
+
+                                        // If there is a method call
+                                        else if (Regex.Match(lines[whileNum], @"(\(.*\))").Success && !lines[whileNum].Contains("method"))
+                                        {
+                                            // Clear the current parametrs
+                                            paramters.Clear();
+                                            // Set  the cursor to the current linenum
+                                            cursor = whileNum;
+                                            // Get the tokens from the line
+                                            var tokens = lexer.Advance(lines[whileNum]);
+                                            // Set current function to the first token
+                                            currentFunction = tokens[0].GetValue();
+
+                                            whileNum = ParseMethodCall(tokens, whileNum, paramters);
+                                        }
+
+                                        // If endif is encountered just continue
+                                        else if (lines[whileNum].Contains("endif"))
+                                        {
+                                            continue;
+                                        }
+
+                                        // If 'if' is encountered
+                                        else if (lines[whileNum].Contains("if"))
+                                        {
+                                            // If the condition is false
+                                            if (!ParseUsingIf(lines[whileNum], lineNum + 1))
+                                            {
+                                                // A bool flag for 1 line
+                                                bool flag = false;
+                                                // Store the current linenum in temp var
+                                                ifLineNum = whileNum;
+                                                // Loop for all the lines
+                                                for (; ifLineNum < lines.Length; ifLineNum++)
+                                                {
+                                                    // If a line contains endif break and set the flag to true
+                                                    if (lines[ifLineNum].Contains("endif"))
+                                                    {
+                                                        flag = true;
+                                                        break;
+                                                    }
+                                                }
+
+                                                // If flag is not set only skip one line else skip till endif
+                                                whileNum = flag ? ifLineNum : whileNum + 1;
+                                            }
+                                        }
+
+                                        // If assignment statement is encountered
+                                        else if (lines[whileNum].Contains("="))
+                                        {
+                                            // Parse using the expression method
+                                            ParseUsingLexer(lines[whileNum], whileNum);
+                                        }
+
+                                        // Else parse using parsecommand
+                                        else
+                                            ParseCommand(lines[whileNum], whileNum + 1);
+
+                                    }
+                                    // Increment whilenum
+                                    whileNum++;
+                                }
+                                // After condition false, set the linenum to whilenum
+                                lineNum = whileNum;
                             }
-                            // After condition false, set the linenum to whilenum
-                            lineNum = whileNum;
+                            else
+                            {
+                                // Log error as keyword not matched
+                                error += "[" + DateTime.Now.ToString("T") + "] Invalid command '" + temp[0].GetValue() + "',";
+                                error += " at line " + (lineNum + 1);
+                                error += ".\r\n";
+                            }
                         }
 
                         // If endif is encountered just continue
