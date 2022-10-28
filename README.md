@@ -1,5 +1,5 @@
 # PLEnvironment
-A simple programming language enivronment created with C#
+A simple programming language enivronment created with C# using Lexer and Parser techniques.
 
 ## Documentation ##
 Documentation is present in the document folder along with test summary, xml documentation and word documentation.
